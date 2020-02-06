@@ -1,68 +1,100 @@
-<!DOCTYPE HTML>  
+<!DOCTYPE HTML>
 <html>
 <head>
-<title>ArtWork</title>
+<style>
+div.centerform {
+	display:block;
+	text-align:center;
+	margin-top: -15%;}
+div.bttmform {
+	display:block;
+	text-align:center;
+	margin-top: 20%;}
+div.leftform {
+	display:block;
+	margin-top: 10%;}
+</style>
+
+<title>Edit Art Work</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  
+
   function myFunction() {
   document.getElementById("myForm").reset();
 }
   </script>
+
+  <script>
+$(document).ready(function(){
+    $('input:checkbox').click(function() {
+        $('input:checkbox').not(this).prop('checked', false);
+    });
+});
+</script>
+
 </head>
 <body>
 
- <h2> ArtWork</h2>
+ <h2> Edit Art Work</h2>
+ <div id="leftform">
 <p><span class="error">* required field</span></p>
-<form id="myForm" method="post" action="action_page.php">   
-  Title: <input type="text" name="title" value="">
-  <span class="error">* <?php echo $nameErr;?></span>
+<form id="myForm" method="post" action="/CGI-Executables/action_page.php">
+  Title: <input type="text" name="title" required> *
   <br><br>
-  Description: <input type="text" name="desecription" value="">
-  <span class="error">* <?php echo $emailErr;?></span>
+  Description: <input type="text" name="description" required> *
   <br><br>
      <div id="form">
-          <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Genre
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Abstract</a></li>
-      <li><a href="#">Baroque</a></li>
-      <li><a href="#">Gothic</a></li>
-	  <li><a href="#">Renaissance</a></li>
-    </ul>
-  </div>
+      <select name="genre">
+<option selected disabled>Choose Genre:</option>
+<option value="Abstract">Abstract</option>
+<option value="Baroque">Baroque</option>
+<option value="Gothic">Gothic</option>
+<option value="Renaissance">Renaissance</option>
+</select>
 </div>
 <br>
    <div id="form">
-          <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Subject
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Landscape</a></li>
-      <li><a href="#">Portrait</a></li>
-    </ul>
-  </div>
+     <select name="subject">
+      <option selected disabled>Choose Subject:</option>
+     <option value="Landscape">Landscape</option>
+     <option value="Portrait">Portrait</option>
+     </select><br>
 </div>
 <br>
+<p>Year: <input type="number" name="year" min="1200" max="2020"></p>
 
-<p>Year: <input type="text" id="datepicker"></p>
-
+<p>Museum: <input type="text" name="museum"></p>
+</div>
   <br><br>
-  <input type="submit" name="submit" value="Submit">  
-  <input type="button" onclick="myFunction()" value="Clear">
+
+  <div class="centerform">
+  Type: &emsp;<input type="radio" name="type" value="Painting"> Painting &emsp;
+  <input type="radio" name="type" value="Sculpture"> Sculpture<br>
+  <br><p>Creative Commons Specification:<br></p>
+  <input type="checkbox" name="copyright" value="Commercial Work"> Commercial<br>
+  <input type="checkbox" name="copyright" value="Non-Commercial Work"> Non-commercial<br>
+  <input type="checkbox" name="copyright" value="Derivative Work"> Derivative Work<br>
+  <input type="checkbox" name="copyright" value="Non-Derivative Work"> Non-Derivative Work<br>
+</div></div>
+  <div class="bttmform">
+  <input type="submit" name="submit" value="Submit Query">
+   <input type="reset" onlclick="myFunction" value="Clear Form">
+  </form>
+  </div>
+
 
 </form>
+
+
 
 
 </body>
