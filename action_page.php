@@ -1,45 +1,58 @@
 <?php
-// define variables and set to empty values
-$nameErr = $emailErr = $genderErr  = "";
-$title = $desecription = $gender = $comment  = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["title"])) {
-    $nameErr = "Title is required";
-  } else {
-    $title = test_input($_POST["title"]);
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z ]*$/",$title)) {
-      $nameErr = "Only letters and white space allowed";
-    }
+$artwork = $_POST;
+
+echo "<h3>Title:</h3>";
+echo $artwork["title"];
+echo "<br>";
+echo "<h3>Desecription:</h3>";
+echo $artwork["description"];
+echo "<br>";
+
+
+echo "<style>h4 { font-style: italic}</style>";
+
+if (empty($artwork["genre"])) {
+  echo "<h4>Genre Unknown</h4>";
+}
+else {
+  echo "<h3>Genre:</h3>";
+  echo $artwork["genre"];
+}
+if (empty($artwork["subject"])) {
+    echo "<h4>Subject Unknown</h4>";
   }
-  
-  if (empty($_POST["desecription"])) {
-    $emailErr = "Desecription is required";
-  } else {
-    $desecription = test_input($_POST["desecription"]);
-    // check if e-mail address is well-formed
-    if (!preg_match("/^[a-zA-Z ]*$/",$desecription)) {
-      $emailErr = "Only letters and white space allowed";
-    }
-  }    
+  else {
+    echo "<h3>Subject:</h3>";
+    echo $artwork["subject"];
+  }
+if (empty($artwork["year"])) {
+  echo "<h4>Year Unknown</h4>";
 }
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+else {
+  echo "<h3>Year:</h3>";
+  echo $artwork["year"];
 }
-
-?>
-
-<?php
-echo "<h2>Title:</h2>";
-echo $title;
-echo "<br>";
-echo "<h2>Desecription</h2>";
-echo $desecription;
-echo "<br>";
+if (empty($artwork["museum"])) {
+  echo "<h4>Museum Unknown</h4>";
+}
+else {
+  echo "<h3>Museum:</h3>";
+  echo $artwork["museum"];
+}
+if (empty($artwork["copyright"])) {
+  echo "<h4>Creative Commons Specification Unknown</h4>";
+}
+else {
+  echo "<h3>Creative Commons Speficiation:</h3>";
+  echo $artwork["copyright"];
+}
+if (empty($artwork["type"])) {
+  echo "<h4>Artwork Type Unknown</h4>";
+}
+else {
+  echo "<h3>Artwork Type:</h3>";
+  echo $artwork["type"];
+}
 
 ?>
