@@ -6,7 +6,7 @@ $_SESSION['city'] = 'britain';
 if (!isset($_SESSION['username']))
   echo "<script>
         alert('Please Login or Signup');
-        window.location.href='test.php';
+window.location.href='index.php';
         </script>";
 
 ?>
