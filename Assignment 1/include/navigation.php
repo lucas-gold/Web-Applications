@@ -3,11 +3,31 @@
   .navbar{
   font-family: "Nunito";
 }
+input[type=text] {
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 120px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  color:#585858;
+  height:20px;
+}
+input[type=text]:focus {
+  width: 250px;
+  height: 30px;
+  font-size: 16px;
+}
 </style>
+
+
+
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="test.php"><strong>Holiday Planner</strong></a>
+      <a class="navbar-brand" href="index.php"><strong>Holiday Planner</strong></a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navi">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -16,21 +36,25 @@
     </div>
     <div id="navi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <?php
-        if (isset($_SESSION['username'])) {
-          ?>
-        <li><a href="cart.php"><strong> <span class="glyphicon glyphicon-bitcoin"></span>View Payments</strong></a></li>
-        <li><a href="include/logout_script.php"><strong> <span class="glyphicon glyphicon-log-out"></span> Logout</strong></a></li>
-        <?php 
-      } else { ?>
-        <li><a href="#login"><strong> <span class="glyphicon glyphicon-log-in"></span> Login</strong></a></li>
-        <li><a href="signup.php"><strong> <span class="glyphicon glyphicon-user"></span> Signup</strong></a></li>
-        <?php
-
-      }
-      ?>
-
+        <li><a href="index.php"><strong> <span class="glyphicon glyphicon-home"></span> Home</strong></a></li>
+        <li><a href="#about"><strong> <span class="glyphicon glyphicon-bookmark"></span> About Us</strong></a></li>
+        <li><a href="#contact"><strong> <span class="glyphicon glyphicon-comment"></span> Contact Us</strong></a></li>
+        <li><a href="cart.php"><strong> <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</strong></a></li>
+        <li>
+          <a onclick=show_search()><strong id="hideme"> <span class="glyphicon glyphicon-search"></span> Search</strong>
+        <form action="" method="get" id="searchform" style="display: inline">
+          <input type="text" id="search" name="search" style="display: none" placeholder="Search...">
+        </form></a>
+      </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<script>
+
+function show_search() {
+  document.getElementById("search").style.display = "block";
+  document.getElementById("hideme").style.display = "none";
+}
+</script>
