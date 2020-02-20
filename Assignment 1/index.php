@@ -8,6 +8,7 @@ include 'include/navigation.php';
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Titillium+Web" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheetA1.css">
 
 <title>Travel Planner</title>
 
@@ -126,13 +127,10 @@ include 'include/navigation.php';
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <img src="img/login.png" class="img-responsive" img style="border:20px solid white" alt="">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="continent">
 
-                    Continents:<br><br>
-                    <select id="continentlist" onchange=show_list("countrylist") style="width:160px">
+                    <h3> &nbsp&nbsp&nbspContinents:</h3><br>
+                    <select id="continentlist" onchange=show_list("countrylist") style="width:160px; color:black">
                       <option selected disabled>Choose One:</option>
                       <option value="nam">North America</option>
                       <option value="sam">South America</option>
@@ -142,15 +140,15 @@ include 'include/navigation.php';
                     </select>
                     <div id="countrylist" style="display:none">
                       <br><br>
-                      Countries:<br><br>
-                      <select id="countries" onchange=show_list("attractionlist") style="width:160px">
+                      <h3> &nbsp&nbsp&nbspCountries:</h3><br>
+                      <select id="countries" onchange=show_list("attractionlist") style="width:160px; color:black">
                       </select>
                     </div>
 
                     <div id="attractionlist" style="display:none">
                       <br><br>
-                      Attractions:<br><br>
-                      <select id='attractions' style="width:160px">
+                      <h3> &nbsp&nbsp&nbspAttractions:</h3><br>
+                      <select id='attractions' style="width:160px"; color:black>
                       </select>
                     </div>
 
@@ -212,7 +210,7 @@ include 'include/navigation.php';
         <p style="padding:30% 0 0 0"></p>
 </div>
 
-    <!--PHOTO GRID-->
+    <!--PHOTO GRID
     <div class="photo-grid">
         <div class="container">
             <h2>WE OFFER THESE EXCITING TRAVEL DESTINATIONS!</h2><br><br>
@@ -324,7 +322,7 @@ include 'include/navigation.php';
         </div>
     </div>
 
-    <!-- Contact Section -->
+    <!-- Contact Section
     <div class="contact">
         <div class="container">
             <div class="col-md-8">
@@ -378,9 +376,9 @@ include 'include/navigation.php';
             </div>
         </div>
     </div>
-
+-->
     <?php
-    include 'include/footer.php';
+    //include 'include/footer.php';
     ?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
