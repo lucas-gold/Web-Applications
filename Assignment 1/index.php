@@ -368,14 +368,13 @@ input[type=text]:focus, input[type=password]:focus {
             <div class="col-md-3 contact-info">
                 <div class="contact-item">
                     <h4>Contact Info</h4>
-                    <p>JAYPEE INSTITUTE OF INFORMATION TECHNOLOGY<br>
-                        SECTOR 62, NOIDA</p>
+                    <p>Ryerson University<br></p>
                 </div>
                 <div class="contact-item">
-                    <p> 7408963464 </p>
+                    <p> 7123554536 </p>
                 </div>
                 <div class="contact-item">
-                    <p> bytestack@gmail.com</p>
+                    <p> bytestacscs.ryersonk@gmail.com</p>
                 </div>
             </div>
         </div>
