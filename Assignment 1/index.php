@@ -9,7 +9,7 @@ include 'include/navigation.php';
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Titillium+Web" rel="stylesheet">
 
-<title>Using Bootstrap Constructively</title>
+<title>Travel Planner</title>
 
 <style>
 
@@ -45,7 +45,7 @@ include 'include/navigation.php';
     }
 
     .login{
-    background: url("img/login.jpg");
+    background: url("img/login.png");
     background-size: cover;
     color:white;
     font-family:"Titillium Web";
@@ -69,11 +69,11 @@ include 'include/navigation.php';
         border-width: 10px;
 		box-shadow: 0 2px 8px black;
     }
-	
+
 	.image:hover {
         box-shadow: 0 1px 8px black;
     }
-	
+
 	.thumbnail {
      border: 0 none;
      box-shadow: none;
@@ -84,7 +84,7 @@ include 'include/navigation.php';
     margin: 15px 0;
     background-color: #f19f4d;
     color: #fff;
-    }   
+    }
 
     .logo{
         margin-top:25px;
@@ -107,28 +107,12 @@ include 'include/navigation.php';
         padding-bottom:25px;
     }
 
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 5px;
-    color: black;
-    margin: 5px 0 2px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-    background-color: rgb(113, 143, 160);
-    color: black;
-    outline: none;
-}
-
 .contact{
     font-family: "Nunito";
     font-weight: bold;
     color:#2F4F4F;
 }
-   
+
 </style>
 
 <body>
@@ -142,9 +126,58 @@ input[type=text]:focus, input[type=password]:focus {
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <img src="img/login.jpg" class="img-responsive" img style="border:20px solid white" alt="">
+                    <img src="img/login.png" class="img-responsive" img style="border:20px solid white" alt="">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="continent">
+
+                    Continents:<br><br>
+                    <select id="continentlist" onchange=show_list("countrylist") style="width:160px">
+                      <option selected disabled>Choose One:</option>
+                      <option value="nam">North America</option>
+                      <option value="sam">South America</option>
+                      <option value="europe">Europe</option>
+                      <option value="asia">Asia</option>
+                      <option value="africa">Africa</option>
+                    </select>
+                    <div id="countrylist" style="display:none">
+                      <br><br>
+                      Countries:<br><br>
+                      <select id="countries" onchange=show_list("attractionlist") style="width:160px">
+                      </select>
+                    </div>
+
+                    <div id="attractionlist" style="display:none">
+                      <br><br>
+                      Attractions:<br><br>
+                      <select id='attractions' style="width:160px">
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div class="place">
+                    <br><br><br>
+                    Popular Places:<br><br>
+                    <select>
+                      <option selected disabled>Choose One:</option>
+                      <option value="yosemite">Yosemite Park</option>
+                      <option value="notredame">Notre Dame</option>
+                      <option value="sahara">Sahara Desert</option>
+                      <option value="alps">The Alps</option>
+                      <option value="everest">Mount Everest</option>
+                    </select>
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+
+                  <div class="main">
+                    <h2>Header</h2>
+
+                  </div>
+
+
                     <h3><b>About Us</b></h3>
                     <p>Reho is an experienced travel management company. We work with you to manage all elements of
                         your travel in an efficient, cost effective and ethical manner.<br>
@@ -164,13 +197,10 @@ input[type=text]:focus, input[type=password]:focus {
                         <li> Exclusive Experiences</li>
                         <li> Bookings across the globe</li>
                         <li> Travel Experience like no other</li>
-
                     </div>
-
                     <div class="col-lg-3 col-md-3 col-sm-6">
                         <li> Your memories are our responsibilities </li>
                         <li> Its better see something once than hear about it a thousand times </li>
-                        
                     </div>
                 </div>
             </div>
@@ -179,39 +209,8 @@ input[type=text]:focus, input[type=password]:focus {
 
     <!--LOGIN-->
     <div class="login" id="login">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12"></div>
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <img src="img/member.png" class="logo" height="220px" width="auto">
-                </div>
-                <?php if (!isset($_SESSION['username'])) { ?>
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <h3><b>Already have an account? Login!</b></h3>
-                    <br>
-                    <form method="POST" action="php/login.php">
-                        EMAIL:<br>
-                        <input type="text" name="login-email" required><br>
-                        PASSWORD:<br>
-                        <input type="password" name="login-password" required><br>
-                        <button class="btn btn-lg" type="submit">LOGIN</button>
-                    </form>
-                    <p>Not a member ? <a href="signup.php">Signup Now!</a> </p>
-                </div>
-                <?php 
-            } else { ?>
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <br><br><br>
-                    <h2>Welcome
-                        <?php echo $_SESSION['username'] ?>
-                    </h2>
-                </div>
-                <?php 
-            } ?>
-            </div>
-        </div>
-    </div>
-    </div>
+        <p style="padding:30% 0 0 0"></p>
+</div>
 
     <!--PHOTO GRID-->
     <div class="photo-grid">
@@ -386,6 +385,75 @@ input[type=text]:focus, input[type=password]:focus {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+    let nam_countries = ['Canada', 'United States']
+    let sam_countries = ['Argentina', 'Brazil']
+    let euro_countries = ['France', 'Italy']
+    let africa_countries = ['Egypt', 'Morocco']
+    let asia_countries = ['China', 'Japan']
+
+    function fill_country(array) {
+      $('#countries').children().remove();
+      $('#countries').append($("<option selected disabled></option>").text("Choose One:"));
+      $.each(array, function(key,value) {
+        $('#countries').append($('<option></option>').text(value));
+      });
+    }
+
+    $(document).ready(function(){
+        $("#continentlist").change(function(){
+            var contVal = $(this).children("option:selected").val();
+            if (contVal == "nam") { fill_country(nam_countries); }
+            else if (contVal == "sam") { fill_country(sam_countries); }
+            else if (contVal == "europe") { fill_country(euro_countries); }
+            else if (contVal == "asia") { fill_country(asia_countries); }
+            else if (contVal == "africa") { fill_country(africa_countries); }
+        });
+    });
+    </script>
+    <script>
+    let canada_attr = ['CN Tower', 'Whistler Blackcomb']
+    let us_attr = ['Central Park', 'Disney Land']
+
+    let argen_attr = ['Argentina', 'Brazil']
+    let brazil_attr = ['France', 'Germany']
+
+    let france_attr = ['Cameroon', 'Chad']
+    let italy_attr = ['Cameroon', 'Chad']
+
+    let egypt_attr = ['Cameroon', 'Chad']
+    let morocco_attr = ['Cameroon', 'Chad']
+
+    let china_attr = ['Cameroon', 'Chad']
+    let japan_attr = ['Cameroon', 'Chad']
+
+
+    function fill_attraction(array) {
+      $('#attractions').children().remove();
+      $('#attractions').append($("<option selected disabled></option>").text("Choose One:"));
+      $.each(array, function(key,value) {
+           $('#attractions').append($("<option></option>").text(value));
+      });
+    }
+
+    $(document).ready(function(){
+        $("#countrylist").change(function(){
+            var countryVal = $('#countries').children("option:selected").val();
+            if (countryVal == "Canada") { fill_attraction(canada_attr); }
+            else if (countryVal == "Cuba") { fill_attraction(cuba_attr); }
+            else if (countryVal == "Jamaica") { fill_attraction(jamaica_attr); }
+            else if (countryVal == "Panama") { fill_attraction(panama_attr); }
+            else if (countryVal == "United States") { fill_attraction(us_attr); }
+        });
+    });
+    </script>
+    <script>
+      function show_list(list) {
+          document.getElementById(list).style.display = "block";
+      }
+    </script>
+
 
 </body>
 
