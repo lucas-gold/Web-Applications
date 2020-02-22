@@ -19,6 +19,8 @@ input[type=text]:focus {
   height: 30px;
   font-size: 16px;
 }
+
+
 </style>
 
 
@@ -37,8 +39,8 @@ input[type=text]:focus {
     <div id="navi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="index.php"><strong> <span class="glyphicon glyphicon-home"></span> Home</strong></a></li>
-        <li><a href="#about"><strong> <span class="glyphicon glyphicon-bookmark"></span> About Us</strong></a></li>
-        <li><a href="#contact"><strong> <span class="glyphicon glyphicon-comment"></span> Contact Us</strong></a></li>
+        <li><a onclick=toggle_aboutpage()><strong> <span class="glyphicon glyphicon-bookmark"></span> About Us</strong></a></li>
+        <li><a onclick=toggle_contactpage()><strong> <span class="glyphicon glyphicon-comment"></span> Contact Us</strong></a></li>
         <li><a href="cart.php"><strong> <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</strong></a></li>
         <li>
           <a onclick=show_search()><strong id="hideme"> <span class="glyphicon glyphicon-search"></span> Search</strong>
@@ -52,9 +54,36 @@ input[type=text]:focus {
 </nav>
 
 <script>
+function about() {
+  document.getElementById("aboutus").style.display = "none";
+
+}
 
 function show_search() {
   document.getElementById("search").style.display = "block";
   document.getElementById("hideme").style.display = "none";
 }
+
+  function toggle_aboutpage() {
+      var x = document.getElementById("aboutpage").style.display;
+      if (x == "block") {
+          document.getElementById("aboutpage").style.display = "none";
+      }
+      else {
+        document.getElementById("aboutpage").style.display = "block";
+      }
+  }
+
+  function toggle_contactpage() {
+      var x = document.getElementById("contactpage").style.display;
+      if (x == "block") {
+          document.getElementById("contactpage").style.display = "none";
+      }
+      else {
+        document.getElementById("contactpage").style.display = "block";
+      }
+  }
+
+
+
 </script>
