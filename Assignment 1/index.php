@@ -1,8 +1,7 @@
 <?php
 session_start();
+require_once('travel_planner/create_table.php');
 include 'include/navigation.php';
-include 'travel_planner/connect.php';
-include 'travel_planner/create_table.php';
 ?>
 
 <html>
@@ -206,18 +205,22 @@ body{
           <div class="continent">
 
             <h3> &nbsp&nbsp&nbspContinents:</h3><br>
-            <select id="continentlist" onchange=show_list("countrylist") style="width:160px; color:black">
-              <option selected disabled>Choose One:</option>
-              <option value="nam">North America</option>
-              <option value="sam">South America</option>
-              <option value="europe">Europe</option>
-              <option value="asia">Asia</option>
-              <option value="africa">Africa</option>
+            <select id="continentlist" name="continentlist" onchange=show_list("countrylist") style="width:160px; color:black">
+              <option selected disabled>Choose a continent...</option>
+              <?php foreach ($continents as $row): ?>
+                    <option value="<?=$row["cont_id"]?>"><?=$row["name"]?></option>
+              <?php endforeach ?>
             </select>
+
             <div id="countrylist" style="display:none">
               <br>
               <h3> &nbsp&nbsp&nbspCountries:</h3><br>
               <select id="countries" onchange=show_list("attractionlist") style="width:160px; color:black">
+                <option selected disabled>Choose a country...</option>
+                  <?php foreach ($countries as $row):?>
+                      <option value="<?=$row["country_id"]?>"><?=$row["name"]?></option>
+                  <?php endforeach?>
+
               </select>
             </div>
 
@@ -269,6 +272,7 @@ body{
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <script>
+
   let nam_countries = ['Canada', 'United States']
   let sam_countries = ['Argentina', 'Brazil']
   let euro_countries = ['France', 'Italy']
@@ -286,7 +290,10 @@ body{
   $(document).ready(function(){
     $("#continentlist").change(function(){
       var contVal = $(this).children("option:selected").val();
-      if (contVal == "nam") { fill_country(nam_countries); }
+      //window.location.href="?cont_id="+contVal;
+      document.cookie = "continent="+contVal;
+
+      if (contVal == "1") { fill_country(nam_countries); }
       else if (contVal == "sam") { fill_country(sam_countries); }
       else if (contVal == "europe") { fill_country(euro_countries); }
       else if (contVal == "asia") { fill_country(asia_countries); }
@@ -323,6 +330,7 @@ body{
   $(document).ready(function(){
     $("#countrylist").change(function(){
       var countryVal = $('#countries').children("option:selected").val();
+      document.cookie = "country="+countryVal;
       if (countryVal == "Canada") { fill_attraction(canada_attr); }
       else if (countryVal == "Cuba") { fill_attraction(cuba_attr); }
       else if (countryVal == "Jamaica") { fill_attraction(jamaica_attr); }
@@ -349,6 +357,8 @@ body{
     document.getElementById("c2").style.display = "block";
     document.getElementById("c3").style.display = "block";
     document.getElementById("caption").innerHTML = attrVal;
+    document.getElementById("caption").innerHTML = attractions;
+
   }
 
 
@@ -359,7 +369,6 @@ body{
   }
 
   </script>
-
 
 
 </body>
