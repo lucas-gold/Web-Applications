@@ -134,20 +134,18 @@ body{
   padding: 10px 20px 10px 20px;
 }
 
-#attr {
+.mainimg {
   max-height: 550px;
   min-width: 420px;
   max-width: 750px;
-  display: none;
   padding:40px;
   background: #64b4cf;
   border-radius: 25px;
 }
-#c1, #c2, #c3 {
+.c1, .c2, .c3 {
 
   max-height: 200px;
   max-width: 210px;
-  display: none;
   float:left;
   padding: 10px;
   margin: 5px;
@@ -184,13 +182,6 @@ body{
 
 
 </style>
-
-
-
-
-
-
-
 
 </head>
 <body>
