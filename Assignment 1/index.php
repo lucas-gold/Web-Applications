@@ -5,7 +5,7 @@ include 'include/navigation.php';
 ?>
 
 <html>
-
+<head>
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Titillium+Web" rel="stylesheet">
@@ -179,7 +179,23 @@ body{
 
 </style>
 
+
+</head>
 <body>
+
+  <script>
+  function show_countries(str) {
+
+    $("#countrylist").load("travel_planner/get_countries.php?q="+str);
+
+  }
+
+  function show_attractions(str) {
+
+    $("#attractionlist").load("travel_planner/get_attractions.php?q="+str);
+
+  }
+  </script>
 
   <div style="height: 50px;">
   </div>
@@ -205,31 +221,16 @@ body{
           <div class="continent">
 
             <h3> &nbsp&nbsp&nbspContinents:</h3><br>
-            <select id="continentlist" name="continentlist" onchange=show_list("countrylist") style="width:160px; color:black">
+            <select id="continentlist" name="continentlist" onchange=show_countries(this.value) style="width:160px; color:black">
               <option selected disabled>Choose a continent...</option>
               <?php foreach ($continents as $row): ?>
                     <option value="<?=$row["cont_id"]?>"><?=$row["name"]?></option>
               <?php endforeach ?>
             </select>
 
-            <div id="countrylist" style="display:none">
-              <br>
-              <h3> &nbsp&nbsp&nbspCountries:</h3><br>
-              <select id="countries" onchange=show_list("attractionlist") style="width:160px; color:black">
-                <option selected disabled>Choose a country...</option>
-                  <?php foreach ($countries as $row):?>
-                      <option value="<?=$row["country_id"]?>"><?=$row["name"]?></option>
-                  <?php endforeach?>
+            <div id = "countrylist"></div>
+            <div id = "attractionlist"></div>
 
-              </select>
-            </div>
-
-            <div id="attractionlist" style="display:none">
-              <br>
-              <h3> &nbsp&nbsp&nbspAttractions:</h3><br>
-              <select id='attractions' style="width:160px; color:black">
-              </select>
-            </div>
             <div>
               <br><br>
               <h4> &nbsp&nbsp&nbspPopular Places:</h4><br>
