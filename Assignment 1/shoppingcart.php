@@ -1,18 +1,17 @@
 <?php
-session_start();
 include "include/navigation.php"; 
+session_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <title>Travel Planner - Cart</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Titillium+Web" rel="stylesheet">
   <style>
   .map {
   	margin-top:30px;
@@ -22,45 +21,39 @@ include "include/navigation.php";
   </style>
 </head>
 
-
 <body>
 
-
-<div class="container" style="margin-top:30px">
+<div class="container" style="margin-top:50px">
   <div class="row">
     <div class="col-sm-4">
       <h3>Plans</h3>
       <p>Suggested Plans</p>
-	  <div id="accordion">
-
-  <div class="card">
-    <div class="card-header">
-      <input type=radio name="selectPlan" style="margin-right:10px">
-      <a class="card-link" data-toggle="collapse" href="#collapseOne">
-        Plan 1
-      </a>
+      <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+       <input type=radio name="selectPlan" style="margin-right:10px">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Plan 1</a>
+      </h4>
     </div>
-    <div id="collapseOne" class="collapse show" data-parent="#accordion">
-      <div class="card-body">
-        Plan 1 Details
-      </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">Plan Details</div>
     </div>
   </div>
-
-  <div class="card">
-    <div class="card-header">
-      <input type=radio name="selectPlan" style="margin-right:10px">
-      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-        Plan 2
-      </a>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <input type=radio name="selectPlan" style="margin-right:10px">  
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        Plan 2</a>
+      </h4>
     </div>
-    <div id="collapseTwo" class="collapse" data-parent="#accordion">
-      <div class="card-body">
-        Plan 2 Details
-      </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">Plan Details</div>
     </div>
   </div>
-  </div>
+</div>
       <div class="map">Map</div>
       <hr class="d-sm-none">
     </div>
@@ -86,3 +79,4 @@ include "include/navigation.php";
 
 </body>
 </html>
+
