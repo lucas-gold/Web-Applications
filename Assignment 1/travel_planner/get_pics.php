@@ -23,7 +23,7 @@ $result = mysqli_query($conn,$sql);
 while($row = mysqli_fetch_array($result)) {
 //echo "<figure id ='fig'>";
 $close_id = $row["close_id"];
-echo "<img src = img/" . $row["picture1"] . "></img>";
+echo "<img class = 'mainimg' src = img/" . $row["picture1"] . "></img>";
 //<figcaption id = "caption"></figcaption>
 //echo "</figure>";
 }
@@ -31,7 +31,10 @@ $sql="SELECT picture1 FROM Pictures WHERE close_id = '".$close_id."' AND attr_id
 $result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
-echo "<img src = img/" . $row["picture1"] . "></img>";
+  $i = 1;
+  $cls = "c" . $i;
+  echo "<img class = '" . $cls .  "'src = img/" . $row["picture1"] . "></img>";
+  $i = $i + 1;
 }
 //$row = mysqli_fetch_array($result["close_id"]) ;
 //$sql="SELECT picture1 FROM Pictures WHERE close_id = '".$q+1."' AND ";
