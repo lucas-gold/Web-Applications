@@ -164,6 +164,12 @@ body{
   margin-left: 20px;
 }
 
+#info {
+  margin-left: 35%;
+  font-size: 28px;
+  padding: 0px 10px;
+}
+
 
 
 @media (max-height:400px) {
@@ -180,6 +186,12 @@ body{
 </style>
 
 
+
+
+
+
+
+
 </head>
 <body>
 
@@ -193,6 +205,11 @@ body{
   function show_attractions(str) {
 
     $("#attractionlist").load("travel_planner/get_attractions.php?q="+str);
+
+  }
+
+  function show_pics(str) {
+    $("#info").load("travel_planner/get_pics.php?q="+str);
 
   }
   </script>
@@ -246,7 +263,7 @@ body{
 
           </div>
 
-          <div class="main">
+          <div id="info">
             <h2>Header</h2>
             <figure id = "fig">
             <img id = "attr"></img>
@@ -271,106 +288,6 @@ body{
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-  <script>
-
-  let nam_countries = ['Canada', 'United States']
-  let sam_countries = ['Argentina', 'Brazil']
-  let euro_countries = ['France', 'Italy']
-  let africa_countries = ['Egypt', 'Morocco']
-  let asia_countries = ['China', 'Japan']
-
-  function fill_country(array) {
-    $('#countries').children().remove();
-    $('#countries').append($("<option selected disabled></option>").text("Choose One:"));
-    $.each(array, function(key,value) {
-      $('#countries').append($('<option></option>').text(value));
-    });
-  }
-
-  $(document).ready(function(){
-    $("#continentlist").change(function(){
-      var contVal = $(this).children("option:selected").val();
-      //window.location.href="?cont_id="+contVal;
-      document.cookie = "continent="+contVal;
-
-      if (contVal == "1") { fill_country(nam_countries); }
-      else if (contVal == "sam") { fill_country(sam_countries); }
-      else if (contVal == "europe") { fill_country(euro_countries); }
-      else if (contVal == "asia") { fill_country(asia_countries); }
-      else if (contVal == "africa") { fill_country(africa_countries); }
-    });
-  });
-  </script>
-  <script>
-  let canada_attr = ['CN Tower', 'Casa Loma']
-  let us_attr = ['Las Vegas', 'Disney Land']
-
-
-  let argen_attr = ['Argentina', 'Brazil']
-  let brazil_attr = ['France', 'Germany']
-
-  let france_attr = ['Cameroon', 'Chad']
-  let italy_attr = ['Cameroon', 'Chad']
-
-  let egypt_attr = ['Cameroon', 'Chad']
-  let morocco_attr = ['Cameroon', 'Chad']
-
-  let china_attr = ['Cameroon', 'Chad']
-  let japan_attr = ['Cameroon', 'Chad']
-
-
-  function fill_attraction(array) {
-    $('#attractions').children().remove();
-    $('#attractions').append($("<option selected disabled></option>").text("Choose One:"));
-    $.each(array, function(key,value) {
-      $('#attractions').append($("<option></option>").text(value));
-    });
-  }
-
-  $(document).ready(function(){
-    $("#countrylist").change(function(){
-      var countryVal = $('#countries').children("option:selected").val();
-      document.cookie = "country="+countryVal;
-      if (countryVal == "Canada") { fill_attraction(canada_attr); }
-      else if (countryVal == "Cuba") { fill_attraction(cuba_attr); }
-      else if (countryVal == "Jamaica") { fill_attraction(jamaica_attr); }
-      else if (countryVal == "Panama") { fill_attraction(panama_attr); }
-      else if (countryVal == "United States") { fill_attraction(us_attr); }
-    });
-  });
-
-
-  $(document).ready(function(){
-    $("#attractionlist").change(function(){
-      var attrVal = $('#attractions').children("option:selected").val();
-      if (attrVal == "CN Tower") { display_attraction("cntower", "casaloma", "disney", "lasvegas", attrVal); }
-    });
-  });
-  function display_attraction(attr, close1, close2, close3, attrVal) {
-    document.getElementById("attr").src = "img/" + attr + ".jpg";
-    document.getElementById("c1").src = "img/" + close1 + ".jpg";
-    document.getElementById("c2").src = "img/" + close2 + ".jpg";
-    document.getElementById("c3").src = "img/" + close3 + ".jpg";
-    document.getElementById("fig").style.display = "block";
-    document.getElementById("attr").style.display = "block";
-    document.getElementById("c1").style.display = "block";
-    document.getElementById("c2").style.display = "block";
-    document.getElementById("c3").style.display = "block";
-    document.getElementById("caption").innerHTML = attrVal;
-    document.getElementById("caption").innerHTML = attractions;
-
-  }
-
-
-  </script>
-  <script>
-  function show_list(list) {
-    document.getElementById(list).style.display = "block";
-  }
-
-  </script>
-
 
 </body>
 
