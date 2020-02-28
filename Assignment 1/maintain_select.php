@@ -14,7 +14,7 @@
     echo "try again";
     }
     */
-    require_once 'sql/connection.php';
+    require_once 'include/connection.php';
     include 'include/navigation.php'
 ?>
 
@@ -69,7 +69,7 @@ $(document).ready(function(){
 </script>
 
 <body>
-    <?php require_once 'sql/delete.php';?>
+    <?php require_once 'travel_planner/delete.php';?>
 
     <!--Create success/error message-->
     <?php
