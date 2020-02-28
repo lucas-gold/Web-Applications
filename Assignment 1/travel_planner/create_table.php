@@ -87,8 +87,8 @@ catch(PDOException $e)
 // create table Reviews
 try {
   $sql = "CREATE TABLE Reviews (
-    attr_id INT(6) UNSIGNED PRIMARY KEY,
-    reviewer_name VARCHAR(30) NOT NULL,
+    reviewer_name VARCHAR(30) PRIMARY KEY,
+    attr_id INT(6) UNSIGNED,
     review VARCHAR(240),
     rating INT(2) NOT NULL,
     date_posted DATETIME NOT NULL,
@@ -226,6 +226,13 @@ try {
   $review = "Great place to stay";
   $rating = "5";
   $date_posted = "2020-01-24 07:41:11";
+  $stmt->execute();
+
+  $attr_id = "123";
+  $reviewer_name = "Test Scott";
+  $review = "adjfaldsfkjasdlfkjads;l LSDKFJSDFLKJdsl adslfkjasdf;k";
+  $rating = "3";
+  $date_posted = "2019-01-24 07:41:19";
   $stmt->execute();
 
 }
