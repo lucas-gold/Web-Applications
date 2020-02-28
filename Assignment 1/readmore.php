@@ -165,7 +165,7 @@ body{
     echo "<h3>Date of Creation: </h3>".$row["year_created"];
     echo "<h3>Founder Name: </h3>".$row["founder"];
     echo "<h3>Approximate Size: </h3>".$row["size"];
-    echo "<h3>Location: </h3>".$row["location"];
+    echo "<h3>Location: </h3>".$row["location"] . ", " . $row["country"];
     echo "</div></td></tr><tr><td>";
     echo "<img class = 's2' src = img/" . $row["picture3"] . "></img></td><td></tr></table>";
   }
