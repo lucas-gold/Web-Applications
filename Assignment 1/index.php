@@ -115,6 +115,22 @@ body{
   padding: 0px 10px;
 }
 
+#search_data {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #64b4cf;
+  border: 8px solid #2f2f2f;
+  color: #2f2f2f;
+  font-size: 22px;
+  border-radius: 15px;
+  font-style:italic;
+  padding: 10px 20px;
+  display: none;
+
+}
+
+
 
 
 @media (max-height:400px) {
@@ -150,6 +166,11 @@ body{
     $("#info").load("travel_planner/get_pics.php?q="+str);
 
   }
+
+  function search_results(str) {
+    document.getElementById("search_data").style.display = "block";
+    $("#search_data").load("searchdb.php?search="+str.replace(/ /g,'+'));
+  }
   </script>
 
   <div style="height: 50px;">
@@ -175,19 +196,18 @@ body{
             <div>
               <br><br>
               <h4> &nbsp&nbsp&nbspPopular Places:</h4><br>
-              <select id='popularplaces' style="width:160px; color:black">
+              <select id='popularplaces' onchange=show_pics(this.value) style="width:160px; color:black">
                 <option selected disabled>Choose One:</option>
-                <option value="yosemite">Yosemite Park</option>
-                <option value="notredame">Notre Dame</option>
-                <option value="sahara">Sahara Desert</option>
-                <option value="alps">The Alps</option>
-                <option value="everest">Mount Everest</option>
+                <?php foreach ($attractions as $row): ?>
+                      <option value="<?=$row["id"]?>"><?=$row["name"]?></option>
+                <?php endforeach ?>
               </select>
             </div>
 
           </div>
 
           <div id="info"></div>
+          <div id="search_data"></div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
