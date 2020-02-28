@@ -49,8 +49,7 @@ try {
     type VARCHAR(30) NOT NULL,
     founder VARCHAR(50),
     size VARCHAR(50),
-    location VARCHAR(50),
-    country VARCHAR(50),
+    location VARCHAR(100),
     year_created INT(4),
     country_id INT(6),
     cont_id INT(6),
@@ -65,6 +64,40 @@ try {
 }
 catch(PDOException $e)
 {
+}
+
+try{
+  $sql = "CREATE TABLE users (
+    id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    password VARCHAR(30) NOT NULL,
+    accountType VARCHAR (1) NOT NULL)";
+    $conn->exec($sql);
+}
+catch(PDOException $e)
+{
+}
+
+try{
+  $sql = "CREATE TABLE plans (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    startDate VARCHAR(10) NOT NULL,
+    duration VARCHAR(30) NOT NULL,
+    attraction_id1 INT(6) UNSIGNED NULL,
+    attraction_id2 INT(6) UNSIGNED NULL,
+    attraction_id3 INT(6) UNSIGNED NULL,
+    transitFare DECIMAL(15,2) NOT NULL,
+    price DECIMAL(15,2) NOT NULL,
+    FOREIGN KEY (attraction_id1) REFERENCES Attraction(id) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (attraction_id2) REFERENCES Attraction(id) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (attraction_id3) REFERENCES Attraction(id) ON DELETE SET NULL ON UPDATE CASCADE
+
+    )";
+    $conn->exec($sql);
+}
+catch(PDOException $e)
+{
+  echo $e->getMessage();
 }
 
 // create table Pictures
@@ -137,15 +170,14 @@ try {
   $stmt->execute();
 
 
-  $stmt = $conn->prepare("INSERT INTO Attraction (id, name, type, founder, size, location, country, year_created, country_id, cont_id, picture1, picture2, picture3, close_id)
-  VALUES (:id, :name, :type, :founder, :size, :location, :country, :year_created, :country_id, :cont_id, :picture1, :picture2, :picture3, :close_id)");
+  $stmt = $conn->prepare("INSERT INTO Attraction (id, name, type, founder, size, location, year_created, country_id, cont_id, picture1, picture2, picture3, close_id)
+  VALUES (:id, :name, :type, :founder, :size, :location, :year_created, :country_id, :cont_id, :picture1, :picture2, :picture3, :close_id)");
   $stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':type', $type);
   $stmt->bindParam(':founder', $founder);
   $stmt->bindParam(':size', $size);
   $stmt->bindParam(':location', $location);
-  $stmt->bindParam(':country', $country);
   $stmt->bindParam(':year_created', $year_created);
   $stmt->bindParam(':country_id', $country_id);
   $stmt->bindParam(':cont_id', $cont_id);
@@ -159,8 +191,7 @@ try {
   $type = "Doe";
   $founder = "john@example.com";
   $size = "Computer Science";
-  $location = "Toronto";
-  $country = "C1";
+  $location = "Toronto, Canada";
   $year_created = "2020";
   $country_id = "8";
   $cont_id = "4";
@@ -176,7 +207,6 @@ try {
   $founder = "john@example.com";
   $size = "Computer Science";
   $location = "Toronto";
-  $country = "C1";
   $year_created = "2020";
   $country_id = "8";
   $cont_id = "4";
@@ -192,7 +222,6 @@ try {
   $founder = "john@example.com";
   $size = "Computer Science";
   $location = "Toronto";
-  $country = "C1";
   $year_created = "2020";
   $country_id = "8";
   $cont_id = "4";
@@ -208,7 +237,6 @@ try {
   $founder = "john@example.com";
   $size = "Computer Science";
   $location = "Toronto";
-  $country = "C1";
   $year_created = "2020";
   $country_id = "8";
   $cont_id = "4";
@@ -249,10 +277,6 @@ catch(PDOException $e)
 $query = $conn->prepare("SELECT * FROM Continent");
 $query->execute();
 $continents=$query->fetchAll(\PDO::FETCH_ASSOC);
-
-$query = $conn->prepare("SELECT * FROM Attraction LIMIT 5");
-$query->execute();
-$attractions=$query->fetchAll(\PDO::FETCH_ASSOC);
 
 $conn = null;
 ?>
