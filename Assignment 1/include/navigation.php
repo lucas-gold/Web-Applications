@@ -23,9 +23,6 @@
 
 </style>
 
-
-
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -42,7 +39,14 @@
         <li><a onclick=toggle_aboutpage()><strong> <span class="glyphicon glyphicon-bookmark"></span> About Us</strong></a></li>
         <li><a onclick=toggle_contactpage()><strong> <span class="glyphicon glyphicon-comment"></span> Contact Us</strong></a></li>
         <li><a href="cart.php"><strong> <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</strong></a></li>
-		<li><a onclick=toggle_contactpage()><strong> <span class="glyphicon glyphicon-wrench"></span> MaintainDB</strong></a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong><span class="glyphicon glyphicon-wrench"></span> MaintainDB</strong><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="maintain_insert.php">Insert</a></li>
+          <li><a href="maintain_delete.php">Delete</a></li>
+          <li><a href="maintain_select.php">Select</a></li>
+          <li><a href="maintain_update.php">Update</a></li>
+        </ul>
+      </li>
         <li>
           <a onclick=show_search()><strong id="hideme"> <span class="glyphicon glyphicon-search"></span> Search</strong>
           <form action="" onsubmit="search_results(search.value); return false;" method="get" id="searchform" style="display: inline">
