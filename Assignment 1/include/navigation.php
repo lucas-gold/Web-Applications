@@ -3,7 +3,7 @@
   .navbar{
   font-family: "Nunito";
 }
-input[type=text] {
+#search {
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -14,7 +14,7 @@ input[type=text] {
   color:#585858;
   height:20px;
 }
-input[type=text]:focus {
+#search:focus {
   width: 250px;
   height: 30px;
   font-size: 16px;
@@ -42,6 +42,7 @@ input[type=text]:focus {
         <li><a onclick=toggle_aboutpage()><strong> <span class="glyphicon glyphicon-bookmark"></span> About Us</strong></a></li>
         <li><a onclick=toggle_contactpage()><strong> <span class="glyphicon glyphicon-comment"></span> Contact Us</strong></a></li>
         <li><a href="cart.php"><strong> <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</strong></a></li>
+		<li><a onclick=toggle_contactpage()><strong> <span class="glyphicon glyphicon-wrench"></span> MaintainDB</strong></a></li>
         <li>
           <a onclick=show_search()><strong id="hideme"> <span class="glyphicon glyphicon-search"></span> Search</strong>
           <form action="" onsubmit="search_results(search.value); return false;" method="get" id="searchform" style="display: inline">
