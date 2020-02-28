@@ -44,16 +44,21 @@ input[type=text]:focus {
         <li><a href="cart.php"><strong> <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</strong></a></li>
         <li>
           <a onclick=show_search()><strong id="hideme"> <span class="glyphicon glyphicon-search"></span> Search</strong>
-        <form action="" method="get" id="searchform" style="display: inline">
+          <form action="" onsubmit="search_results(search.value); return false;" method="get" id="searchform" style="display: inline">
           <input type="text" id="search" name="search" style="display: none" placeholder="Search...">
-        </form></a>
+          </form></a>
+      </a>
       </li>
       </ul>
     </div>
   </div>
 </nav>
+<!--        <form action="" onsubmit="search_results(this.value); return false;" method="get" id="searchform" style="display: inline">
+          <input type="text" id="search" name="search" style="display: none" placeholder="Search...">
+        </form></a> -->
 
 <script>
+
 function about() {
   document.getElementById("aboutus").style.display = "none";
 
