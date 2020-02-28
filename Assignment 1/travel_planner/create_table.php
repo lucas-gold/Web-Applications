@@ -89,6 +89,8 @@ try {
   $sql = "CREATE TABLE Reviews (
     attr_id INT(6) UNSIGNED PRIMARY KEY,
     reviewer_name VARCHAR(30) NOT NULL,
+    review VARCHAR(240),
+    rating INT(2) NOT NULL,
     date_posted DATETIME NOT NULL,
     FOREIGN KEY (attr_id) REFERENCES Attraction(id) ON DELETE CASCADE ON UPDATE CASCADE
   )";
@@ -191,8 +193,8 @@ try {
   $country_id = "8";
   $cont_id = "4";
   $picture1 = "bigben.jpg";
-  $picture2 = "abc.jpg";
-  $picture3 = "efg.jpg";
+  $picture2 = "bologna.jpg";
+  $picture3 = "brazil.jpg";
   $close_id = "1";
   $stmt->execute();
 
@@ -211,14 +213,18 @@ try {
   $close_id = "1";
   $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Reviews (attr_id, reviewer_name, date_posted)
-  VALUES (:attr_id, :reviewer_name, :date_posted)");
+  $stmt = $conn->prepare("INSERT INTO Reviews (attr_id, reviewer_name, review, rating, date_posted)
+  VALUES (:attr_id, :reviewer_name, :review, :rating, :date_posted)");
   $stmt->bindParam(':attr_id', $attr_id);
   $stmt->bindParam(':reviewer_name', $reviewer_name);
+    $stmt->bindParam(':review', $review);
+    $stmt->bindParam(':rating', $rating);
   $stmt->bindParam(':date_posted', $date_posted);
 
   $attr_id = "123";
   $reviewer_name = "Michael Scott";
+  $review = "Great place to stay";
+  $rating = "5";
   $date_posted = "2020-01-24 07:41:11";
   $stmt->execute();
 
