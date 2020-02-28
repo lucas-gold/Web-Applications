@@ -1,6 +1,19 @@
 <?php
 session_start();
-require_once('travel_planner/create_table.php');
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "travel_planner";
+
+//Connect to db
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname;", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch(PDOException $e)
+{
+}
 include 'include/navigation.php';
 include 'include/aboutus.php';
 
