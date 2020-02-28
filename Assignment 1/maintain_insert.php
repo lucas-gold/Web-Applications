@@ -14,7 +14,7 @@
     echo "try again";
     }
     */
-    require_once 'include/connection.php';
+    require_once 'sql/connection.php';
     include 'include/navigation.php'
 ?>
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
         if(form == "plans"){
             $("#form_plans").toggle();
         }
-        if(form == "country"){
+        if(form == "attraction_photos"){
             $("#form_attraction_photos").toggle();
         }
         if(form == "invoice"){
@@ -64,18 +64,12 @@ $(document).ready(function(){
         if(form == "reviews"){
             $("#form_reviews").toggle();
         }
-        if(form == "country"){
-            $("#form_country").toggle();
-        }
-        if(form == "continent"){
-            $("#form_continent").toggle();
-        }
     });
 });
 </script>
 
 <body>
-    <?php require_once 'travel_planner/insert.php';?>
+    <?php require_once 'sql/insert.php';?>
 
     <!--Create success/error message-->
     <?php
@@ -98,8 +92,7 @@ $(document).ready(function(){
                 <option value="users" selected>users</option>
                 <option value="attractions">attractions</option>
                 <option value="plans">plans</option>
-                <option value="country">country</option>
-                <option value="continent">continent</option>
+                <option value="attraction_photos">attraction_photos</option>
                 <option value="invoice">invoice</option>
                 <option value="reviews">reviews</option>
             </select>
@@ -107,7 +100,7 @@ $(document).ready(function(){
         </form>
         <button id="btn_selectTable" class="btn btn-success">Select</button>
 
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_users">
+        <form action="sql/insert.php" method="POST" class="form_insert" id="form_users">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
@@ -124,7 +117,7 @@ $(document).ready(function(){
             <button type="submit" name="btn_insert_user" class="btn btn-success" value="submit" value="submit">Insert</button>
         </form>
 
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_plans">
+        <form action="sql/insert.php" method="POST" class="form_insert" id="form_plans">
             <div class="form-group">
                 <label for="startDate">Start Date</label><br>
                 <small><em>YYYY-MM-DD</em></small>
@@ -159,124 +152,82 @@ $(document).ready(function(){
             <button type="submit" name="btn_insert_plan" class="btn btn-success" value="submit">Insert</button>
         </form>
 
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_attractions">
+        <form action="sql/insert.php" method="POST" class="form_insert" id="form_attractions">
             <div class="form-group">
                 <label for="attraction">Attraction Name</label>
-                <input type="text" class="form-control" name="attractionName" id="attractionName" required>
+                <input type="text" class="form-control" id="attraction" required>
             </div>
             <div class="form-group">
-                <label for="type">Type</label>
-                <input type="text" class="form-control" name="type" id="type" required>
+                <label for="continent">Continent</label>
+                <input type="text" class="form-control" id="continent" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" required>
+            </div>
+            <div class="form-group">
+                <label for="dateCreated">Date Created</label>
+                <input type="text" class="form-control" id="dateCreated" required>
             </div>
             <div class="form-group">
                 <label for="founder">Founder</label>
-                <input type="text" class="form-control" name="founder" id="founder" required>
-            </div>
-            <div class="form-group">
-                <label for="size">Size</label>
-                <input type="text" class="form-control" name="size" id="size" required>
-            </div>
-            <div class="form-group">
-                <label for="location">Location</label>
-                <input type="text" class="form-control" name="location" id="location" required>
-            </div>
-            <div class="form-group">
-                <label for="country_id">Country ID</label>
-                <input type="text" class="form-control" name="country_id" id="country_id" required>
-            </div>
-            <div class="form-group">
-                <label for="cont_id">Continent ID</label>
-                <input type="text" class="form-control" name="cont_id" id="cont_id" required>
-            </div>
-            <div class="form-group">
-                <label for="picture1">Picture 1</label>
-                <input type="text" class="form-control" name="picture1" id="picture1" required>
-            </div>
-            <div class="form-group">
-                <label for="picture2">Picture 2</label>
-                <input type="text" class="form-control" name="picture2" id="picture2" required>
-            </div>
-            <div class="form-group">
-                <label for="picture3">Picture 3</label>
-                <input type="text" class="form-control" name="picture3" id="picture3" required>
-            </div>
-            <div class="form-group">
-                <label for="close_id">Close Id</label>
-                <input type="text" class="form-control" name="close_id" id="close_id" required>
+                <input type="text" class="form-control" id="founder" required>
             </div>
             <button type="submit" name="btn_insert_attraction" class="btn btn-success" value="submit">Insert</button>
         </form>
 
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_invoice">
+        <form action="sql/insert.php" method="POST" class="form_insert" id="form_attraction_photos">
+            <div class="form-group">
+                <label for="filePath">File Path</label>
+                <input type="text" class="form-control" id="filePath" required>
+            </div>
+            <div class="form-group">
+                <label for="attractionId">Attraction ID</label>
+                <input type="text" class="form-control" id="attractionId" required>
+            </div>
+            <button type="submit" name="btn_insert_photo" class="btn btn-success" value="submit">Insert</button>
+        </form>
+
+        <form action="sql/insert.php" method="POST" class="form_insert" id="form_invoice">
             <div class="form-group">
                 <label for="planId">Plan ID</label>
-                <input type="number" class="form-control" name="planId" id="planId" required>
+                <input type="text" class="form-control" id="planId" required>
             </div>
             <div class="form-group">
-                <label for="userId">User ID</label>
-                <input type="number" class="form-control" name="userId" id="userId" maxlenght="30" required>
+                <label for="username">username</label>
+                <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
             </div>
             <div class="form-group">
-                <label for="invoiceTotal">Invoice Total</label>
-                <input type="number" class="form-control" id="invoiceTotal" name="invoiceTotal" pattern="^[0-9]+(\.[0-9]{1,2})?$" required>
+                <label for="numAdults">Adults</label>
+                <input type="number" class="form-control" id="numAdults" name="numAdults" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="numChild">Children</label>
+                <input type="number" class="form-control" id="numChild" name="numChild" min="1" max="100" required>
             </div>
             <button type="submit" name="btn_insert_invoice" class="btn btn-success" value="submit">Insert</button>
         </form>
 
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_country">
-        <!--
+        <form action="sql/insert.php" method="POST" class="form_insert" id="form_reviews">
             <div class="form-group">
-                <label for="countryId">Country ID</label>
-                <input type="number" class="form-control" name="countryId" id="countryId" max="6" required>
-            </div>
-        -->
-            <div class="form-group">
-                <label for="countryName">Country Name</label>
-                <input type="text" class="form-control" name="countryName" id="countryName" maxlenght="50" required>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
             </div>
             <div class="form-group">
-                <label for="continentId">Continent ID</label>
-                <input type="number" class="form-control" id="continentId" name="continentId" max="6" required>
-            </div>
-            <button type="submit" name="btn_insert_country" class="btn btn-success" value="submit">Insert</button>
-        </form>
-
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_continent">
-        <!--
-            <div class="form-group">
-                <label for="continentId">Continent ID</label>
-                <input type="number" class="form-control" name="continentId" id="continentId" max="6" required>
-            </div>
-        -->
-            <div class="form-group">
-                <label for="continentName">Continent Name</label>
-                <input type="text" class="form-control" name="continentName" id="continentName" maxlenght="50" required>
-            </div>
-            <button type="submit" name="btn_insert_continent" class="btn btn-success" value="submit">Insert</button>
-        </form>
-
-        <form action="travel_planner/insert.php" method="POST" class="form_insert" id="form_reviews">
-            <div class="form-group">
-                <label for="reviewerName">Name</label>
-                <input type="text" class="form-control" name="reviewerName" id="reviewerName" maxlength="30" required>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
             </div>
             <div class="form-group">
-                <label for="attraction_id">Attraction Id</label>
-                <input type="number" class="form-control" name="attraction_id" id="attraction_id" maxlength="6" required>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
             </div>
             <div class="form-group">
-                <label for="rating">Rating</label><br>
-                <small><em>*1-5</em></small>
-                <input type="number" class="form-control" name="username" id="username" maxlength="1" min="0" max="5" required>
-            </div>
-            <div class="form-group">
-                <label for="datePosted">Date Posted</label><br>
-                <small><em>*YYYY-MM-DD HH:MI:SS</em></small>
-                <input type="text" class="form-control" name="datePosted" id="datePosted" maxlength="30" required>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
             </div>
             <div class="form-group">
                 <label for="review">Review</label>
-                <textarea class="form-control" id="review" rows="4" maxlength="240" required></textarea>
+                <textarea class="form-control" id="review" rows="4" required></textarea>
             </div>
             <button type="submit" name="btn_insert_review" class="btn btn-success" value="submit">Insert</button>
         </form>
