@@ -53,6 +53,10 @@ try {
     year_created INT(4),
     country_id INT(6),
     cont_id INT(6),
+    picture1 VARCHAR(50),
+    picture2 VARCHAR(50),
+    picture3 VARCHAR(50),
+    close_id INT(6),
     FOREIGN KEY (country_id) REFERENCES Country(country_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (cont_id) REFERENCES Continent(cont_id) ON DELETE CASCADE ON UPDATE CASCADE
 
@@ -67,12 +71,12 @@ catch(PDOException $e)
 try {
   $sql = "CREATE TABLE Pictures (
     attr_id INT(6) UNSIGNED PRIMARY KEY,
+    caption VARCHAR(50) NOT NULL,
     picture1 VARCHAR(50),
     picture2 VARCHAR(50),
     picture3 VARCHAR(50),
     close_id INT(6),
     FOREIGN KEY (attr_id) REFERENCES Attraction(id) ON DELETE CASCADE ON UPDATE CASCADE
-
   )";
   $conn->exec($sql);
 }
@@ -107,11 +111,6 @@ try {
 
   $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Continent (cont_id, name)
-  VALUES (:cont_id, :name)");
-  $stmt->bindParam(':cont_id', $cont_id);
-  $stmt->bindParam(':name', $name);
-
   $cont_id = "5";
   $name = "Cont2";
 
@@ -129,12 +128,6 @@ try {
 
   $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Country (country_id, name, cont_id)
-  VALUES (:country_id, :name, :cont_id)");
-  $stmt->bindParam(':country_id', $id);
-  $stmt->bindParam(':name', $name);
-  $stmt->bindParam(':cont_id', $cont_id);
-
   $id = "3";
   $name = "C2";
   $cont_id = "5";
@@ -142,8 +135,8 @@ try {
   $stmt->execute();
 
 
-  $stmt = $conn->prepare("INSERT INTO Attraction (id, name, type, founder, size, location, year_created, country_id, cont_id)
-  VALUES (:id, :name, :type, :founder, :size, :location, :year_created, :country_id, :cont_id)");
+  $stmt = $conn->prepare("INSERT INTO Attraction (id, name, type, founder, size, location, year_created, country_id, cont_id, picture1, picture2, picture3, close_id)
+  VALUES (:id, :name, :type, :founder, :size, :location, :year_created, :country_id, :cont_id, :picture1, :picture2, :picture3, :close_id)");
   $stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':type', $type);
@@ -153,107 +146,66 @@ try {
   $stmt->bindParam(':year_created', $year_created);
   $stmt->bindParam(':country_id', $country_id);
   $stmt->bindParam(':cont_id', $cont_id);
-
-  $id = "123";
-  $name = "John";
-  $type = "Doe";
-  $founder = "john@example.com";
-  $size = "Computer Science";
-  $location = "Toronto";
-  $year_created = "2020";
-  $country_id = "8";
-  $cont_id = "4";
-  $stmt->execute();
-
-  $stmt = $conn->prepare("INSERT INTO Attraction (id, name, type, founder, size, location, year_created, country_id, cont_id)
-  VALUES (:id, :name, :type, :founder, :size, :location, :year_created, :country_id, :cont_id)");
-  $stmt->bindParam(':id', $id);
-  $stmt->bindParam(':name', $name);
-  $stmt->bindParam(':type', $type);
-  $stmt->bindParam(':founder', $founder);
-  $stmt->bindParam(':size', $size);
-  $stmt->bindParam(':location', $location);
-  $stmt->bindParam(':year_created', $year_created);
-  $stmt->bindParam(':country_id', $country_id);
-  $stmt->bindParam(':cont_id', $cont_id);
-
-  $id = "124";
-  $name = "attr1";
-  $type = "Doe";
-  $founder = "john@example.com";
-  $size = "Computer Science";
-  $location = "Toronto";
-  $year_created = "2020";
-  $country_id = "8";
-  $cont_id = "4";
-  $stmt->execute();
-  
-  $id = "125";
-  $name = "attr2";
-  $type = "Doe";
-  $founder = "john@example.com";
-  $size = "Computer Science";
-  $location = "Toronto";
-  $year_created = "2020";
-  $country_id = "8";
-  $cont_id = "4";
-  $stmt->execute();
-
-  $stmt = $conn->prepare("INSERT INTO Pictures (attr_id, picture1, picture2, picture3, close_id)
-  VALUES (:attr_id, :picture1, :picture2, :picture3, :close_id)");
-  $stmt->bindParam(':attr_id', $attr_id);
   $stmt->bindParam(':picture1', $picture1);
   $stmt->bindParam(':picture2', $picture2);
   $stmt->bindParam(':picture3', $picture3);
   $stmt->bindParam(':close_id', $close_id);
 
-  $attr_id = "123";
+  $id = "123";
+  $name = "Casa Loma";
+  $type = "Doe";
+  $founder = "john@example.com";
+  $size = "Computer Science";
+  $location = "Toronto, Canada";
+  $year_created = "2020";
+  $country_id = "8";
+  $cont_id = "4";
   $picture1 = "casaloma.jpg";
   $picture2 = "disney.jpg";
   $picture3 = "bigben.jpg";
   $close_id = "1";
   $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Pictures (attr_id, picture1, picture2, picture3, close_id)
-  VALUES (:attr_id, :picture1, :picture2, :picture3, :close_id)");
-  $stmt->bindParam(':attr_id', $attr_id);
-  $stmt->bindParam(':picture1', $picture1);
-  $stmt->bindParam(':picture2', $picture2);
-  $stmt->bindParam(':picture3', $picture3);
-  $stmt->bindParam(':close_id', $close_id);
-
-  $attr_id = "124";
+  $id = "124";
+  $name = "Disney Land";
+  $type = "Doe";
+  $founder = "john@example.com";
+  $size = "Computer Science";
+  $location = "Toronto";
+  $year_created = "2020";
+  $country_id = "8";
+  $cont_id = "4";
   $picture1 = "disney.jpg";
   $picture2 = "abc.jpg";
   $picture3 = "efg.jpg";
   $close_id = "1";
   $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Pictures (attr_id, picture1, picture2, picture3, close_id)
-  VALUES (:attr_id, :picture1, :picture2, :picture3, :close_id)");
-  $stmt->bindParam(':attr_id', $attr_id);
-  $stmt->bindParam(':picture1', $picture1);
-  $stmt->bindParam(':picture2', $picture2);
-  $stmt->bindParam(':picture3', $picture3);
-  $stmt->bindParam(':close_id', $close_id);
-
-  $attr_id = "125";
+  $id = "125";
+  $name = "Big Ben";
+  $type = "Doe";
+  $founder = "john@example.com";
+  $size = "Computer Science";
+  $location = "Toronto";
+  $year_created = "2020";
+  $country_id = "8";
+  $cont_id = "4";
   $picture1 = "bigben.jpg";
   $picture2 = "abc.jpg";
   $picture3 = "efg.jpg";
   $close_id = "1";
   $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Pictures (attr_id, picture1, picture2, picture3, close_id)
-  VALUES (:attr_id, :picture1, :picture2, :picture3, :close_id)");
-  $stmt->bindParam(':attr_id', $attr_id);
-  $stmt->bindParam(':picture1', $picture1);
-  $stmt->bindParam(':picture2', $picture2);
-  $stmt->bindParam(':picture3', $picture3);
-  $stmt->bindParam(':close_id', $close_id);
-
-  $attr_id = "126";
-  $picture1 = "capetown.jpg";
+  $id = "126";
+  $name = "Eiffel Tower";
+  $type = "Doe";
+  $founder = "john@example.com";
+  $size = "Computer Science";
+  $location = "Toronto";
+  $year_created = "2020";
+  $country_id = "8";
+  $cont_id = "4";
+  $picture1 = "eiffel.jpg";
   $picture2 = "abc.jpg";
   $picture3 = "efg.jpg";
   $close_id = "1";
@@ -279,52 +231,6 @@ catch(PDOException $e)
 $query = $conn->prepare("SELECT * FROM Continent");
 $query->execute();
 $continents=$query->fetchAll(\PDO::FETCH_ASSOC);
-/*
-$query = $conn->prepare("SELECT * FROM Attraction");
-$query->execute();
-$attractions=$query->fetchAll(\PDO::FETCH_ASSOC);
-
-
-
-
-
-$query = $conn->prepare("SELECT * FROM Country");
-$query->execute();
-$countries=$query->fetchAll(\PDO::FETCH_ASSOC);
-
-$query = $conn->prepare("SELECT * FROM Pictures");
-$query->execute();
-$pictures=$query->fetchAll(\PDO::FETCH_ASSOC);
-print_r($attractions[0]["cont_id"]);
-
-
-if (isset($_COOKIE["continent"])) {
-$cont = $_COOKIE["continent"];
-}
-else {
-  $cont = "0";
-}
-
-$query = $conn->prepare("SELECT * FROM Country WHERE cont_id = $cont");
-$query->execute();
-$country_cut=$query->fetchAll(\PDO::FETCH_ASSOC);
-
-if (isset($_COOKIE["country"])) {
-$country = $_COOKIE["country"];
-}
-else {
-  $country = "0";
-}
-
-$query = $conn->prepare("SELECT * FROM Attraction WHERE country_id = $country");
-$query->execute();
-$attr_cut=$query->fetchAll(\PDO::FETCH_ASSOC);
-
-
-
-echo $cont;
-print_r($country_cut);
-*/
 
 $conn = null;
 ?>
