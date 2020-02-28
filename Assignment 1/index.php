@@ -2,6 +2,8 @@
 session_start();
 require_once('travel_planner/create_table.php');
 include 'include/navigation.php';
+include 'include/aboutus.php';
+
 ?>
 
 <html>
@@ -24,78 +26,14 @@ include 'include/navigation.php';
 }
 
 .about-us{
-  background-color:#DCDCDC;
   color:#2F4F4F;
   font-family:"Nunito";
-  padding-top: 25px;
-  padding-bottom:25px;
-}
-
-.contact-info{
-  margin-top: 80px;
-  margin-left: 50px;
-}
-
-.about-text{
-  font-weight: bold;
-}
-
-.btn {
-  margin: 15px 0;
-  background-color: #ff533d;
-  color: #fff;
 }
 
 body{
-  background: url("img/cityscape.svg") bottom;
+  background: url("img/cityscape.svg");
   background-size:cover;
 
-}
-
-.img-responsive{
-  height: 300px;
-  width: auto;
-  margin-left:50px;
-  margin-top: 20px;
-}
-
-.image{
-  height: 200px;
-  width: auto;
-  border: #ffffff67;
-  border-width: 10px;
-  box-shadow: 0 2px 8px black;
-}
-
-.image:hover {
-  box-shadow: 0 1px 8px black;
-}
-
-.thumbnail {
-  border: 0 none;
-  box-shadow: none;
-  border-radius:0px;
-}
-
-.btn {
-  margin: 15px 0;
-  background-color: #f19f4d;
-  color: #fff;
-}
-
-.logo{
-  margin-top:25px;
-}
-
-.thumbnail:hover {
-  box-shadow: 0 1px 16px #DCDCDC;
-}
-
-.photo-grid{
-  background: #ffffff67;
-  font-family: "Montserrat";
-  padding-top: 50px;
-  padding-bottom: 100px;
 }
 
 .contact{
@@ -112,12 +50,14 @@ body{
 
 #aboutpage {
   text-align:right;
+  padding-top: 1%;
   padding-right: 20%;
   display:none;
   float:right;
 }
 #contactpage {
   text-align:right;
+  padding-top: 1%;
   padding-right: 20%;
   display:none;
   float:right;
@@ -141,6 +81,7 @@ body{
   padding:40px;
   background: #64b4cf;
   border-radius: 25px;
+  margin-top: -25px;
 }
 .c1, .c2, .c3 {
 
@@ -151,15 +92,21 @@ body{
   margin: 5px;
   background: #64b4cf;
   border-radius: 25px;
+  margin-bottom: 50px;
 }
 
-#fig {
-  display: none;
-}
-
-#caption {
+.caption {
   margin-top: -35px;
-  margin-left: 20px;
+  margin-left: 25px;
+  padding-left: 13px;
+}
+
+.caption2 {
+  color: white;
+  font-size: 16px;
+  float: left;
+  margin-top: 130px;
+  margin-left: -200px;
 }
 
 #info {
@@ -209,21 +156,7 @@ body{
   </div>
 
   <!--MAIN PAGE-->
-  <div class="about-us">
-    <!--CONTACT US-->
-    <div id="contactpage">
-      <span class = "about_l" style="font-size:24px;">Contact Us<br></span><br><br><br><br>
-      <span class = "about_l">Tammy Cheung<br>something@ryerson.ca<br></span><br><br><br><br>
-      <span class = "about_l">Lucas Gold<br>lucas.gold@ryerson.ca<br></span><br><br><br><br>
-      <span class = "about_l">Mustafa Salem<br>something@ryerson.ca<br></span>
-    </div>
-    <!--ABOUT US-->
-    <div id="aboutpage">
-      <span class = "about_l" style="font-size:24px;">About Us<br></span><br><br><br><br>
-      <span class = "about_l">Tammy Cheung<br>StudentNum<br></span><br><br><br><br>
-      <span class = "about_l">Lucas Gold<br>500686031<br></span><br><br><br><br>
-      <span class = "about_l">Mustafa Salem<br>StudentNum<br></span>
-    </div>
+
     <!--DROPDOWN MENU-->
 
           <div class="continent">
@@ -254,28 +187,7 @@ body{
 
           </div>
 
-          <div id="info">
-            <h2>Header</h2>
-            <figure id = "fig">
-            <img id = "attr"></img>
-            <figcaption id = "caption"></figcaption>
-          </figure>
-                <img id = "c1"></img>
-
-                <img id = "c2"></img>
-
-                <img id = "c3"></img><br><br>
-
-
-
-                read more read more read more
-
-          </div>
-
-
-          <h3><b>About Us</b></h3>
-
-  </div>
+          <div id="info"></div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
