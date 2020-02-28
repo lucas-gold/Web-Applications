@@ -1,5 +1,18 @@
 <?php
-include 'sql/connection.php';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "travel_planner";
+
+//Connect to db
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname;", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch(PDOException $e)
+{
+}
 session_start();
 $_SESSION['city'] = 'usa';
 if (!isset($_SESSION['username']))
