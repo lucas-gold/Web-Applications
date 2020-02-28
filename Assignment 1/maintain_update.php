@@ -55,7 +55,7 @@ $(document).ready(function(){
         if(form == "plans"){
             $("#form_plans").toggle();
         }
-        if(form == "attraction_photos"){
+        if(form == "country"){
             $("#form_attraction_photos").toggle();
         }
         if(form == "invoice"){
@@ -92,7 +92,7 @@ $(document).ready(function(){
                 <option value="users" selected>users</option>
                 <option value="attractions">attractions</option>
                 <option value="plans">plans</option>
-                <option value="attraction_photos">attraction_photos</option>
+                <option value="country">country</option>
                 <option value="invoice">invoice</option>
                 <option value="reviews">reviews</option>
             </select>
@@ -100,7 +100,7 @@ $(document).ready(function(){
         </form>
         <button id="btn_selectTable" class="btn btn-success">Select</button>
 
-        <form action="sql/update.php" method="POST" class="form_update" id="form_users">
+        <form action="travel_planner/update.php" method="POST" class="form_update" id="form_users">
             <div class="form-group">
                 <label for="userid">User ID</label>
                 <input type="number" class="form-control" name="userid" id="userid" maxlenght="10" required>
@@ -108,7 +108,7 @@ $(document).ready(function(){
             <button type="submit" name="btn_update_user" class="btn btn-danger" value="submit" value="submit">update</button>
         </form>
 
-        <form action="sql/update.php" method="POST" class="form_update" id="form_plans">
+        <form action="travel_planner/update.php" method="POST" class="form_update" id="form_plans">
             <div class="form-group">
                 <label for="startDate">Start Date</label><br>
                 <small><em>YYYY-MM-DD</em></small>
@@ -143,7 +143,7 @@ $(document).ready(function(){
             <button type="submit" name="btn_update_plan" class="btn btn-success" value="submit">update</button>
         </form>
 
-        <form action="sql/update.php" method="POST" class="form_update" id="form_attractions">
+        <form action="travel_planner/update.php" method="POST" class="form_update" id="form_attractions">
             <div class="form-group">
                 <label for="attraction">Attraction Name</label>
                 <input type="text" class="form-control" id="attraction" required>
@@ -167,7 +167,7 @@ $(document).ready(function(){
             <button type="submit" name="btn_update_attraction" class="btn btn-success" value="submit">update</button>
         </form>
 
-        <form action="sql/update.php" method="POST" class="form_update" id="form_attraction_photos">
+        <form action="travel_planner/update.php" method="POST" class="form_update" id="form_attraction_photos">
             <div class="form-group">
                 <label for="filePath">File Path</label>
                 <input type="text" class="form-control" id="filePath" required>
@@ -179,7 +179,7 @@ $(document).ready(function(){
             <button type="submit" name="btn_update_photo" class="btn btn-success" value="submit">update</button>
         </form>
 
-        <form action="sql/update.php" method="POST" class="form_update" id="form_invoice">
+        <form action="travel_planner/update.php" method="POST" class="form_update" id="form_invoice">
             <div class="form-group">
                 <label for="planId">Plan ID</label>
                 <input type="text" class="form-control" id="planId" required>
@@ -199,7 +199,7 @@ $(document).ready(function(){
             <button type="submit" name="btn_update_invoice" class="btn btn-success" value="submit">update</button>
         </form>
 
-        <form action="sql/update.php" method="POST" class="form_update" id="form_reviews">
+        <form action="travel_planner/update.php" method="POST" class="form_update" id="form_reviews">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" name="username" id="username" maxlenght="30" required>
