@@ -1,27 +1,38 @@
-<?php 
-session_start();
-include 'connection.php';
+<?php
+if(!isset($_SESSION)) { 
+    session_start(); 
+} 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "travel_planner";
 
-if(isset($_POST['btn_insert_user'])){
-    $sql = "SELECT * FROM users (uid,username,password,accountType) VALUES (?,?,?,?)";
-
-    if($stmt = $conn->prepare($sql)){
-        //$stmt->bind_param("isss",$uid,$username,$password,$accountType);
-    }
-
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $accountType = $_POST['accountType'];
-
-    if($stmt->execute()){
-        $_SESSION['message'] = "Insert Successful!";
-        $_SESSION['msg_type'] = "success";
-        header("location: ../maintain_select.php");
-    }else{
-        $_SESSION['message'] = "There was an error";
-        $_SESSION['msg_type'] = "danger";
-        header("location: ../maintain_select.php");
-    }
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-    $conn = null;
+
+if(isset($_POST['btn_selectTable']))
+
+    $option = $_POST['selectTable'];
+
+    if($option == "users"){
+        $sql = "SELECT * FROM users";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            echo "<table><tr><th>ID</th><th>Username</th><th>Password</th><th>Account Type</th></tr>";
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo "<tr><td>".$row["id"]."</td><td>".$row["username"]."</td><td> ".$row["password"]."</td><td> ".$row["accountType"]."</td></tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "0 results";
+        }
+    }
+
+$conn->close();
 ?>
