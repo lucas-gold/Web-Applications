@@ -1,6 +1,6 @@
 <?php
-include "include/navigation.php"; 
 session_start();
+include "include/navigation.php"; 
 ?>
 
 <html>
@@ -38,7 +38,14 @@ session_start();
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body">Plan Details</div>
+      <div class="panel-body">
+          <p id="planID">Plan ID: </p>
+          <p id="planStartDate">Start Date: </p>
+          <p id="planDuration">Duration: </p>
+          <p id="attractions">Attractions: </p>
+          <p id="planTransitFare">Transportation Fare: $</p>
+          <p id="planPrice">Price: $</p>
+      </div>
     </div>
   </div>
   <div class="panel panel-default">
@@ -50,7 +57,14 @@ session_start();
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">Plan Details</div>
+      <div class="panel-body">
+          <p id="planID">Plan ID: </p>
+          <p id="planStartDate">Start Date: </p>
+          <p id="planDuration">Duration: </p>
+          <p id="attractions">Attractions: </p>
+          <p id="planTransitFare">Transportation Fare: $</p>
+          <p id="planPrice">Price: $</p>
+      </div>
     </div>
   </div>
 </div>
@@ -68,9 +82,9 @@ session_start();
       <label for="numChild" style="margin-right: 20px">Children</label>
       <input type="number" id="numChild" name="numChild" min="1" max="10">
       </p>
-      <p>Price</p>
-      <p>Tax</p>
-      <p>Total</p>
+      <p id="invoicePrice">Price: </p>
+      <p id="tax">Tax: </p>
+      <p id="invoiceTotal">Total: </p>
       <button type=button>Purchase</button>
       <br>
     </div>
