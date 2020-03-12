@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Rest Countries API</title>
+    <link data-require="bootstrap@4.1.3" data-semver="4.1.3" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <script data-require="bootstrap@4.1.3" data-semver="4.1.3" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.12/angular.js" data-semver="1.4.9"></script>
+    <script data-require="moment-timezone-with-data@0.4.0" data-semver="0.4.0" src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+    <script data-require="moment.js@2.14.1" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-app="searchApp">
+    <div class="container" ng-controller="searchCtrl">
+      <form ng-submit="submit()">
+        <div class="container-fluid header">
+          <div class="container">
+            <h2>Country or Capital Search:</h2>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="col-xs-12">
+          <label>Type a search keyword ...</label>
+        </div>
+        <div>&nbsp;</div>
+        <div>
+          <input type="text" class="form-control" ng-model="test" />
+        </div>
+        <div>&nbsp;</div>
+        <table ng-table="countries" class="table table-bordered">
+          <tbody>
+            <tr>
+              <th class="col-xs-1">Flag</th>
+              <th class="col-xs-2">Country</th>
+              <th class="col-xs-2">Capital</th>
+			  <th class="col-xs-5">Population</th>
+
+              <th class="col-xs-4">Currency (Code | Name | Symbol)</th>
+              <th class="col-xs-3">Current Time</th>
+            </tr>
+            <tr ng-repeat="result in results | orderBy:result.timezone | filter:test">
+              <td>
+                <img ng-src="{{result.flag}}" style="width:50px" />
+              </td>
+              <td>{{ result.name }}</td>
+              <td>{{ result.capital }}</td>
+			  <td>{{ result.population }}</td>
+              <td>
+                <div ng-repeat="currency in result.currencies"> {{currency.code}} | {{currency.name}} | {{currency.symbol}}
+								</div>
+              </td>
+              <td>
+                <div ng-repeat="timezone in result.timezones | orderBy:getCurrentTime ">{{getCurrentTime(timezone)}}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+
+</html>
