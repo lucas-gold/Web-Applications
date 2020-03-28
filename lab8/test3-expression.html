@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title> AngularJS Hello World! </title>
+  <script src="angular.js"></script>
+</head>
+
+<body>
+  
+  <script>
+  angular.module('TemplateExample', [])
+  .controller('cnt3', ['$scope', function($scope) {
+    $scope.l1= 'Hello'; $scope.l2 = 'World';
+  }]);
+</script>
+
+<div ng-app="TemplateExample">
+  <div ng-controller="cnt3">
+    <label>Line1: <input type="text" ng-model="l1"></label><br>
+    <label>Line2: <input type="text" ng-model="l2"></label><br>
+    <p ng-bind-template="{{l1}} {{l2}}!"></p>
+  </div>
+</div>
+
+</body>
+</html>
