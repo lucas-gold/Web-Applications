@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> AngularJS Hello World! </title>
+  <script src="angular.js"></script>
+</head>
+
+<body>
+
+  <div ng-app="app1">
+    <div ng-controller="cnt1">
+      stName <input type="text" ng-model="name"><br>
+      stId <input type="number" ng-model="id"><br><br>
+      Student Information: {{name + " with Id: " + id}}
+    </div>
+  </div>
+
+  <script>
+  angular.module("app1", []).controller("cnt1", function($scope) {
+    $scope.name = "Arian";
+    $scope.id = 123456;
+  });
+</script>
+
+</body>
+</html>
