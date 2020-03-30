@@ -1,0 +1,195 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: url("img/cityscape.svg") bottom;
+  background-size:cover;
+}
+
+
+.continent {
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 12%;
+  left: 5%;
+  background: #222222;
+  border-radius: 25px;
+  color:#9d9d9d;
+  overflow-x: hidden;
+  padding: 24px 0px 42px 18px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.continent:hover {
+  width: 220px;
+  position: fixed;
+  z-index: 1;
+  top: 10%;
+  left: 4%;
+  background: #64b4cf;
+  color:#111e40;
+  border-radius: 20px;
+  overflow-x: hidden;
+  padding: 42px 0px 75px 26px;
+}
+
+@media (max-height:650px) {
+    .continent{
+      position:static;
+    }
+    .continent:hover{
+      position:static;
+    }
+}
+
+.place {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 70%;
+  left: 5%;
+  background: #434a4a;
+  border-radius: 25px;
+  color:#f2f2f2;
+  overflow-x: hidden;
+  padding: 8px 0 8px 12px;
+}
+.place:hover {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 70%;
+  left: 5%;
+  background: #c7f2f2;
+  color:black;
+  border-radius: 25px;
+  overflow-x: hidden;
+  padding: 8px 0 8px 12px;
+}
+
+.header{
+  font-family: "Nunito";
+  font-display: block;
+  font-style: oblique;
+  padding-left: 100px;
+  margin: 0px;
+}
+
+.about-us{
+  background-color:#DCDCDC;
+  color:#2F4F4F;
+  font-family:"Nunito";
+  padding-top: 25px;
+  padding-bottom:25px;
+}
+
+.contact-info{
+  margin-top: 80px;
+  margin-left: 50px;
+}
+
+.about-text{
+  font-weight: bold;
+}
+
+.btn {
+  margin: 15px 0;
+  background-color: #ff533d;
+  color: #fff;
+}
+
+.img-responsive{
+  height: 300px;
+  width: auto;
+  margin-left:50px;
+  margin-top: 20px;
+}
+
+.image{
+  height: 200px;
+  width: auto;
+  border: #ffffff67;
+  border-width: 10px;
+  box-shadow: 0 2px 8px black;
+}
+
+.image:hover {
+  box-shadow: 0 1px 8px black;
+}
+
+.thumbnail {
+  border: 0 none;
+  box-shadow: none;
+  border-radius:0px;
+}
+
+.btn {
+  margin: 15px 0;
+  background-color: #f19f4d;
+  color: #fff;
+}
+
+.logo{
+  margin-top:25px;
+}
+
+.thumbnail:hover {
+  box-shadow: 0 1px 16px #DCDCDC;
+}
+
+.photo-grid{
+  background: #ffffff67;
+  font-family: "Montserrat";
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.contact{
+  background-color: rgba(0, 204, 255, 0.986);
+  padding-top:25px;
+  padding-bottom:25px;
+}
+
+.contact{
+  font-family: "Nunito";
+  font-weight: bold;
+  color:#2F4F4F;
+}
+
+#aboutpage {
+  text-align:right;
+  padding-right: 20%;
+  display:none;
+  z-index: 1;
+  float:right;
+}
+#contactpage {
+  text-align:right;
+  padding-right: 20%;
+  display:none;
+  z-index: 1;
+  float:right;
+
+}
+
+.about_l {
+  width: 190px;
+  position: fixed;
+  text-align:center;
+  background: #222222;
+  border-radius: 25px;
+  color:#9d9d9d;
+  padding: 10px 20px 10px 20px;
+}
+
+
+
+@media (max-height:400px) {
+  .about_l{
+    position:static;
+    padding: 0px;
+    background: none;
+    color:black;
+  }
+
+}
