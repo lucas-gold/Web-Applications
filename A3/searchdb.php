@@ -30,21 +30,20 @@ mysqli_select_db($conn,"travel_planner");
 
     //STEM WORDS:
     //Remove trailing S
-    if (substr($word, -3) == "ies") {
+    if (strtolower(substr($word, -3)) == "ies") {
       $word = substr($word, 0, -3)."y";
     }
-    else if (substr($word, -1) == "s") {
+    else if (strtolower(substr($word, -1)) == "s") {
       $word = substr($word, 0, -1);
     }
     //Change trailing "ian" to "a"
-    if (substr($word, -3) == "ian") {
-      if (substr($word, -4, -3) == "l") {
+    if (strtolower(substr($word, -3)) == "ian") {
+      if (strtolower(substr($word, -4, -3)) == "l") {
           $word = substr($word, 0, -3);
       }
       else {
       $word = substr($word, 0, -3)."a";
     }
-      echo $word;
     }
     //**********end of stem words***************
 
@@ -59,15 +58,15 @@ mysqli_select_db($conn,"travel_planner");
         $next_word = substr($next_word, 1);
       }
       if (is_numeric($next_word)) {
-        if ($word == "over")
+        if (strtolower($word) == "over")
         {
           $q_parsed["min-price"] = $next_word;
         }
-        else if ($word == "under")
+        else if (strtolower($word) == "under")
         {
           $q_parsed["max-price"] = $next_word;
         }
-        else if ($word == "for")
+        else if (strtolower($word) == "for")
         {
           $q_parsed["min-price"] = $next_word;
           $q_parsed["max-price"] = $next_word;
@@ -175,26 +174,40 @@ mysqli_select_db($conn,"travel_planner");
   $row1 = "";
   $row2 = "";
   $row3 = "";
+  $row4 = "";
+  $trow = "";
 
-
+  $i = 0;
   while($row = mysqli_fetch_array($result)) {
-    //$rowdiv = "<div class='showresult'>";
+    $i++;
+
     $tr1 = "<table><tr>";
-    $row0 = "<td><img src = 'img/".$row[4]."' class='imgresult'></img></td><td>".$row0."</td>";
+    $row0 = "<td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td><a href = '/index.php'><img src = 'img/".$row[4]."' class='imgresult'></img></a><br><br></td><td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td>".$row0."</td>";
     $tr = "</tr><tr>";
-    $row1 = "<td>".$row[0]."</td><td>".$row1."</td>";
+    $row1 = "<td>  </td><td>".$row[0]."</td><td>  </td><td>".$row1."</td>";
     //$tr
-    $row2 = "<td>".$row[2].", ".$row[3]."</td><td>".$row2."</td>";
+    $row2 = "<td>  </td><td>".$row[2].", ".$row[3]."</td><td>  </td><td>".$row2."</td>";
     //$tr
-    $row3 = "<td>".$row[1]."</td><td>".$row3."</td>";
+    $row3 = "<td>  </td><td>".$row[1]."</td><td>  </td><td>".$row3."</td>";
     $tre = "</tr></table>";
-  //  $rowdivend = "</div>";
+    //add row for compare with checkbox
   //  echo $row[0]."\n";
   //  echo $row[2].", ".$row[3]."\n";
   //  echo $row[1]."\n\n";
   }
+    if ($i <= 2) {
+      $trow = "<td> &nbsp&nbsp </td>";
+      $trow .= $trow;
+      $trow .= $trow;
+      $trow .= $trow;
+      $trow .= $trow;
 
-  printf("%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s", $tr1, $row0, $tr, $row1, $tr, $row2, $tr, $row3, $tre);
+      printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s  \n %s \n %s \n %s  \n %s", $tr1, $trow, $row0, $tr, $trow, $row1, $tr, $trow, $row2, $tr, $trow, $row3, $tre);
+
+    }
+    else {
+    printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s", $tr1, $row0, $tr, $row1, $tr, $row2, $tr, $row3, $tre);
+  }
 //  echo $row1."\n".$row2."\n".$row3;
 
 }
