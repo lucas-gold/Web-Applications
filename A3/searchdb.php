@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html>
 <?php
-$q = $_GET['search'];
+
+$post_data = file_get_contents("php://input");
+$data = json_decode($post_data);
+
+  $q = $data->query;
+
 
 $conn = mysqli_connect('localhost','root','','travel_planner');
 if (!$conn) {
@@ -10,9 +13,7 @@ if (!$conn) {
 
 mysqli_select_db($conn,"travel_planner");
 
-?>
-<body>
-  <?php
+
   $chars = "0123456789";
   $q_arr = str_word_count( $q , 1, $chars);
   $q_count = str_word_count( $q , 0, $chars);
@@ -20,12 +21,12 @@ mysqli_select_db($conn,"travel_planner");
   //place, continent, country, city, keyword(s), min-price, max-price
   $q_parsed = array("Attraction" => "notset", "Continent" => "notset", "Country" => "notset", "City" => "notset", "Keywords" => "notset", "min-price" => "notset", "max-price" => "notset");
   $prev_word = ""; //for multi word consideration i.e. New Zealand
-  $tables = array("Continent", "Country", "Attraction");
+  $tables = array("Continent", "Country", "Attraction", "City");
 
   for ($x = 0; $x < $q_count; $x++)
   {
     $word = $q_arr[$x];
-    echo $q_arr[$x];
+    //echo $q_arr[$x];
 
     //STEM WORDS:
     //Remove trailing S
@@ -37,7 +38,12 @@ mysqli_select_db($conn,"travel_planner");
     }
     //Change trailing "ian" to "a"
     if (substr($word, -3) == "ian") {
+      if (substr($word, -4, -3) == "l") {
+          $word = substr($word, 0, -3);
+      }
+      else {
       $word = substr($word, 0, -3)."a";
+    }
       echo $word;
     }
     //**********end of stem words***************
@@ -120,19 +126,22 @@ mysqli_select_db($conn,"travel_planner");
     echo $q_parsed["Continent"];
     echo ", ";
     echo $q_parsed["Attraction"];
-    echo "!!! ";
+    echo ", ";
+    echo $q_parsed["City"];
+    echo ", ";
 */
 
     //CHECK FOR MATCHING KEYWORDS (type) IN Attraction
     $sql = "SELECT type FROM Attraction WHERE type = '$single_word'";
     $result = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_array($result)) {
-      //do something
       $q_parsed["Keywords"] = $row["type"];
-      //$prev_word = ""; //no effect?
     }
 
-    echo "((".$q_parsed["Keywords"] ."))";
+    //echo $q_parsed["Keywords"];
+    //echo "!!! ";
+
+    //echo "((".$q_parsed["City"] ."))";
 
 
   } //end of for loop to get parsed text
@@ -143,26 +152,52 @@ mysqli_select_db($conn,"travel_planner");
   $city_input = $q_parsed['City'];
   $keyword_input = $q_parsed['Keywords'];
 
-  $sql = "SELECT name, type, location, country FROM Attraction WHERE
+  $sql = "SELECT name, type, city, country, picture1 FROM Attraction WHERE
   ('$name_input' = 'notset' OR  name = '$name_input')
   AND
   ('$country_input' = 'notset' OR  country = '$country_input')
   AND
-  ('$city_input' = 'notset' OR location = '$city_input')
+  ('$city_input' = 'notset' OR city = '$city_input')
   AND
   ('$keyword_input' = 'notset' OR type = '$keyword_input')
   AND
   NOT ('$keyword_input' = 'notset' AND '$city_input' = 'notset' AND '$country_input' = 'notset' AND '$name_input' = 'notset')
   ";
-
+    //add continent, description, picture, price.
+    //only need WHERE conditional for continent
 
   $result = mysqli_query($conn,$sql);
-  while($row = mysqli_fetch_array($result)) {
-    echo $row[0];
-    //format search results here
+  if (mysqli_num_rows($result) == 0) {
+    echo "No results found.";
   }
+  else {
+  $row0 = "";
+  $row1 = "";
+  $row2 = "";
+  $row3 = "";
+
+
+  while($row = mysqli_fetch_array($result)) {
+    //$rowdiv = "<div class='showresult'>";
+    $tr1 = "<table><tr>";
+    $row0 = "<td><img src = 'img/".$row[4]."' class='imgresult'></img></td><td>".$row0."</td>";
+    $tr = "</tr><tr>";
+    $row1 = "<td>".$row[0]."</td><td>".$row1."</td>";
+    //$tr
+    $row2 = "<td>".$row[2].", ".$row[3]."</td><td>".$row2."</td>";
+    //$tr
+    $row3 = "<td>".$row[1]."</td><td>".$row3."</td>";
+    $tre = "</tr></table>";
+  //  $rowdivend = "</div>";
+  //  echo $row[0]."\n";
+  //  echo $row[2].", ".$row[3]."\n";
+  //  echo $row[1]."\n\n";
+  }
+
+  printf("%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s", $tr1, $row0, $tr, $row1, $tr, $row2, $tr, $row3, $tre);
+//  echo $row1."\n".$row2."\n".$row3;
+
+}
 
 mysqli_close($conn);
 ?>
-</body>
-</html>
