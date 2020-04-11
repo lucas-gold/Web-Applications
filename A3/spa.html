@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="travelApp">
+
+<head>
+    <title>Travel Planner</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+    .searchbar {
+      margin: 20% 10% 25% 12%;
+    }
+
+    .returned {
+
+      color: blue;
+        float:left;
+        padding: 10px;
+        margin: 5px;
+        background: #64b4cf;
+        border-radius: 25px;
+        margin-bottom: 50px;
+        white-space:pre-line;
+
+    }
+
+    @media (max-width:767px) {
+      .btn{
+        width: 74%;
+        margin-left: 2%;
+      }
+
+    }
+
+
+
+    </style>
+</head>
+
+<body ng-controller="formCtrl">
+
+  <div class="searchbar">
+    <a href="#" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Type in searches like: 'Castles in Toronto' or 'Brazilian Museums', 'Things to do in Asia'" style="float:left; color: #d7d9db;"><span class="glyphicon glyphicon-info-sign"></span></a>
+      <form name="searchForm" class="form-inline">
+        <div class="form-group mb-2 col-sm-11">
+          <input type="text" ng-model="query" class="form-control input-lg" id="query" placeholder="Search travel destination" style="width:100%;" required>
+        </div>
+        <button type="submit" ng-click="formsubmit(searchForm.$valid)" ng-disabled="searchForm.$invalid" class="btn btn-info mb-2" style="height:45px; position:absolute;">
+          Search <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </form>
+      <div style="padding-top: 10%;"></div>
+        <p ng-bind-html="result"></p>
+      </div>
+    </div>
+
+
+    <script>
+        var myApp = angular.module("travelApp", ['ngSanitize']);
+
+
+        myApp.controller("formCtrl", ['$scope', '$http', function ($scope, $http) {
+                $scope.url = 'searchdb.php';
+                $scope.formsubmit = function (isValid) {
+
+                    if (isValid) {
+
+                        $http.post($scope.url, {"query": $scope.query}).
+                                success(function (data, status) {
+                                    $scope.status = status;
+                                    $scope.data = data;
+                                    $scope.result = data;
+                                })
+                    } else {
+                        alert('Input is not valid');
+                    }
+
+                }
+
+            }]);
+
+    </script>
+
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();
+    });
+    </script>
+
+</body>
+
+</html>
