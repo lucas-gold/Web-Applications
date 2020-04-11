@@ -21,32 +21,58 @@
     }
 
     .returned {
-
-      color: blue;
+        color: #616566;
         float:left;
+        text-align:center;
         padding: 10px;
         margin: 5px;
-        background: #64b4cf;
         border-radius: 25px;
-        margin-bottom: 50px;
-        white-space:pre-line;
-
     }
+
+    .imgresult {
+      border-radius: 10px;
+      width: 500px;
+      height: 300px;
+    }
+
+    .padded {
+      padding-top: 10%;
+    }
+
 
     @media (max-width:767px) {
       .btn{
         width: 74%;
         margin-left: 2%;
       }
+      .padded {
+        padding-top: 30%;
+      }
+      .imgresult{
+        border-radius: 10px;
+        width: 400px;
+        height: 220px;
+      }
 
     }
+
+    @media (max-height:500px) {
+      .imgresult{
+        border-radius: 10px;
+        width: 300px;
+        height: 180px;
+      }
+
+    }
+
+
 
 
 
     </style>
 </head>
 
-<body ng-controller="formCtrl">
+<body ng-controller="formCtrl" style="background:#dff1f7;">
 
   <div class="searchbar">
     <a href="#" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Type in searches like: 'Castles in Toronto' or 'Brazilian Museums', 'Things to do in Asia'" style="float:left; color: #d7d9db;"><span class="glyphicon glyphicon-info-sign"></span></a>
@@ -58,8 +84,9 @@
           Search <span class="glyphicon glyphicon-search"></span>
         </button>
       </form>
-      <div style="padding-top: 10%;"></div>
-        <p ng-bind-html="result"></p>
+      <div class="padded"></div>
+      <div style="margin: -20% -10% -25% -16%;">
+        <p ng-bind-html="result" class="returned"></p></div>
       </div>
     </div>
 
