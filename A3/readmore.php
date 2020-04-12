@@ -1,13 +1,5 @@
 <?php
-session_start();
-require_once('travel_planner/create_table.php');
-include 'include/navigation.php';
-include 'include/aboutus.php';
 
-?>
-
-<html>
-<?php
 $id = intval($_GET['q']);
 
 $conn = mysqli_connect('localhost','root','','travel_planner');
@@ -19,135 +11,19 @@ mysqli_select_db($conn,"travel_planner");
 
 ?>
 <head>
-<meta name="viewport" content="width = device-width, initial-scale = 1">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Titillium+Web" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="stylesheetA1.css">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<title>Travel Planner</title>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<style>
+  <link rel="stylesheet" href="mainstyle.css">
 
-.header{
-  font-family: "Nunito";
-  font-display: block;
-  font-style: oblique;
-  padding-left: 100px;
-  margin: 0px;
-}
-
-.about-us{
-  color:#2F4F4F;
-  font-family:"Nunito";
-}
-
-body{
-  background: url("img/cityscape.svg");
-  background-size:cover;
-
-}
-
-
-.contact{
-  background-color: rgba(0, 204, 255, 0.986);
-  padding-top:25px;
-  padding-bottom:25px;
-}
-
-.contact{
-  font-family: "Nunito";
-  font-weight: bold;
-  color:#2F4F4F;
-}
-
-#aboutpage {
-  text-align:right;
-  padding-top: 1%;
-  padding-right: 20%;
-  display:none;
-  float:right;
-}
-#contactpage {
-  text-align:right;
-  padding-top: 1%;
-  padding-right: 20%;
-  display:none;
-  float:right;
-
-}
-
-.about_l {
-  width: 190px;
-  position: fixed;
-  text-align:center;
-  background: #222222;
-  border-radius: 25px;
-  color:#9d9d9d;
-  padding: 10px 20px 10px 20px;
-}
-
-.s1 {
-
-  max-height: 275px;
-  max-width: 290px;
-  float:left;
-  padding: 10px;
-  background: #64b4cf;
-  border-radius: 25px;
-  margin: 30px 25px 50px 25px;
-}
-.s2 {
-
-  max-height: 275px;
-  max-width: 290px;
-  float:left;
-  padding: 10px;
-  background: #64b4cf;
-  border-radius: 25px;
-  margin: 0px 25px 10px 25px;
-}
-
-.emptyrow {
-  margin: 0px 350px;
-}
-
-.emptyrow_xs {
-  margin: 0px 50px;
-}
-
-
-
-@media (max-height:400px) {
-  .about_l{
-    position:static;
-    padding: 0px;
-    background: none;
-    color:black;
-  }
-
-}
-
-@media (max-width:1300px) {
-  .emptyrow {
-    margin: 10px 5px;
-  }
-}
-
-.reviewbox {
-  background-color: #64b4cf;
-  border: 8px solid #2f2f2f;
-  color: #2f2f2f;
-  font-size: 18px;
-  border-radius: 15px;
-  font-style:italic;
-}
-.reviewtext {
-  color: #2f2f2f;
-  font-size: 18px;
-  font-style:italic;
-}
-
-</style>
 
 </head>
 <body>
@@ -158,7 +34,22 @@ body{
 
   $result = mysqli_query($conn,$sql);
 
+  $space = "&nbsp&nbsp&nbsp&nbsp";
+  $space .= $space;
+  $space .= $space;
+  $space .= $space;
+  $lower = "<br><br><br><br><br><br>";
+
   while($row = mysqli_fetch_array($result)) {
+    echo "<table style='margin-top: -9%;'><tr><td valign='top'>";
+    echo "<img class = 's1' src = img/" . $row["picture2"] . "></img></td><td>";
+    echo "</td><td valign='top'><h2>".$row["name"]."</h2><h3>";
+    echo $row["city"].", ".$row["country"];
+    echo "</h3><br>";
+    echo "This is a placeholder for a description.<br>";
+    echo " Cost: $ 100.00<br>";
+    //echo "</tr></table>";
+    /*
     echo "<h2 style='position:absolute;color:white;margin-left:50px;'>".$row["name"]."<h2>";
     echo "<table><tr><td></div>";
     echo "<img class = 's1' src = img/" . $row["picture2"] . "></img></td><td><div class='emptyrow'></div></td><td>";
@@ -168,13 +59,27 @@ body{
     echo "<h3>Location: </h3>".$row["location"] . ", " . $row["country"];
     echo "</div></td></tr><tr><td>";
     echo "<img class = 's2' src = img/" . $row["picture3"] . "></img></td><td></tr></table>";
+    */
   }
 
+
+  //echo "<select id='continentlist' name='continentlist' onchange=show_countries(this.value) style='width:160px; color:black'>";
+  //echo "<option selected disabled>Choose a continent...</option>";
+  //echo "</select>";
+  $sql="SELECT * FROM Attraction";
+  $result = mysqli_query($conn,$sql);
+  echo "<select id='attractions' onchange=show_compare(this.value) style='width:120px;height:28px;color:black'>";
+    echo "<option selected disabled>Compare:</option>";
+  while($row = mysqli_fetch_array($result)) {
+    echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
+  }
+    echo "</select></td>";
+echo "</tr></table>";
 
   $sql="SELECT * FROM Reviews WHERE attr_id = '".$id."'";
 
   $result = mysqli_query($conn,$sql);
-
+/*
   echo "<div class='reviewbox'><h4 style='font-style:normal;text-align:center;font-size:22px;'>Reviews:</h4>";
     echo "<table><tr>";
   while($row = mysqli_fetch_array($result)) {
@@ -186,7 +91,7 @@ body{
   }
   echo "</tr></table>";
         echo "</div>";
-
+*/
  ?>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
