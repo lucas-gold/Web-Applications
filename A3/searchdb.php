@@ -167,28 +167,28 @@ mysqli_select_db($conn,"travel_planner");
 
   $result = mysqli_query($conn,$sql);
   if (mysqli_num_rows($result) == 0) {
-    echo "No results found.";
+    printf("<br><br><br><br>No results found.");
   }
   else {
   $row0 = "";
   $row1 = "";
   $row2 = "";
-  $row3 = "";
-  $row4 = "";
   $trow = "";
 
   $i = 0;
   while($row = mysqli_fetch_array($result)) {
     $i++;
 
-    $tr1 = "<table><tr>";
-    $row0 = "<td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td><a href = '/index.php'><img src = 'img/".$row[4]."' class='imgresult'></img></a><br><br></td><td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td>".$row0."</td>";
+    $tr1 = "<br><br><br><br><br><table><tr>";
+    $row0 = "<td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td><a href = '#/".strtolower(str_replace(' ', '', $row[0]))."'><img src = 'img/".$row[4]."' class='imgresult'></img></a><br><br></td><td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td>".$row0."</td>";
     $tr = "</tr><tr>";
     $row1 = "<td>  </td><td>".$row[0]."</td><td>  </td><td>".$row1."</td>";
+    if ($i == 2) {
+      $row1 .= "</tr><tr></tr><tr>";
+    }
     //$tr
     $row2 = "<td>  </td><td>".$row[2].", ".$row[3]."</td><td>  </td><td>".$row2."</td>";
     //$tr
-    $row3 = "<td>  </td><td>".$row[1]."</td><td>  </td><td>".$row3."</td>";
     $tre = "</tr></table>";
     //add row for compare with checkbox
   //  echo $row[0]."\n";
@@ -202,11 +202,11 @@ mysqli_select_db($conn,"travel_planner");
       $trow .= $trow;
       $trow .= $trow;
 
-      printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s  \n %s \n %s \n %s  \n %s", $tr1, $trow, $row0, $tr, $trow, $row1, $tr, $trow, $row2, $tr, $trow, $row3, $tre);
+      printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s  \n %s \n %s", $tr1, $trow, $row0, $tr, $trow, $row1, $tr, $trow, $row2, $trow, $tre);
 
     }
     else {
-    printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s", $tr1, $row0, $tr, $row1, $tr, $row2, $tr, $row3, $tre);
+    printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s", $tr1, $row0, $tr, $row1, $tr, $row2, $tre);
   }
 //  echo $row1."\n".$row2."\n".$row3;
 
