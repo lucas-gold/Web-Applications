@@ -1,9 +1,5 @@
+<!DOCTYPE html>
 <?php
-session_start();
-require_once('travel_planner/create_table.php');
-include 'include/navigation.php';
-include 'include/aboutus.php';
-
 if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: login.php');
@@ -13,236 +9,161 @@ if (!isset($_SESSION['username'])) {
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
-?>
+  ?>
+<html ng-app="travelApp">
 
-<html>
 <head>
-<meta name="viewport" content="width = device-width, initial-scale = 1">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Titillium+Web" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="stylesheetA1.css">
-
-<title>Travel Planner</title>
-
-<style>
-
-.header{
-  font-family: "Nunito";
-  font-display: block;
-  font-style: oblique;
-  padding-left: 100px;
-  margin: 0px;
-}
-
-.about-us{
-  color:#2F4F4F;
-  font-family:"Nunito";
-}
-
-body{
-  background: url("img/cityscape.svg");
-  background-size:cover;
-
-}
-
-.contact{
-  background-color: rgba(0, 204, 255, 0.986);
-  padding-top:25px;
-  padding-bottom:25px;
-}
-
-.contact{
-  font-family: "Nunito";
-  font-weight: bold;
-  color:#2F4F4F;
-}
-
-#aboutpage {
-  text-align:right;
-  padding-top: 1%;
-  padding-right: 20%;
-  display:none;
-  float:right;
-}
-#contactpage {
-  text-align:right;
-  padding-top: 1%;
-  padding-right: 20%;
-  display:none;
-  float:right;
-
-}
-
-.about_l {
-  width: 190px;
-  position: fixed;
-  text-align:center;
-  background: #222222;
-  border-radius: 25px;
-  color:#9d9d9d;
-  padding: 10px 20px 10px 20px;
-}
-
-.mainimg {
-  max-height: 550px;
-  min-width: 420px;
-  max-width: 750px;
-  padding:40px;
-  background: #64b4cf;
-  border-radius: 25px;
-  margin-top: -25px;
-}
-.c1, .c2, .c3 {
-
-  max-height: 120px;
-  max-width: 230px;
-  float:left;
-  padding: 10px;
-  margin: 5px;
-  background: #64b4cf;
-  border-radius: 25px;
-  margin-bottom: 50px;
-}
-
-.caption {
-  margin-top: -35px;
-  margin-left: 25px;
-  padding-left: 13px;
-}
-
-.caption2 {
-  color: white;
-  font-size: 16px;
-  float: left;
-  margin-top: 130px;
-  margin-left: -200px;
-  padding-right: 20px;
-}
-
-#info {
-  margin-left: 35%;
-  font-size: 28px;
-  padding: 0px 10px;
-}
-
-#search_data {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: #64b4cf;
-  border: 8px solid #2f2f2f;
-  color: #2f2f2f;
-  font-size: 22px;
-  border-radius: 15px;
-  font-style:italic;
-  padding: 10px 20px;
-  display: none;
-
-}
+  <title>Travel Planner</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
 
 
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-@media (max-height:400px) {
-  .about_l{
-    position:static;
-    padding: 0px;
-    background: none;
-    color:black;
-  }
+  <link rel="stylesheet" href="mainstyle.css">
 
-}
-
-
-</style>
 
 </head>
-<body>
+
+<body ng-controller="formCtrl" style="background:#dff1f7;">
+
+  <div class="searchbar">
+    <a href="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Search with phrases like: 'Castles in Toronto', 'Brazilian Museums' or 'Things to do in Asia'" style="position:fixed; color: #d7d9db; padding-right: 40px; margin-top: 50px;"><span class="glyphicon glyphicon-info-sign"></span></a>
+    <form name="searchForm" class="form-inline">
+      <div class="form-group mb-2 col-sm-11">
+        <input type="text" ng-model="query" class="form-control input-lg" id="query" placeholder="Search travel destination" style="width:69%; position:fixed; margin-top: 50px;" required>
+      </div>
+      <button type="submit" ng-click="formsubmit(searchForm.$valid)" ng-disabled="searchForm.$invalid" class="btn btn-info mb-2" style="height:45px; position:fixed; margin-top: 50px;">
+        Search <span class="glyphicon glyphicon-search"></span>
+      </button>
+    </form>
+    <div class="padded"></div>
+    <div style="margin: -20% -10% -25% -16%;">
+      <p ng-bind-html="result" class="returned"></p></div>
+      <div ng-view class="entry"></div>
+      <div id="compare" class="compare"></div>
+    </div>
+
+
+
+
+    <div class="content">
+        <!-- notification message -->
+        <?php if (isset($_SESSION['success'])) : ?>
+          <div class="error success" >
+            <h3>
+              <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+              ?>
+            </h3>
+          </div>
+        <?php endif ?>
+
+        <!-- logged in user information -->
+        <?php  if (isset($_SESSION['username'])) : ?>
+          <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+          <p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
+        <?php endif ?>
+    </div>
+
+
+
+
+
+
 
   <script>
-  function show_countries(str) {
-
-    $("#countrylist").load("travel_planner/get_countries.php?q="+str);
-
-  }
-
-  function show_attractions(str) {
-
-    $("#attractionlist").load("travel_planner/get_attractions.php?q="+str);
-
-  }
-
-  function show_pics(str) {
-    $("#info").load("travel_planner/get_pics.php?q="+str);
-
-  }
-
-  function search_results(str) {
-    document.getElementById("search_data").style.display = "block";
-    $("#search_data").load("searchdb.php?search="+str.replace(/ /g,'+'));
-  }
-  </script>
-
-  <div style="height: 50px;">
-  </div>
-
-  <!--MAIN PAGE-->
-
-    <!--DROPDOWN MENU-->
-
-          <div class="continent">
-
-            <h3> &nbsp&nbsp&nbspContinents:</h3><br>
-            <select id="continentlist" name="continentlist" onchange=show_countries(this.value) style="width:160px; color:black">
-              <option selected disabled>Choose a continent...</option>
-              <?php foreach ($continents as $row): ?>
-                    <option value="<?=$row["cont_id"]?>"><?=$row["name"]?></option>
-              <?php endforeach ?>
-            </select>
-
-            <div id = "countrylist"></div>
-            <div id = "attractionlist"></div>
-
-            <div>
-              <br><br>
-              <h4> &nbsp&nbsp&nbspPopular Places:</h4><br>
-              <select id='popularplaces' onchange=show_pics(this.value) style="width:160px; color:black">
-                <option selected disabled>Choose One:</option>
-                <?php foreach ($attractions as $row): ?>
-                      <option value="<?=$row["id"]?>"><?=$row["name"]?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
-
-          </div>
-
-          <div id="info"></div>
-          <div id="search_data"></div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    var myApp = angular.module("travelApp", ['ngSanitize', 'ngRoute']);
 
 
+    myApp.controller("formCtrl", ['$scope', '$http', function ($scope, $http) {
+      $scope.url = 'searchdb.php';
+      $scope.formsubmit = function (isValid) {
 
-<div class="content">
-  	<!-- notification message -->
-  	<?php if (isset($_SESSION['success'])) : ?>
-      <div class="error success" >
-      	<h3>
-          <?php 
-          	echo $_SESSION['success']; 
-          	unset($_SESSION['success']);
-          ?>
-      	</h3>
-      </div>
-  	<?php endif ?>
+        if (isValid) {
 
-    <!-- logged in user information -->
-    <?php  if (isset($_SESSION['username'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
-    <?php endif ?>
-</div>
-</body>
+          $http.post($scope.url, {"query": $scope.query}).
+          success(function (data, status) {
+            $scope.status = status;
+            $scope.data = data;
+            $scope.result = data;
+          })
+        } else {
+          alert('Input is not valid');
+        }
 
-</html>
+      }
+
+    }]);
+
+/* add ratings:
+    myApp.controller("ratingCtrl", ['$scope', '$http', function ($scope, $http) {
+      $scope.url = 'rate.php';
+      $scope.formsubmit = function (isValid) {
+
+        if (isValid) {
+
+          $http.post($scope.url, {"query": $scope.query}).
+          success(function (data, status) {
+            $scope.status = status;
+            $scope.data = data;
+            $scope.result = data;
+          })
+        } else {
+          alert('Input is not valid');
+        }
+
+      }
+    }]);
+*/
+    myApp.config(function($routeProvider) {
+      $routeProvider
+
+      .when('/home', {
+        templateUrl : 'pages/home.html',
+        controller : 'HomeController'})
+
+        .when('/cntower', {
+          templateUrl : 'readmore.php?q=1011',
+          controller : 'CNTowerController'})
+
+
+          });
+
+          myApp.controller('HomeController', function($scope) {
+            $scope.message = 'Hello from HomeController';});
+
+            myApp.controller('CNTowerController', function($scope) {
+              $scope.message = 'Hello from AboutusController';});
+
+
+
+              </script>
+
+              <script>
+                $(document).ready(function(){
+                  $('[data-toggle="popover"]').popover();
+                });
+              </script>
+
+              <script>
+              function show_compare(str) {
+                $("#compare").load("travel_planner/get_compare.php?q="+str);
+
+              }
+              </script>
+
+
+            </body>
+
+            </html>
