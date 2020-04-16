@@ -71,7 +71,7 @@ try{
   $sql = "CREATE TABLE users (
     id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
-    password VARCHAR(30) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     accountType VARCHAR (1) NOT NULL)";
     $conn->exec($sql);
 }
