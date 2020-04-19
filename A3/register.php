@@ -23,6 +23,21 @@
   	  <label>Confirm password</label>
   	  <input type="password" name="password_2">
   	</div>
+	 <div class="input-group">
+	<label>Address</label>
+	 <input type="text" name="address" >
+	 </div>
+	 <div class="input-group">
+	<label>Email</label>
+    <label>
+    <input type="text" name="email" >
+    </label>
+	</div>
+	<div class="input-group">
+    <label>Phone Number</label>
+	<label>
+    <input type="text" name="phone_number">
+    </label>
   	<div class="input-group">
   	  <button type="submit" class="btn" name="reg_user">Register</button>
   	</div>

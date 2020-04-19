@@ -14,6 +14,10 @@ if (isset($_POST['reg_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+  $email = mysqli_real_escape_string($db, $_POST['email']);
+  $address = mysqli_real_escape_string($db, $_POST['address']);
+  $phone_number = mysqli_real_escape_string($db, $_POST['phone_number']);
+
 
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
@@ -22,6 +26,10 @@ if (isset($_POST['reg_user'])) {
   if ($password_1 != $password_2) {
 	array_push($errors, "The two passwords do not match");
   }
+  if (empty($email)) { array_push($errors, "email is required"); }
+  if (empty($address)) { array_push($errors, "address is required"); }
+  if (empty($phone_number)) { array_push($errors, "phone_number is required"); }
+
 
   // first check the database to make sure 
   // a user does not already exist with the same username 
@@ -39,8 +47,8 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, password) 
-  			  VALUES('$username', '$password')";
+  	$query = "INSERT INTO users (username, password, email, address,phone_number  ) 
+  			  VALUES('$username', '$password', '$email', '$address', '$phone_number')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
