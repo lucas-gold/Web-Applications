@@ -73,9 +73,10 @@ try{
     username VARCHAR(30) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
 	email VARCHAR(50) NOT NULL,
-	phone VARCHAR(14) NOT NULL,
+	phone_number VARCHAR(14) NOT NULL,
 	address VARCHAR(100) NOT NULL,
-    accountType VARCHAR (1) NOT NULL)";
+    accountType VARCHAR (1) NOT NULL)
+	";
     $conn->exec($sql);
 }
 catch(PDOException $e)
