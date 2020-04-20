@@ -35,7 +35,8 @@ while($row = mysqli_fetch_array($result)) {
   echo "</td><td valign='top'><h2>".$row["name"]."</h2><h3>";
   echo $row["city"].", ".$row["country"];
   echo "</h3><br>";
-  echo $row["description"]." <span style='font-style:italic;'>Rated ".$row["rating"]."/5.</span><br>";
+  echo $row["description"];
+  echo "<br>Last review: ".$row["review"]." <span style='font-style:italic;'>... ".$row["rating"]." stars.</span><br>";
   //echo " Cost: $".$row["price"];
   echo "<a onclick='hide_compare()' style='font-style:italic;'> Click here to purchase for $".$row["price"].".</a><br>";
 
