@@ -35,8 +35,6 @@ if (isset($_GET['logout'])) {
 
   <link rel="stylesheet" href="mainstyle.css">
 
-
-
 </head>
 
 <body style="background:#dff1f7;">
