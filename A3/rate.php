@@ -4,6 +4,7 @@ $post_data = file_get_contents("php://input");
 $data = json_decode($post_data);
 
   $rev = $data->review;
+  $rate = $data->rating;
   $id = $data->attrname;
 
 
@@ -14,12 +15,12 @@ if (!$conn) {
 
 mysqli_select_db($conn,"travel_planner");
 
-$sql = "UPDATE Attraction SET review='$rev' WHERE id='$id'";
+$sql = "UPDATE Attraction SET review='$rev', rating='$rate' WHERE id='$id'";
 
   if ($conn->query($sql) === TRUE) {
-      echo "Rating saved.";
+      echo "Review saved.";
   } else {
-      echo "Rating could not be saved.";
+      echo "Review could not be saved.";
   }
 
 mysqli_close($conn);
