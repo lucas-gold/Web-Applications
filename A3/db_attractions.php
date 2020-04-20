@@ -81,7 +81,7 @@ if(isset($_GET['edit'])){
             <label for="city_id">City</label>
             <select class="form-control input-sm" id="city_id" name="city_id" required>
                 <option disabled selected>Select one...</option>
-                <?php $results = mysqli_query($conn, "SELECT * FROM city");
+                <?php $results = mysqli_query($conn, "SELECT * FROM City");
                 while($row = mysqli_fetch_array($results)) { ?>
                 <option value="<?php echo $row['name'];?>" <?php if($sel_city == $row['name']) echo "selected"; ?>><?php echo $row['name'];?></option>
                 <?php } ?>
@@ -178,23 +178,12 @@ if(isset($_GET['edit'])){
 
         <?php while($row = mysqli_fetch_array($results)) { ?>
             <tr>
+                <td><?php echo $row['id']; ?></td>
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['type']; ?></td>
-                <?php $city_id = $row['city'];
-                $result2 = mysqli_query($conn, "SELECT name FROM city WHERE name=$city_id");
-                $row2 = mysqli_fetch_array($result2);?>
-                <td><?php echo $row2['name'];?></td>
-
-                <?php $country_id = $row['country'];
-                $result2 = mysqli_query($conn, "SELECT name FROM Country WHERE country=$country_id");
-                $row2 = mysqli_fetch_array($result2);?>
-                <td><?php echo $row2['name'];?></td>
-
-                <?php $cont_id = $row['continent'];
-                $result2 = mysqli_query($conn, "SELECT name FROM Continent WHERE continent=$cont_id");
-                $row2 = mysqli_fetch_array($result2);?>
-                <td><?php echo $row2['name'];?></td>
-
+                <td><?php echo $row['city'];?></td>
+                <td><?php echo $row['country'];?></td>
+                <td><?php echo $row['continent'];?></td>
                 <td><?php echo $row['lat'];?></td>
                 <td><?php echo $row['lon'];?></td>
                 <td><?php echo $row['picture1']; ?></td>
@@ -208,7 +197,7 @@ if(isset($_GET['edit'])){
                     <a class="btn btn-warning btn-sm" href="db_attractions.php?edit=<?php echo $row['id'];?>">Edit</a>
                 </td>
                 <td>
-                    <a class="btn btn-danger btn-sm" href="maintaindb.php?del_att=<?php echo $row['id'];?>">Delete</a>
+                    <a class="btn btn-danger btn-sm" href="db_attractions.php?del_att=<?php echo $row['id'];?>">Delete</a>
                 </td>
             </tr>
         <?php } ?>
