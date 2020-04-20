@@ -1,14 +1,16 @@
-<?php 
+<?php
 include('dbconnect.php');
 
 $update = false;
+$id = "";
 $name="";
 $type="";
 $picture1="";
 $picture2="";
-$picture3="";
 $description="";
 $price="";
+$rating="";
+$review="";
 $sel_city="";
 $sel_cont="";
 $sel_country="";
@@ -22,16 +24,18 @@ if(isset($_GET['edit'])){
 
     if($record->num_rows == 1){
         $n = mysqli_fetch_array($record);
+        $id=$n['id'];
         $name=$n['name'];
         $type=$n['type'];
         $picture1=$n['picture1'];
         $picture2=$n['picture2'];
-        $picture3=$n['picture3'];
         $description=$n['description'];
         $price=$n['price'];
-        $sel_city=$n['city_id'];
-        $sel_cont=$n['cont_id'];
-        $sel_country=$n['country_id'];
+        $sel_city=$n['city'];
+        $sel_cont=$n['continent'];
+        $sel_country=$n['country'];
+        $rating=$n['rating'];
+        $review=$n['review'];
         $lat=$n['lat'];
         $lon=$n['lon'];
     }
@@ -54,7 +58,7 @@ if(isset($_GET['edit'])){
     <div class="alert alert-success alert-dismissible">
         <?php
             echo $_SESSION['message'];
-            unset($_SESSION['message']);    
+            unset($_SESSION['message']);
         ?>
     </div>
     <?php endif ?>
@@ -66,6 +70,10 @@ if(isset($_GET['edit'])){
             <input class="form-control input-sm" type="text" id="name" name="name" value="<?php echo $name;?>">
         </div>
         <div class="form-group">
+            <label for="name">ID</label>
+            <input class="form-control input-sm" type="text" id="id" name="id" value="<?php echo $id;?>">
+        </div>
+        <div class="form-group">
             <label for="type">Type</label>
             <input class="form-control input-sm" type="text" id="type" name="type" value="<?php echo $type;?>">
         </div>
@@ -73,9 +81,9 @@ if(isset($_GET['edit'])){
             <label for="city_id">City</label>
             <select class="form-control input-sm" id="city_id" name="city_id" required>
                 <option disabled selected>Select one...</option>
-                <?php $results = mysqli_query($conn, "SELECT * FROM city"); 
+                <?php $results = mysqli_query($conn, "SELECT * FROM city");
                 while($row = mysqli_fetch_array($results)) { ?>
-                <option value="<?php echo $row['city_id'];?>" <?php if($sel_city == $row['city_id']) echo "selected"; ?>><?php echo $row['name'];?></option>
+                <option value="<?php echo $row['name'];?>" <?php if($sel_city == $row['name']) echo "selected"; ?>><?php echo $row['name'];?></option>
                 <?php } ?>
             </select>
         </div>
@@ -83,9 +91,9 @@ if(isset($_GET['edit'])){
             <label for="country_id">Country</label>
             <select class="form-control input-sm" id="country_id" name="country_id" required>
                 <option disabled selected>Select one...</option>
-                <?php $results = mysqli_query($conn, "SELECT * FROM Country"); 
+                <?php $results = mysqli_query($conn, "SELECT * FROM Country");
                 while($row = mysqli_fetch_array($results)) { ?>
-                <option value="<?php echo $row['country_id'];?>" <?php if($sel_country == $row['country_id']) echo "selected"; ?>><?php echo $row['name'];?></option>
+                <option value="<?php echo $row['name'];?>" <?php if($sel_country == $row['name']) echo "selected"; ?>><?php echo $row['name'];?></option>
                 <?php } ?>
             </select>
         </div>
@@ -93,9 +101,9 @@ if(isset($_GET['edit'])){
             <label for="cont_id">Continent</label>
             <select class="form-control input-sm" id="cont_id" name="cont_id" required>
                 <option disabled selected>Select one...</option>
-                <?php $results = mysqli_query($conn, "SELECT * FROM Continent"); 
+                <?php $results = mysqli_query($conn, "SELECT * FROM Continent");
                 while($row = mysqli_fetch_array($results)) { ?>
-                <option value="<?php echo $row['cont_id'];?>" <?php if($sel_cont == $row['cont_id']) echo "selected"; ?>><?php echo $row['name'];?></option>
+                <option value="<?php echo $row['name'];?>" <?php if($sel_cont == $row['name']) echo "selected"; ?>><?php echo $row['name'];?></option>
                 <?php } ?>
             </select>
         </div>
@@ -124,15 +132,6 @@ if(isset($_GET['edit'])){
             <input class="form-control input-sm" id="picture2" type="file" name="picture2" accept="image/*" value="<?php echo $picture2;?>">
         </div>
         <div class="form-group">
-            <label for="picture3">Picture 3</label>
-            <?php if(!empty($picture3)){?>
-            <img src="img/<?php echo $picture3;?>" height="50" width="50">
-            <input type="hidden" name="picture3" value="<?php echo $picture3;?>">
-            <?php } ?>
-            <input type="hidden" name="picture3" value="<?php echo $picture3;?>">
-            <input class="form-control input-sm" type="file" id="picture3" name="picture3" accept="image/*" value="<?php echo $picture3;?>">
-        </div>
-        <div class="form-group">
             <label for="description">Description</label>
             <input class="form-control input-sm" type="text" id="description" name="description" value="<?php echo $description;?>">
         </div>
@@ -140,8 +139,16 @@ if(isset($_GET['edit'])){
             <label for="price">Price</label>
             <input class="form-control input-sm" type="text" id="price" name="price" value="<?php echo $price;?>">
         </div>
+        <div class="form-group">
+            <label for="price">Rating</label>
+            <input class="form-control input-sm" type="text" id="rating" name="rating" value="<?php echo $rating;?>">
+        </div>
+        <div class="form-group">
+            <label for="price">Review</label>
+            <input class="form-control input-sm" type="text" id="review" name="review" value="<?php echo $review;?>">
+        </div>
             <?php if ($update == true): ?>
-                <button class="btn btn-warning btn-sm" type="submit" name="update_att">Update</button> 
+                <button class="btn btn-warning btn-sm" type="submit" name="update_att">Update</button>
             <?php else: ?>
                 <button class="btn btn-success btn-sm" type="submit" name="add_att">Add</button>
             <?php endif ?>
@@ -151,6 +158,7 @@ if(isset($_GET['edit'])){
     <table class="table table-condensed">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Type</th>
                 <th>City</th>
@@ -160,9 +168,10 @@ if(isset($_GET['edit'])){
                 <th>Longitude</th>
                 <th>Picture 1</th>
                 <th>Picture 2</th>
-                <th>Picture 3</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Rating</th>
+                <th>Review</th>
                 <th colspan="2">Action</th>
             </tr>
         </thead>
@@ -171,28 +180,30 @@ if(isset($_GET['edit'])){
             <tr>
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['type']; ?></td>
-                <?php $city_id = $row['city_id'];
-                $result2 = mysqli_query($conn, "SELECT name FROM city WHERE city_id=$city_id");
-                $row2 = mysqli_fetch_array($result2);?>
-                <td><?php echo $row2['name'];?></td>
-                
-                <?php $country_id = $row['country_id'];
-                $result2 = mysqli_query($conn, "SELECT name FROM Country WHERE country_id=$country_id");
+                <?php $city_id = $row['city'];
+                $result2 = mysqli_query($conn, "SELECT name FROM city WHERE name=$city_id");
                 $row2 = mysqli_fetch_array($result2);?>
                 <td><?php echo $row2['name'];?></td>
 
-                <?php $cont_id = $row['cont_id'];
-                $result2 = mysqli_query($conn, "SELECT name FROM Continent WHERE cont_id=$cont_id");
+                <?php $country_id = $row['country'];
+                $result2 = mysqli_query($conn, "SELECT name FROM Country WHERE country=$country_id");
                 $row2 = mysqli_fetch_array($result2);?>
                 <td><?php echo $row2['name'];?></td>
-                
+
+                <?php $cont_id = $row['continent'];
+                $result2 = mysqli_query($conn, "SELECT name FROM Continent WHERE continent=$cont_id");
+                $row2 = mysqli_fetch_array($result2);?>
+                <td><?php echo $row2['name'];?></td>
+
                 <td><?php echo $row['lat'];?></td>
                 <td><?php echo $row['lon'];?></td>
                 <td><?php echo $row['picture1']; ?></td>
                 <td><?php echo $row['picture2']; ?></td>
-                <td><?php echo $row['picture3']; ?></td>
                 <td><?php echo $row['description']; ?></td>
                 <td><?php echo $row['price']; ?></td>
+                <td><?php echo $row['rating']; ?></td>
+                <td><?php echo $row['review']; ?></td>
+
                 <td>
                     <a class="btn btn-warning btn-sm" href="db_attractions.php?edit=<?php echo $row['id'];?>">Edit</a>
                 </td>
@@ -205,4 +216,3 @@ if(isset($_GET['edit'])){
 </div>
 </body>
 </html>
-
