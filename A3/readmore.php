@@ -46,13 +46,15 @@ mysqli_select_db($conn,"travel_planner");
     echo "<img class = 's1' src = img/" . $row["picture2"] . "></img></td><td>";
     echo "</td><td valign='top'><h2>".$row["name"]."</h2><h3>";
     echo $row["city"].", ".$row["country"];
-    echo "</h3><br>";
+    echo "</h3>";
     echo $row["description"];
     echo "<div ng-controller='ratingCtrl'>";
-    echo "<form name='rateForm'><input type='hidden' ng-model='attrname' value='".$row["id"]."'><input type='text' id='review' ng-model='review' placeholder='Enter review'><button type='submit' ng-click='formsubmit(rateForm)'><span class='glyphicon glyphicon-ok' style='color:#7bacb3;'></span></button></form>";
+    echo "<form name='rateForm'><input type='hidden' ng-model='attrname' value='".$row["id"]."'><input type='text' id='review' ng-model='review' placeholder='Enter review' style='width:125px;'>";
+    echo "<input type='number' id='rating' ng-model='rating' min='1' max='5' placeholder='&#9734;' style='width:35px;'>";
+    echo "<button type='submit' ng-click='formsubmit(rateForm)'><span class='glyphicon glyphicon-ok' style='color:#7bacb3;'></span></button></form>";
     echo "{{res}}";
     echo "</div>";
-    echo "Last review: ".$row["review"]." <span style='font-style:italic;'>Rated ".$row["rating"]."/5.</span><br>";
+    echo "Last review: ".$row["review"]." <span style='font-style:italic;'>... ".$row["rating"]." stars.</span><br>";
     //echo " Cost: $".$row["price"];
     //echo "<div ng-controller='cartCtrl'>";
     //echo "<form name = 'cartForm'>";
@@ -62,7 +64,6 @@ mysqli_select_db($conn,"travel_planner");
 
     echo "<a onclick='hide_compare()' style='font-style:italic;'> Click here to purchase for $".$row["price"].".</a><br>";
 
-    //echo "</tr></table>";
     /*
     echo "<h2 style='position:absolute;color:white;margin-left:50px;'>".$row["name"]."<h2>";
     echo "<table><tr><td></div>";
@@ -90,22 +91,6 @@ mysqli_select_db($conn,"travel_planner");
     echo "</select></td>";
 echo "</tr></table>";
 
-  $sql="SELECT * FROM Reviews WHERE attr_id = '".$id."'";
-
-  $result = mysqli_query($conn,$sql);
-/*
-  echo "<div class='reviewbox'><h4 style='font-style:normal;text-align:center;font-size:22px;'>Reviews:</h4>";
-    echo "<table><tr>";
-  while($row = mysqli_fetch_array($result)) {
-    echo "<td><span class = 'emptyrow_xs'></span></td><td><span class='reviewtext'>";
-    echo $row['reviewer_name']." at ".$row['date_posted'];
-    echo "<br><br>".$row["rating"]." stars<br><br>";
-    echo $row["review"];
-    echo "</span></td>";
-  }
-  echo "</tr></table>";
-        echo "</div>";
-*/
  ?>
 
 
