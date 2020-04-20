@@ -149,21 +149,24 @@ mysqli_select_db($conn,"travel_planner");
   $name_input = $q_parsed['Attraction'];
   $country_input = $q_parsed['Country'];
   $city_input = $q_parsed['City'];
+  $continent_input = $q_parsed['Continent'];
   $keyword_input = $q_parsed['Keywords'];
 
-  $sql = "SELECT name, type, city, country, picture1 FROM Attraction WHERE
+
+  $sql = "SELECT name, type, city, country, picture1, continent FROM Attraction WHERE
   ('$name_input' = 'notset' OR  name = '$name_input')
   AND
   ('$country_input' = 'notset' OR  country = '$country_input')
+  AND
+  ('$continent_input' = 'notset' OR continent = '$continent_input')
   AND
   ('$city_input' = 'notset' OR city = '$city_input')
   AND
   ('$keyword_input' = 'notset' OR type = '$keyword_input')
   AND
-  NOT ('$keyword_input' = 'notset' AND '$city_input' = 'notset' AND '$country_input' = 'notset' AND '$name_input' = 'notset')
+  NOT ('$keyword_input' = 'notset' AND '$city_input' = 'notset' AND '$country_input' = 'notset' AND '$name_input' = 'notset' AND '$continent_input' = 'notset')
   ";
-    //add continent, description, picture, price.
-    //only need WHERE conditional for continent
+
 
   $result = mysqli_query($conn,$sql);
   if (mysqli_num_rows($result) == 0) {
