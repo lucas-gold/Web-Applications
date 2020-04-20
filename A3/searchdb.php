@@ -61,10 +61,13 @@ mysqli_select_db($conn,"travel_planner");
         if (strtolower($word) == "over")
         {
           $q_parsed["min-price"] = $next_word;
+          $q_parsed["max-price"] = 10000;
+
         }
         else if (strtolower($word) == "under")
         {
           $q_parsed["max-price"] = $next_word;
+          $q_parsed["min-price"] = 0;
         }
         else if (strtolower($word) == "for")
         {
@@ -151,9 +154,11 @@ mysqli_select_db($conn,"travel_planner");
   $city_input = $q_parsed['City'];
   $continent_input = $q_parsed['Continent'];
   $keyword_input = $q_parsed['Keywords'];
+  $maxprice = $q_parsed["max-price"];
+  $minprice = $q_parsed["min-price"];
 
 
-  $sql = "SELECT name, type, city, country, picture1, continent FROM Attraction WHERE
+  $sql = "SELECT name, type, city, country, picture1, continent, price FROM Attraction WHERE
   ('$name_input' = 'notset' OR  name = '$name_input')
   AND
   ('$country_input' = 'notset' OR  country = '$country_input')
@@ -164,13 +169,15 @@ mysqli_select_db($conn,"travel_planner");
   AND
   ('$keyword_input' = 'notset' OR type = '$keyword_input')
   AND
-  NOT ('$keyword_input' = 'notset' AND '$city_input' = 'notset' AND '$country_input' = 'notset' AND '$name_input' = 'notset' AND '$continent_input' = 'notset')
+  ('$minprice' = 'notset' OR '$maxprice' = 'notset' OR (price >= '$minprice' AND price <= '$maxprice'))
+  AND
+  NOT ('$minprice' = 'notset' AND '$maxprice' = 'notset' AND '$keyword_input' = 'notset' AND '$city_input' = 'notset' AND '$country_input' = 'notset' AND '$name_input' = 'notset' AND '$continent_input' = 'notset')
   ";
 
 
   $result = mysqli_query($conn,$sql);
   if (mysqli_num_rows($result) == 0) {
-    printf("<br><br><br><br>No results found.");
+    printf("<br><br><br><br><br>No results found.");
   }
   else {
   $row0 = "";
@@ -183,7 +190,7 @@ mysqli_select_db($conn,"travel_planner");
     $i++;
 
     $tr1 = "<br><br><br><br><br><table><tr>";
-    $row0 = "<td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td><a href = '#/".strtolower(str_replace(' ', '', $row[0]))."'><img src = 'img/".$row[4]."' class='imgresult'></img></a><br><br></td><td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td>".$row0."</td>";
+    $row0 = "<td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td><a href = '#/".strtolower(str_replace(' ', '', $row[0]))."'> <img src = 'img/".$row[4]."' class='imgresult'></img></a><br><br></td><td> &nbsp&nbsp&nbsp&nbsp&nbsp </td><td>".$row0."</td>";
     $tr = "</tr><tr>";
     $row1 = "<td>  </td><td>".$row[0]."</td><td>  </td><td>".$row1."</td>";
     if ($i == 2) {
@@ -211,6 +218,7 @@ mysqli_select_db($conn,"travel_planner");
     else {
     printf("\n%s \n %s \n %s \n %s \n %s \n %s \n %s", $tr1, $row0, $tr, $row1, $tr, $row2, $tre);
   }
+
 //  echo $row1."\n".$row2."\n".$row3;
 
 }
