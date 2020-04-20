@@ -100,7 +100,7 @@ if (isset($_GET['logout'])) {
       myApp.controller("ratingCtrl", ['$scope', '$http', function ($scope, $http) {
         $scope.url = 'rate.php';
         $scope.formsubmit = function() {
-          $http.post($scope.url, {'review': $scope.review, 'attrname': $scope.attrname}).
+          $http.post($scope.url, {'review': $scope.review, 'attrname': $scope.attrname, 'rating': $scope.rating}).
           success(function (data, status) {
             $scope.status = status;
             $scope.data = data;
@@ -162,14 +162,6 @@ if (isset($_GET['logout'])) {
       */
       </script>
 
-      <script>
-      $('#reviewForm').submit(function() {
-        var post_data = $('#mail_subscribe').serialize();
-        $.post('process.php', post_data, function(data) {
-          $('#notification').show();
-        });
-      });
-      </script>
 
       <script>
       $(document).ready(function(){
