@@ -69,6 +69,8 @@ try {
     picture3 VARCHAR(50),
     description VARCHAR(300),
     price DECIMAL(15,2),
+    review VARCHAR(100),
+    rating INT(4),
     FOREIGN KEY (city_id) REFERENCES city(city_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (country_id) REFERENCES Country(country_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (cont_id) REFERENCES Continent(cont_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -291,8 +293,8 @@ try {
     $country_id= "7";
     $stmt->execute();
 
-    $stmt = $conn->prepare("INSERT INTO Attraction (name, type, city_id, country_id, cont_id, lat, lon, picture1, picture2, picture3, description, price)
-    VALUES (:name, :type, :city_id, :country_id, :cont_id, :lat, :lon, :picture1, :picture2, :picture3, :description, :price)");
+    $stmt = $conn->prepare("INSERT INTO Attraction (name, type, city_id, country_id, cont_id, lat, lon, picture1, picture2, picture3, description, price, review, rating)
+    VALUES (:name, :type, :city_id, :country_id, :cont_id, :lat, :lon, :picture1, :picture2, :picture3, :description, :price, :review, :rating)");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':type', $type);
     $stmt->bindParam(':city_id', $city_id);
@@ -305,6 +307,8 @@ try {
     $stmt->bindParam(':picture3', $picture3);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':price', $price);
+    $stmt->bindParam(':review', $review);
+    $stmt->bindParam(':rating', $rating);
   
     $name = "Casa Loma";
     $type = "Castle";
@@ -318,6 +322,8 @@ try {
     $picture3 = "casaloma3.jpg";
     $description = "A Gothic Revival style mansion and garden built in 1914.";
     $price = "40";
+    $review = "Beautiful castle!";
+    $rating = "4";
     $stmt->execute();
   
     $name = "CN Tower";
@@ -332,6 +338,8 @@ try {
     $picture3 = "cntower3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "35";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
 
     $name = "White House";
@@ -346,6 +354,8 @@ try {
     $picture3 = "whitehouse3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "70";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
 
     $name = "Disney Land";
@@ -360,6 +370,8 @@ try {
     $picture3 = "disney3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "100";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
 
     $name = "Christ the Redeemer";
@@ -374,6 +386,8 @@ try {
     $picture3 = "redeemer3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "55";
+    $review = "Fun for the whole family!";
+    $rating = "3.8";
     $stmt->execute();
 
     $name = "Niteroi Museum";
@@ -388,6 +402,8 @@ try {
     $picture3 = "niteroi3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "50";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
   
     $name = "Botero Museum";
@@ -402,6 +418,8 @@ try {
     $picture3 = "botero3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "95";
+    $review = "Fun for the whole family!";
+    $rating = "3";
     $stmt->execute();
 
     $name = "Lost City";
@@ -416,6 +434,8 @@ try {
     $picture3 = "lostcity3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "15";
+    $review = "Fun for the whole family!";
+    $rating = "2.5";
     $stmt->execute();
   
     $name = "The Louvre";
@@ -430,6 +450,8 @@ try {
     $picture3 = "louvre3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "200";
+    $review = "Fun for the whole family!";
+    $rating = "3";
     $stmt->execute();
 
     $name = "Eiffel Tower";
@@ -444,6 +466,8 @@ try {
     $picture3 = "eiffel3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "80";
+    $review = "Fun for the whole family!";
+    $rating = "4";
     $stmt->execute();
 
     $name = "Big Ben";
@@ -458,6 +482,8 @@ try {
     $picture3 = "bigben3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "35";
+    $review = "Fun for the whole family!";
+    $rating = "4.5";
     $stmt->execute();
 
     $name = "The Shard";
@@ -472,6 +498,8 @@ try {
     $picture3 = "shard3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "45";
+    $review = "Fun for the whole family!";
+    $rating = "3.6";
     $stmt->execute();
 
     $name = "Great Wall of China";
@@ -486,6 +514,8 @@ try {
     $picture3 = "greatwall3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "100";
+    $review = "Fun for the whole family!";
+    $rating = "2.3";
     $stmt->execute();
 
     $name = "Forbidden City";
@@ -500,6 +530,8 @@ try {
     $picture3 = "forbiddencity3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "120";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
 
     $name = "Taj Mahal";
@@ -514,6 +546,8 @@ try {
     $picture3 = "tajmahal3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "90";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
 
     $name = "Amber Palace";
@@ -528,6 +562,8 @@ try {
     $picture3 = "amberpalace2.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "68";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
   
     $name = "Sydney Opera House";
@@ -542,6 +578,8 @@ try {
     $picture3 = "sydney3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "300";
+    $review = "Fun for the whole family!";
+    $rating = "4";
     $stmt->execute();
 
     $name = "Harbour Bridge";
@@ -556,6 +594,8 @@ try {
     $picture3 = "harbourbridge3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "251";
+    $review = "Fun for the whole family!";
+    $rating = "4";
     $stmt->execute();
 
     $name = "Mount Cook";
@@ -570,6 +610,8 @@ try {
     $picture3 = "mountcook3.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "35";
+    $review = "Fun for the whole family!";
+    $rating = "3";
     $stmt->execute();
 
     $name = "Milford Sound";
@@ -584,6 +626,8 @@ try {
     $picture3 = "milfordsound.jpg";
     $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia.";
     $price = "50";
+    $review = "Fun for the whole family!";
+    $rating = "5";
     $stmt->execute();
   
     $stmt = $conn->prepare("INSERT INTO Reviews (attr_id, reviewer_id, review, rating, date_posted)
