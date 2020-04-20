@@ -201,6 +201,132 @@ $stmt->execute();
   $review = "Fun for the whole family!";
   $rating = "5";
   $stmt->execute();
+  
+  
+  
+  $name = "White House";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Government";
+  $city = "Washington dc";
+  $country = "United States";
+  $continent = "North America";
+  $picture1 = "whitehouse.jpg";
+  $picture2 = "whitehouse2.jpg";
+  $description = "The White House is the official residence and workplace of the president of the United States. It is located at 1600 Pennsylvania Avenue NW in Washington, D.C. and has been the residence of every U.S. president since John Adams in 1800.";
+  $lat = "38.8977";
+  $lon = "-77.0366";
+  $price = "70";
+  $review = "Fun for the whole family!";
+  $rating = "5";
+  $stmt->execute();
+  
+  
+  
+  $name = "Disney Land";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Tower";
+  $city = "California";
+  $country = "United States";
+  $continent = "North America";
+  $picture1 = "disney.jpg";
+  $picture2 = "disney2.jpg";
+  $description = "Disneyland Park, originally Disneyland, is the first of two theme parks built at the Disneyland Resort in Anaheim, California, opened on July 17, 1955. It is the only theme park designed and built to completion under the direct supervision of Walt Disney.";
+  $lat = "28.3852";
+  $lon = "81.5638";
+  $price = "100";
+  $review = "Fun for the whole family!";
+  $rating = "5";
+  $stmt->execute();
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  $name = "Christ the Redeemer;
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Statue";
+  $city = "Rio de Janeiro ";
+  $country = "Brazil";
+  $continent = "South America";
+  $picture1 = "redeemer.jpg";
+  $picture2 = "redeemer2.jpg";
+  $description = "Christ the Redeemer is an Art Deco statue of Jesus Christ in Rio de Janeiro, Brazil, created by French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa, in collaboration with French engineer Albert Caquot. Romanian sculptor Gheorghe Leonida fashioned the face.";
+  $lat = "-22.9518";
+  $lon = "-43.2104";
+  $price = "50";
+  $review = "Fun for the whole family!";
+  $rating = "3.8";
+  $stmt->execute();
+  
+  $name = "Niteroi Museum";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Museum";
+  $city = "Niterói";
+  $country = "Brazil";
+  $continent = "South America";
+  $picture1 = "niteroi.jpg";
+  $picture2 = "niteroi2.jpg";
+  $description = "The Niterói Contemporary Art Museum is situated in the city of Niterói, Rio de Janeiro, Brazil, and is one of the city’s main landmarks. It was completed in 1996";
+  $lat = "-22.9078";
+  $lon = "-43.1258";
+  $price = "50";
+  $review = "Fun for the whole family!";
+  $rating = "3.8";
+  $stmt->execute();
+
+  $name = "Botero Museum";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Museum";
+  $city = "Bogotá";
+  $country = "Colombia";
+  $continent = "South America";
+  $picture1 = "botero.jpg";
+  $picture2 = "botero2.jpg";
+  $description = "The Botero Museum also known as Museo Botero is a museum located in Bogotá, Colombia. It houses one of Latin America's most important international art collections. It sees 500,000 visitors annually, around 1,000 daily, and of those 2,000 students per";
+  $lat = "4.5968";
+  $lon = "-74.0731";
+  $price = "95";
+  $review = "Fun for the whole family!";
+  $rating = "3.8";
+  $stmt->execute();
+
+
+  $name = "Lost City";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Park";
+  $city = "Magdalena Department";
+  $country = "Colombia";
+  $continent = "South America";
+  $picture1 = "lostcity.jpg";
+  $picture2 = "lostcity2.jpg";
+  $description = "A lost city is a settlement that fell into terminal decline and became extensively or completely uninhabited, with the consequence that the site's former significance was no longer known to the wider world.";
+  $lat = "11.0385";
+  $lon = "-73.9251";
+  $price = "15";
+  $review = "Fun for the whole family!";
+  $rating = "3.8";
+  $stmt->execute();
+
+  $name = "The Louvre";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Museum";
+  $city = "Paris";
+  $country = "France";
+  $continent = "Europe";
+  $picture1 = "louvre.jpg";
+  $picture2 = "louvre2.jpg";
+  $description = "The Louvre, or the Louvre Museum, is the world's largest art museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement.";
+  $lat = "48.8606";
+  $lon = "2.3376";
+  $price = "200";
+  $review = "Fun for the whole family!";
+  $rating = "3.8";
+  $stmt->execute();
+
 
   $name = "Eiffel Tower";
   $id = strtolower(str_replace(' ', '', $name));
@@ -210,7 +336,7 @@ $stmt->execute();
   $continent = "Europe";
   $picture1 = "eiffel.jpg";
   $picture2 = "eiffel2.jpg";
-  $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $description = "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower.";
   $lat = "48.8566";
   $lon = "2.3522";
   $price = "70";
@@ -248,6 +374,142 @@ $stmt->execute();
   $price = "45";
   $review = "Good experience, would recommend.";
   $rating = "3";
+  $stmt->execute();
+
+  $name = "Great Wall of China";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Wall";
+  $city = "Beijing";
+  $country = "China";
+  $continent = "Asia";
+  $picture1 = "greatwall.jpg";
+  $picture2 = "greatwall2.jpg";
+  $description = "The Great Wall of China is the collective name of a series of fortification systems generally built across the historical northern borders of China to protect and consolidate territories of Chinese states and empires against various nomadic groups of the steppe and their polities.";
+  $lat = "40.4319";
+  $lon = "116.5703";
+  $price = "100";
+  $review = "Good experience, would recommend.";
+  $rating = "4.2";
+  $stmt->execute();
+
+
+  $name = "Forbidden City";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "City";
+  $city = "Beijing";
+  $country = "China";
+  $continent = "Asia";
+  $picture1 = "forbiddencity.jpg";
+  $picture2 = "forbiddencity2.jpg";
+  $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $lat = "39.9170";
+  $lon = "116.3907";
+  $price = "120";
+  $review = "Good experience, would recommend.";
+  $rating = "4.5";
+  $stmt->execute();
+
+
+
+  $name = "Taj Mahal";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Museum";
+  $city = "Agra";
+  $country = "India";
+  $continent = "Asia";
+  $picture1 = "tajmaha.jpg";
+  $picture2 = "tajmaha2.jpg";
+  $description = "The Taj Mahal was commissioned by Shah Jahan in 1631, to be built in the memory of his wife Mumtaz Mahal";
+  $lat = "27.1750";
+  $lon = "78.0421";
+  $price = "90";
+  $review = "Good experience, would recommend.";
+  $rating = "3";
+  $stmt->execute();
+
+  $name = "Amber Palace";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Castle";
+  $city = "Rajasthan";
+  $country = "India";
+  $continent = "Asia";
+  $picture1 = "amberpalace.jpg";
+  $picture2 = "amberpalace2.jpg";
+  $description = "Amer Fort or Amber Fort is a fort located in Amer, Rajasthan, India. Amer is a town with an area of 4 square kilometres located 11 kilometres from Jaipur, the capital of Rajasthan.";
+  $lat = "26.9855";
+  $lon = "75.8513";
+  $price = "68";
+  $review = "Good experience, would recommend.";
+  $rating = "3";
+  $stmt->execute();
+
+
+
+  $name = "Sydney Opera House";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Theatre";
+  $city = "Sydney";
+  $country = "Australia";
+  $continent = "Oceania";
+  $picture1 = "sydney.jpg";
+  $picture2 = "sydney2.jpg";
+  $description = "The Sydney Opera House is a multi-venue performing arts centre at Sydney Harbour in Sydney, New South Wales, Australia. It is one of the 20th century's most famous and distinctive buildings.";
+  $lat = "-33.8568";
+  $lon = "151.2152
+  $price = "300";
+  $review = "Good experience, would recommend.";
+  $rating = "3";
+  $stmt->execute();
+
+
+  $name = "Harbour Bridge";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Bridge";
+  $city = "Sydney";
+  $country = "Australia";
+  $continent = "Oceania";
+  $picture1 = "harbourbridge.jpg";
+  $picture2 = "harbourbridge2.jpg";
+  $description = "The Sydney Harbour Bridge is an Australian heritage-listed steel through arch bridge across Sydney Harbour that carries rail, vehicular, bicycle, and pedestrian traffic between the Sydney central business district and the North Shore.";
+  $lat = "-33.8521";
+  $lon = "151.2108";
+  $price = "251";
+  $review = "Good experience, would recommend.";
+  $rating = "4";
+  $stmt->execute();
+
+
+  $name = "Mount Cook";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Park";
+  $city = "Fiordland";
+  $country = "New Zealand";
+  $continent = "Oceania";
+  $picture1 = "mountcook.jpg";
+  $picture2 = "mountcook2.jpg";
+  $description = "Aoraki / Mount Cook is the highest mountain in New Zealand. Its height, as of 2014, is listed as 3,724 metres. ";
+  $lat = "-43.5946";
+  $lon = "170.1414";
+  $price = "35";
+  $review = "Good experience, would recommend.";
+  $rating = "4";
+  $stmt->execute();
+
+
+  $name = "Milford Sound";
+  $id = strtolower(str_replace(' ', '', $name));
+  $type = "Park";
+  $city = "Fiordland";
+  $country = "New Zealand";
+  $continent = "Oceania";
+  $picture1 = "milfordsound.jpg";
+  $picture2 = "milfordsound2.jpg";
+  $description = "Milford Sound is a fiord in the southwest of New Zealand’s South Island.";
+  $lat = "-44.6716";
+  $lon = "167.9251";
+  $price = "50";
+  $review = "Good experience, would recommend.";
+  $rating = "4";
   $stmt->execute();
 
 
