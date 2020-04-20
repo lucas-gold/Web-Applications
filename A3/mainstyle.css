@@ -1,3 +1,4 @@
+
   .searchbar {
     margin: 18% 10% 25% 12%;
   }
@@ -6,7 +7,8 @@
     color: #616566;
     float:left;
     text-align:center;
-    padding: 10px;
+    padding-top: 55px;
+    padding-left: 10px;
     margin: 5px;
     border-radius: 25px;
     position:static;
@@ -14,12 +16,12 @@
 
   .imgresult {
     border-radius: 10px;
-    width: 500px;
-    height: 300px;
+    width: 450px;
+    height: 260px;
   }
 
   .padded {
-    padding-top: 10%;
+    padding-top: 9%;
   }
 
   .entry {
@@ -30,6 +32,17 @@
   .compare {
     position: fixed;
     margin-left: 45%;
+  }
+  .pay {
+    position: fixed;
+    margin-left: 45%;
+  }
+  .form-control {
+    margin-top: 7% !important;
+  }
+  .btn-info{
+    margin-top: 7% !important;
+
   }
 
 
@@ -51,7 +64,6 @@
     background: white;
     border-radius: 0px 0px 10px 10px;
   }
-
 
 
 
