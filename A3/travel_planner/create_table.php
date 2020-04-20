@@ -58,6 +58,8 @@ try {
     picture1 VARCHAR(50),
     picture2 VARCHAR(50),
     description VARCHAR(100),
+    lat DECIMAL(9,6),
+    lon DECIMAL(9,6),
     price INT(8),
     review VARCHAR(100),
     rating INT(4))";
@@ -151,8 +153,8 @@ $stmt->execute();
 $name = "Paris";
 $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Attraction (name, id, type, city, country, continent, picture1, picture2, description, price, review, rating)
-  VALUES (:name, :id, :type, :city, :country, :continent, :picture1, :picture2, :description, :price, :review, :rating)");
+  $stmt = $conn->prepare("INSERT INTO Attraction (name, id, type, city, country, continent, picture1, picture2, description, lat, lon, price, review, rating)
+  VALUES (:name, :id, :type, :city, :country, :continent, :picture1, :picture2, :description, :lat, :lon, :price, :review, :rating)");
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':id', $id);
   $stmt->bindParam(':type', $type);
@@ -162,6 +164,8 @@ $stmt->execute();
   $stmt->bindParam(':picture1', $picture1);
   $stmt->bindParam(':picture2', $picture2);
   $stmt->bindParam(':description', $description);
+  $stmt->bindParam(':lat', $lat);
+  $stmt->bindParam(':lon', $lon);
   $stmt->bindParam(':price', $price);
   $stmt->bindParam(':review', $review);
   $stmt->bindParam(':rating', $rating);
@@ -175,6 +179,8 @@ $stmt->execute();
   $picture1 = "casaloma.jpg";
   $picture2 = "casaloma2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $lat = "43.6532";
+  $lon = "-79.3832";
   $price = "40";
   $review = "Beautiful castle!";
   $rating = "4";
@@ -189,6 +195,8 @@ $stmt->execute();
   $picture1 = "cntower.jpg";
   $picture2 = "cntower.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $lat = "43.6532";
+  $lon = "-79.3832";
   $price = "50";
   $review = "Fun for the whole family!";
   $rating = "5";
@@ -203,6 +211,8 @@ $stmt->execute();
   $picture1 = "eiffel.jpg";
   $picture2 = "eiffel2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $lat = "48.8566";
+  $lon = "2.3522";
   $price = "70";
   $review = "Fun for the whole family!";
   $rating = "5";
@@ -217,6 +227,8 @@ $stmt->execute();
   $picture1 = "bigben.jpg";
   $picture2 = "bigben2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $lat = "52.3555";
+  $lon = "-1.1743";
   $price = "35";
   $review = "Good experience, would recommend.";
   $rating = "3";
@@ -231,6 +243,8 @@ $stmt->execute();
   $picture1 = "shard.jpg";
   $picture2 = "shard2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
+  $lat = "52.3555";
+  $lon = "-1.1743";
   $price = "45";
   $review = "Good experience, would recommend.";
   $rating = "3";
