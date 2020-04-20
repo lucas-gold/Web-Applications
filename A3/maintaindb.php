@@ -19,10 +19,9 @@ if(isset($_POST['add_user'])){
 }
 
 if(isset($_POST['update_user'])){
-    $stmt = $conn->prepare("UPDATE users SET username=?, password=?, email=?, phone_number=?, address=?, accountType=? WHERE id=?");
-    $stmt->bind_param("ssssssd", $username, $password, $email, $phone_number, $address, $accountType, $id);
+    $stmt = $conn->prepare("UPDATE users SET password=?, email=?, phone_number=?, address=?, accountType=? WHERE username=?");
+    $stmt->bind_param("ssssss", $password, $email, $phone_number, $address, $accountType, $username);
     
-    $id = $_POST['id'];
     $username = $_POST['username'];
     $password = md5($_POST['password']);
     $accountType = $_POST['accountType'];
@@ -37,8 +36,8 @@ if(isset($_POST['update_user'])){
 }
 
 if(isset($_GET['del_user'])){
-    $stmt = $conn->prepare("DELETE FROM users WHERE id=?");
-    $stmt->bind_param("d", $id);
+    $stmt = $conn->prepare("DELETE FROM users WHERE username=?");
+    $stmt->bind_param("d", $username);
 
     $id = $_GET['del_user'];
 
@@ -49,11 +48,10 @@ if(isset($_GET['del_user'])){
 
 //Country
 if(isset($_POST['add_country'])){
-    $stmt = $conn->prepare("INSERT INTO Country (name, cont_id) VALUES (?,?)");
-    $stmt->bind_param("sd", $countryName, $cont_id);
+    $stmt = $conn->prepare("INSERT INTO Country (name) VALUES (?)");
+    $stmt->bind_param("s", $countryName);
     
     $countryName = $_POST['name'];
-    $cont_id = $_POST['cont_id'];
 
     $stmt->execute();
 
@@ -62,12 +60,11 @@ if(isset($_POST['add_country'])){
 }
 
 if(isset($_POST['update_country'])){
-    $stmt = $conn->prepare("UPDATE Country SET name=?, cont_id=? WHERE country_id=?");
-    $stmt->bind_param("ssd", $countryName, $cont_id, $country_id);
-    
-    $country_id = $_POST['country_id'];
+    $stmt = $conn->prepare("UPDATE Country SET name=? WHERE name=?");
+    $stmt->bind_param("ss", $countryName,$name);
+
     $countryName = $_POST['name'];
-    $cont_id = $_POST['cont_id'];
+    $name = $_POST['name'];
 
     $stmt->execute();
 
@@ -76,10 +73,10 @@ if(isset($_POST['update_country'])){
 }
 
 if(isset($_GET['del_country'])){
-    $stmt = $conn->prepare("DELETE FROM Country WHERE country_id=?");
-    $stmt->bind_param("d", $id);
+    $stmt = $conn->prepare("DELETE FROM Country WHERE name=?");
+    $stmt->bind_param("s", $name);
 
-    $id = $_GET['del_country'];
+    $name = $_GET['del_country'];
 
     $stmt->execute();
 
@@ -128,7 +125,6 @@ if(isset($_GET['del_city'])){
 }
 
 //Continent
-$continentName = "";
 if(isset($_POST['add_cont'])){
     $stmt = $conn->prepare("INSERT INTO Continent (name) VALUES (?)");
     $stmt->bind_param("s", $continentName);
@@ -142,10 +138,10 @@ if(isset($_POST['add_cont'])){
 }
 
 if(isset($_POST['update_cont'])){
-    $stmt = $conn->prepare("UPDATE Continent SET name=? WHERE cont_id=?");
-    $stmt->bind_param("sd", $continentName, $cont_id);
+    $stmt = $conn->prepare("UPDATE Continent SET name=? WHERE name=?");
+    $stmt->bind_param("ss", $continentName, $oldName);
     
-    $cont_id = $_POST['cont_id'];
+    $oldName = $_POST['name'];
     $continentName = $_POST['name'];
 
     $stmt->execute();
@@ -155,10 +151,10 @@ if(isset($_POST['update_cont'])){
 }
 
 if(isset($_GET['del_cont'])){
-    $stmt = $conn->prepare("DELETE FROM Continent WHERE cont_id=?");
-    $stmt->bind_param("d", $id);
+    $stmt = $conn->prepare("DELETE FROM Continent WHERE name=?");
+    $stmt->bind_param("s", $name);
     
-    $id = $_GET['del_cont'];
+    $name = $_GET['del_cont'];
 
     $stmt->execute();
     $SESSION['message'] = "Continent deleted";
@@ -168,14 +164,14 @@ if(isset($_GET['del_cont'])){
 //Attractions
 if(isset($_POST['add_att'])){
 
-    $stmt = $conn->prepare("INSERT INTO Attraction (name, type, city_id, country_id, cont_id, lat, lon, picture1, picture2, picture3, description, price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param("ssdddssssd", $name, $type, $city_id, $country_id, $cont_id, $lat, $lon, $picture1, $picture2, $picture3, $description, $price);
+    $stmt = $conn->prepare("INSERT INTO Attraction (name, type, city, country, continent, lat, lon, picture1, picture2, description, price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("ssssddsssd", $name, $type, $city, $country, $continent, $lat, $lon, $picture1, $picture2, $description, $price);
 
     $name= $_POST['name'];
     $type= $_POST['type'];
-    $city_id= $_POST['city_id'];
-    $country_id = $_POST['country_id'];
-    $cont_id = $_POST['cont_id'];
+    $city= $_POST['city'];
+    $country = $_POST['country'];
+    $cont = $_POST['continent'];
     $lat = $_POST['lat'];
     $lon = $_POST['lon'];
     $picture1 = $_FILES['picture1']['name'];
@@ -191,14 +187,14 @@ if(isset($_POST['add_att'])){
 }
 
 if(isset($_POST['update_att'])){
-    $stmt = $conn->prepare("UPDATE Attraction SET name=?, type=?, city_id=?, country_id=?, cont_id=?, lat=?, lon=?, picture1=?, picture2=?, picture3=?, description=?, price=? WHERE id=?");
-    $stmt->bind_param("ssdddssssdd", $name, $type, $city_id, $country_id, $cont_id, $lat, $lon, $picture1, $picture2, $picture3, $description, $price, $id);
+    $stmt = $conn->prepare("UPDATE Attraction SET name=?, type=?, city=?, country=?, continent=?, lat=?, lon=?, picture1=?, picture2=?, description=?, price=? WHERE id=?");
+    $stmt->bind_param("ssssddsssds", $name, $type, $city, $country, $continent, $lat, $lon, $picture1, $picture2, $description, $price, $id);
 
     $name= $_POST['name'];
     $type= $_POST['type'];
-    $city_id= $_POST['city_id'];
-    $country_id = $_POST['country_id'];
-    $cont_id = $_POST['cont_id'];
+    $city= $_POST['city'];
+    $country = $_POST['country'];
+    $cont = $_POST['continent'];
     $lat = $_POST['lat'];
     $lon = $_POST['lon'];
 
@@ -232,7 +228,7 @@ if(isset($_POST['update_att'])){
 
 if(isset($_GET['del_att'])){
     $stmt = $conn->prepare("DELETE FROM Attraction WHERE id=?");
-    $stmt->bind_param("d", $id);
+    $stmt->bind_param("s", $id);
     
     $id = $_GET['del_att'];
 
