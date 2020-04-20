@@ -1,6 +1,6 @@
 <?php
 
-$id = intval($_GET['q']);
+$id = strval($_GET['q']);
 
 $conn = mysqli_connect('localhost','root','','travel_planner');
 if (!$conn) {
@@ -10,6 +10,7 @@ if (!$conn) {
 mysqli_select_db($conn,"travel_planner");
 
 ?>
+<html>
 <head>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
   <script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.min.js"></script>
@@ -41,13 +42,26 @@ mysqli_select_db($conn,"travel_planner");
   $lower = "<br><br><br><br><br><br>";
 
   while($row = mysqli_fetch_array($result)) {
-    echo "<table style='margin-top: -9%;'><tr><td valign='top'>";
+    echo "<table style='margin-top: -7%; margin-right: 25%;'><tr><td valign='top'>";
     echo "<img class = 's1' src = img/" . $row["picture2"] . "></img></td><td>";
     echo "</td><td valign='top'><h2>".$row["name"]."</h2><h3>";
     echo $row["city"].", ".$row["country"];
     echo "</h3><br>";
-    echo "This is a placeholder for a description.<br>";
-    echo " Cost: $ 100.00<br>";
+    echo $row["description"];
+    echo "<div ng-controller='ratingCtrl'>";
+    echo "<form name='rateForm'><input type='hidden' ng-model='attrname' value='".$row["id"]."'><input type='text' id='review' ng-model='review' placeholder='Enter review'><button type='submit' ng-click='formsubmit(rateForm)'><span class='glyphicon glyphicon-ok' style='color:#7bacb3;'></span></button></form>";
+    echo "{{res}}";
+    echo "</div>";
+    echo "Last review: ".$row["review"]." <span style='font-style:italic;'>Rated ".$row["rating"]."/5.</span><br>";
+    //echo " Cost: $".$row["price"];
+    //echo "<div ng-controller='cartCtrl'>";
+    //echo "<form name = 'cartForm'>";
+    //echo "<input type = 'hidden' name = 'attr_id' value = '".$row["name"]."'>";
+    //echo "<button type='submit' ng-click='addtocart(cartForm.\$valid)' ng-disabled='cartForm.\$invalid' class='btn btn-info mb-2' style='height:45px; position:fixed; margin-top: 50px;'>";
+    //echo "Add to cart </button></form></div>";
+
+    echo "<a onclick='hide_compare()' style='font-style:italic;'> Click here to purchase for $".$row["price"].".</a><br>";
+
     //echo "</tr></table>";
     /*
     echo "<h2 style='position:absolute;color:white;margin-left:50px;'>".$row["name"]."<h2>";
@@ -66,9 +80,9 @@ mysqli_select_db($conn,"travel_planner");
   //echo "<select id='continentlist' name='continentlist' onchange=show_countries(this.value) style='width:160px; color:black'>";
   //echo "<option selected disabled>Choose a continent...</option>";
   //echo "</select>";
-  $sql="SELECT * FROM Attraction";
+  $sql="SELECT * FROM Attraction WHERE id <> '".$id."'";
   $result = mysqli_query($conn,$sql);
-  echo "<select id='attractions' onchange=show_compare(this.value) style='width:120px;height:28px;color:black'>";
+  echo "<select id='attractions' onchange=show_compare(this.value,'".$id."') style='width:120px;height:28px;color:black'>";
     echo "<option selected disabled>Compare:</option>";
   while($row = mysqli_fetch_array($result)) {
     echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
@@ -94,8 +108,7 @@ echo "</tr></table>";
 */
  ?>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
 </body>
 
