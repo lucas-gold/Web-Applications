@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <?php
+require_once('travel_planner/create_table.php');
 session_start();
 if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -10,10 +12,12 @@ if (!isset($_SESSION['username'])) {
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
-  ?>
+?>
+
 <html ng-app="travelApp">
 
 <head>
+  <link rel="icon" type="icon/png" href="img/plane.png">
   <title>Travel Planner</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +26,6 @@ if (!isset($_SESSION['username'])) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
-
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -33,12 +36,49 @@ if (!isset($_SESSION['username'])) {
   <link rel="stylesheet" href="mainstyle.css">
 
 
+<!-- map api that doesnt work
+  <script type='text/javascript'>
+  function GetMap()
+  {
+      var map = new Microsoft.Maps.Map('#myMap', {
+        center: new Microsoft.Maps.Location(47.606209, -122.332071),
+          zoom: 12,
+      });
+
+      Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+                    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+                    // Set Route Mode to transit
+                    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.transit });
+                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({address: 'Paris, FR', location: new Microsoft.Maps.Location(48.8566, 2.3522)});
+                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'Seattle', location: new Microsoft.Maps.Location(47.59977722167969, -122.33458709716797) });
+                    directionsManager.addWaypoint(waypoint1);
+                    directionsManager.addWaypoint(waypoint2);
+                    // Set the element in which the itinerary will be rendered
+                    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+                    directionsManager.calculateDirections();
+                });
+
+  }
+  </script>
+-->
+
+
+
 </head>
 
-<body ng-controller="formCtrl" style="background:#dff1f7;">
+<body style="background:#dff1f7;">
+  <div>
+       <!-- notification message -->
 
+       <!-- logged in user information -->
+       <?php  if (isset($_SESSION['username'])) : ?>
+         <p style="font-style:italic; position:fixed; margin-top: -17.7%; color:#397487;">&nbsp; Welcome <strong><?php echo $_SESSION['username']; ?>&nbsp;</strong>
+         <a href="index.php?logout='1'" style="color: #6db2c9;"> logout</a> </p>
+       <?php endif ?>
+   </div>
+<div ng-controller="formCtrl">
   <div class="searchbar">
-    <a href="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Search with phrases like: 'Castles in Toronto', 'Brazilian Museums' or 'Things to do in Asia'" style="position:fixed; color: #d7d9db; padding-right: 40px; margin-top: 50px;"><span class="glyphicon glyphicon-info-sign"></span></a>
+    <a href="" class = "popup" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Search with phrases like: 'Castles in Toronto', 'Brazilian Museums' or 'Things to do in Asia'" style="position:fixed; color: #d7d9db; padding-right: 40px; margin-top: 50px;"><span class="glyphicon glyphicon-info-sign"></span></a>
     <form name="searchForm" class="form-inline">
       <div class="form-group mb-2 col-sm-11">
         <input type="text" ng-model="query" class="form-control input-lg" id="query" placeholder="Search travel destination" style="width:69%; position:fixed; margin-top: 50px;" required>
@@ -53,29 +93,13 @@ if (!isset($_SESSION['username'])) {
       <div ng-view class="entry"></div>
       <div id="compare" class="compare"></div>
     </div>
+  </div>
 
 
 
 
-    <div class="content">
-        <!-- notification message -->
-        <?php if (isset($_SESSION['success'])) : ?>
-          <div class="error success" >
-            <h3>
-              <?php
-                echo $_SESSION['success'];
-                unset($_SESSION['success']);
-              ?>
-            </h3>
-          </div>
-        <?php endif ?>
 
-        <!-- logged in user information -->
-        <?php  if (isset($_SESSION['username'])) : ?>
-          <p>&emsp; Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-          <p> <a href="index.php?logout='1'" style="color: red;"> &emsp; logout</a> </p>
-        <?php endif ?>
-    </div>
+
 
   <script>
     var myApp = angular.module("travelApp", ['ngSanitize', 'ngRoute']);
@@ -101,13 +125,12 @@ if (!isset($_SESSION['username'])) {
 
     }]);
 
+
 /* add ratings:
     myApp.controller("ratingCtrl", ['$scope', '$http', function ($scope, $http) {
       $scope.url = 'rate.php';
       $scope.formsubmit = function (isValid) {
-
         if (isValid) {
-
           $http.post($scope.url, {"query": $scope.query}).
           success(function (data, status) {
             $scope.status = status;
@@ -117,31 +140,19 @@ if (!isset($_SESSION['username'])) {
         } else {
           alert('Input is not valid');
         }
-
       }
     }]);
 */
     myApp.config(function($routeProvider) {
       $routeProvider
 
-      .when('/home', {
-        templateUrl : 'pages/home.html',
-        controller : 'HomeController'})
-
         .when('/cntower', {
-          templateUrl : 'readmore.php?q=1011',
-          controller : 'CNTowerController'})
+          templateUrl : 'readmore.php?q=cntower'})
+          .when('/theshard', {
+            templateUrl : 'readmore.php?q=theshard'})
 
 
           });
-
-          myApp.controller('HomeController', function($scope) {
-            $scope.message = 'Hello from HomeController';});
-
-            myApp.controller('CNTowerController', function($scope) {
-              $scope.message = 'Hello from AboutusController';});
-
-
 
               </script>
 
