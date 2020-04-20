@@ -59,6 +59,7 @@ try {
     picture2 VARCHAR(50),
     description VARCHAR(100),
     price INT(8),
+    review VARCHAR(100),
     rating INT(4))";
   $conn->exec($sql);
 }
@@ -86,6 +87,8 @@ catch(PDOException $e)
 
 // Populate tables
 try {
+
+
 
   $stmt = $conn->prepare("INSERT INTO users (username, password, email, address,phone_number, accountType, fullname)
   VALUES (:username, :password, :email, :address, :phone_number, :accountType, :fullname)");
@@ -148,8 +151,8 @@ $stmt->execute();
 $name = "Paris";
 $stmt->execute();
 
-  $stmt = $conn->prepare("INSERT INTO Attraction (name, id, type, city, country, continent, picture1, picture2, description, price, rating)
-  VALUES (:name, :id, :type, :city, :country, :continent, :picture1, :picture2, :description, :price, :rating)");
+  $stmt = $conn->prepare("INSERT INTO Attraction (name, id, type, city, country, continent, picture1, picture2, description, price, review, rating)
+  VALUES (:name, :id, :type, :city, :country, :continent, :picture1, :picture2, :description, :price, :review, :rating)");
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':id', $id);
   $stmt->bindParam(':type', $type);
@@ -160,6 +163,7 @@ $stmt->execute();
   $stmt->bindParam(':picture2', $picture2);
   $stmt->bindParam(':description', $description);
   $stmt->bindParam(':price', $price);
+  $stmt->bindParam(':review', $review);
   $stmt->bindParam(':rating', $rating);
 
   $name = "Casa Loma";
@@ -172,6 +176,7 @@ $stmt->execute();
   $picture2 = "casaloma2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
   $price = "40";
+  $review = "Beautiful castle!";
   $rating = "4";
   $stmt->execute();
 
@@ -185,6 +190,7 @@ $stmt->execute();
   $picture2 = "cntower.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
   $price = "50";
+  $review = "Fun for the whole family!";
   $rating = "5";
   $stmt->execute();
 
@@ -198,6 +204,7 @@ $stmt->execute();
   $picture2 = "eiffel2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
   $price = "70";
+  $review = "Fun for the whole family!";
   $rating = "5";
   $stmt->execute();
 
@@ -211,6 +218,7 @@ $stmt->execute();
   $picture2 = "bigben2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
   $price = "35";
+  $review = "Good experience, would recommend.";
   $rating = "3";
   $stmt->execute();
 
@@ -224,6 +232,7 @@ $stmt->execute();
   $picture2 = "shard2.jpg";
   $description = "A Gothic Revival style mansion and garden built in 1914.";
   $price = "45";
+  $review = "Good experience, would recommend.";
   $rating = "3";
   $stmt->execute();
 
