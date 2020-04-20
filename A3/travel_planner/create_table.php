@@ -237,19 +237,12 @@ $stmt->execute();
   $review = "Fun for the whole family!";
   $rating = "5";
   $stmt->execute();
+ 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  $name = "Christ the Redeemer;
+  $name = "Christ the Redeemer";
   $id = strtolower(str_replace(' ', '', $name));
   $type = "Statue";
-  $city = "Rio de Janeiro ";
+  $city = "Rio de Janeiro";
   $country = "Brazil";
   $continent = "South America";
   $picture1 = "redeemer.jpg";
@@ -455,7 +448,7 @@ $stmt->execute();
   $picture2 = "sydney2.jpg";
   $description = "The Sydney Opera House is a multi-venue performing arts centre at Sydney Harbour in Sydney, New South Wales, Australia. It is one of the 20th century's most famous and distinctive buildings.";
   $lat = "-33.8568";
-  $lon = "151.2152
+  $lon = "151.2152";
   $price = "300";
   $review = "Good experience, would recommend.";
   $rating = "3";
@@ -517,7 +510,6 @@ $stmt->execute();
 catch(PDOException $e)
 {
 }
-
 
 $conn = null;
 ?>
