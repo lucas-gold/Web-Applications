@@ -1,17 +1,18 @@
 * {
   margin: 0px;
   padding: 0px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body {
   font-size: 120%;
-  background: #F8F8FF;
+  background: #dff1f7;
 }
 
 .header {
   width: 30%;
   margin: 50px auto 0px;
   color: white;
-  background: #5F9EA0;
+  background: #7bacb3;
   text-align: center;
   border: 1px solid #B0C4DE;
   border-bottom: none;
@@ -46,23 +47,23 @@ form, .content {
   padding: 10px;
   font-size: 15px;
   color: white;
-  background: #5F9EA0;
+  background: #7bacb3;
   border: none;
   border-radius: 5px;
 }
 .error {
-  width: 92%; 
-  margin: 0px auto; 
-  padding: 10px; 
-  border: 1px solid #a94442; 
-  color: #a94442; 
-  background: #f2dede; 
-  border-radius: 5px; 
+  width: 92%;
+  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color: #a94442;
+  background: #f2dede;
+  border-radius: 5px;
   text-align: left;
 }
 .success {
-  color: #3c763d; 
-  background: #dff0d8; 
+  color: #3c763d;
+  background: #dff0d8;
   border: 1px solid #3c763d;
   margin-bottom: 20px;
 }
