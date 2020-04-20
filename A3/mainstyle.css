@@ -43,11 +43,20 @@
     margin: 0px 25px 50px -20px;
   }
 
+  .content {
+    width: 30%;
+    margin: 0px auto;
+    padding: 20px;
+    border: 1px solid #B0C4DE;
+    background: white;
+    border-radius: 0px 0px 10px 10px;
+  }
+
 
 
 
   @media (max-width:1100px) {
-    .btn{
+    .btn-info{
       margin-top: 8% !important;
       margin-left: 2%;
 
@@ -55,6 +64,7 @@
     .s1 {
       height: 165px;
       width: 200px;
+      margin-top: 10%;
     }
     .form-control {
       margin-top: 8% !important;
@@ -72,17 +82,38 @@
 
   }
 
+  @media(max-width:900px) {
+    .s1{
+      height: 100px;
+      width: 120px;
+      margin-top: 20%;
+    }
+    .form-control {
+      margin-top: 12% !important;
+    }
+    .btn-info{
+      margin-top: 12% !important;
+
+    }
+    .returned {
+      padding-top: 8%;
+    }
+    .popup {
+      display:none;
+    }
+  }
+
 
 
   @media (max-width:767px) {
-    .btn{
+    .btn-info {
       width: 69%;
-      margin-top: 20% !important;
+      margin-top: 26% !important;
       margin-left: 2%;
 
     }
     .returned {
-      padding-top: 22%;
+      padding-top: 28%;
     }
     .imgresult{
       border-radius: 10px;
@@ -96,7 +127,11 @@
       font-size:14px;
     }
     .form-control {
-      margin-top: 14% !important;
+      margin-top: 20% !important;
+    }
+
+    .s1 {
+      display:none;
     }
 
   }
@@ -111,14 +146,15 @@
   }
 
   @media (max-width:580px) {
-    .btn{
+    .btn-info{
       width: 69%;
-      margin-top: 32% !important;
+      margin-top: 33% !important;
     }
     .form-control {
-      margin-top: 25% !important;
+      margin-top: 26% !important;
     }
     .returned {
       padding-top: 32%;
     }
+
   }
