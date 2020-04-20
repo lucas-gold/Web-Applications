@@ -4,14 +4,16 @@
 require_once('travel_planner/create_table.php');
 session_start();
 if (!isset($_SESSION['username'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['username']);
-  	header("location: login.php");
-  }
+  $_SESSION['msg'] = "You must log in first";
+  header('location: login.php');
+}
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['username']);
+  header("location: login.php");
+}
+
+
 ?>
 
 <html ng-app="travelApp">
@@ -36,140 +38,157 @@ if (!isset($_SESSION['username'])) {
   <link rel="stylesheet" href="mainstyle.css">
 
 
-<!-- map api that doesnt work
-  <script type='text/javascript'>
-  function GetMap()
-  {
-      var map = new Microsoft.Maps.Map('#myMap', {
-        center: new Microsoft.Maps.Location(47.606209, -122.332071),
-          zoom: 12,
-      });
-
-      Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-                    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-                    // Set Route Mode to transit
-                    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.transit });
-                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({address: 'Paris, FR', location: new Microsoft.Maps.Location(48.8566, 2.3522)});
-                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'Seattle', location: new Microsoft.Maps.Location(47.59977722167969, -122.33458709716797) });
-                    directionsManager.addWaypoint(waypoint1);
-                    directionsManager.addWaypoint(waypoint2);
-                    // Set the element in which the itinerary will be rendered
-                    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
-                    directionsManager.calculateDirections();
-                });
-
-  }
-  </script>
--->
-
-
 
 </head>
 
 <body style="background:#dff1f7;">
   <div>
-       <!-- notification message -->
+    <!-- notification message -->
 
-       <!-- logged in user information -->
-       <?php  if (isset($_SESSION['username'])) : ?>
-         <p style="font-style:italic; position:fixed; margin-top: -17.7%; color:#397487;">&nbsp; Welcome <strong><?php echo $_SESSION['username']; ?>&nbsp;</strong>
-         <a href="index.php?logout='1'" style="color: #6db2c9;"> logout</a> </p>
-       <?php endif ?>
-   </div>
-<div ng-controller="formCtrl">
-  <div class="searchbar">
-    <a href="" class = "popup" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Search with phrases like: 'Castles in Toronto', 'Brazilian Museums' or 'Things to do in Asia'" style="position:fixed; color: #d7d9db; padding-right: 40px; margin-top: 50px;"><span class="glyphicon glyphicon-info-sign"></span></a>
-    <form name="searchForm" class="form-inline">
-      <div class="form-group mb-2 col-sm-11">
-        <input type="text" ng-model="query" class="form-control input-lg" id="query" placeholder="Search travel destination" style="width:69%; position:fixed; margin-top: 50px;" required>
-      </div>
-      <button type="submit" ng-click="formsubmit(searchForm.$valid)" ng-disabled="searchForm.$invalid" class="btn btn-info mb-2" style="height:45px; position:fixed; margin-top: 50px;">
-        Search <span class="glyphicon glyphicon-search"></span>
-      </button>
-    </form>
-    <div class="padded"></div>
-    <div style="margin: -20% -10% -25% -16%;">
-      <p ng-bind-html="result" class="returned"></p></div>
-      <div ng-view class="entry"></div>
-      <div id="compare" class="compare"></div>
+    <!-- logged in user information -->
+    <?php  if (isset($_SESSION['username'])) : ?>
+      <p style="font-style:italic; position:fixed; margin-top: -17.7%; color:#397487;">&nbsp; Welcome <strong><?php echo $_SESSION['username']; ?>&nbsp;</strong>
+        <a href="index.php?logout='1'" style="color: #6db2c9;"> logout</a></p>
+      <?php endif ?>
     </div>
-  </div>
+    <div ng-controller="formCtrl">
+      <div class="searchbar">
+        <a href="" class = "popup" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Search with phrases like: 'Castles in Toronto', 'Brazilian Museums' or 'Things to do in Asia'" style="position:fixed; color: #d7d9db; padding-right: 40px; margin-top: 105px;"><span class="glyphicon glyphicon-info-sign"></span></a>
+        <form name="searchForm" class="form-inline">
+          <div class="form-group mb-2 col-sm-11">
+            <input type="text" ng-model="query" class="form-control input-lg" id="query" placeholder="Search travel destination" style="width:69%; position:fixed; margin-top: 50px;" required>
+          </div>
+          <button type="submit" ng-click="formsubmit(searchForm.$valid)" ng-disabled="searchForm.$invalid" class="btn btn-info mb-2" style="height:45px; position:fixed; margin-top: 50px;">
+            Search <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </form>
+        <div class="padded"></div>
+        <div style="margin: -20% -10% -25% -16%;">
+          <p ng-bind-html="result" class="returned"></p></div>
+          <div ng-view class="entry"></div>
+          <div id="compare" class="compare"></div>
+        </div>
+      </div>
+
+
+      <script>
+      var myApp = angular.module("travelApp", ['ngSanitize', 'ngRoute']);
+
+
+      myApp.controller("formCtrl", ['$scope', '$http', function ($scope, $http) {
+        $scope.url = 'searchdb.php';
+        $scope.formsubmit = function (isValid) {
+
+          if (isValid) {
+
+            $http.post($scope.url, {"query": $scope.query}).
+            success(function (data, status) {
+              $scope.status = status;
+              $scope.data = data;
+              $scope.result = data;
+            })
+          } else {
+            alert('Search is not valid');
+          }
+
+        }
+
+      }]);
 
 
 
-
-
-
-
-  <script>
-    var myApp = angular.module("travelApp", ['ngSanitize', 'ngRoute']);
-
-
-    myApp.controller("formCtrl", ['$scope', '$http', function ($scope, $http) {
-      $scope.url = 'searchdb.php';
-      $scope.formsubmit = function (isValid) {
-
-        if (isValid) {
-
-          $http.post($scope.url, {"query": $scope.query}).
+      myApp.controller("ratingCtrl", ['$scope', '$http', function ($scope, $http) {
+        $scope.url = 'rate.php';
+        $scope.formsubmit = function() {
+          $http.post($scope.url, {'review': $scope.review, 'attrname': $scope.attrname}).
           success(function (data, status) {
             $scope.status = status;
             $scope.data = data;
-            $scope.result = data;
+            $scope.res = data;
           })
-        } else {
-          alert('Input is not valid');
         }
+      }]);
 
-      }
+      //directive that allows for HTML input value to be set while using ngModel
+      //provided by Dan Hunsaker on stackoverflow.com/questions/10610282
+      myApp.directive('input', ['$parse', function ($parse) {
+        return {
+          restrict: 'E',
+          require: '?ngModel',
+          link: function (scope, element, attrs) {
+            if(attrs.value) {
+              $parse(attrs.ngModel).assign(scope, attrs.value);
+            }
+          }
+        };
+      }]);
 
-    }]);
 
 
-/* add ratings:
-    myApp.controller("ratingCtrl", ['$scope', '$http', function ($scope, $http) {
-      $scope.url = 'rate.php';
-      $scope.formsubmit = function (isValid) {
-        if (isValid) {
-          $http.post($scope.url, {"query": $scope.query}).
-          success(function (data, status) {
-            $scope.status = status;
-            $scope.data = data;
-            $scope.result = data;
-          })
-        } else {
-          alert('Input is not valid');
-        }
-      }
-    }]);
-*/
-    myApp.config(function($routeProvider) {
-      $routeProvider
+      myApp.config(function($routeProvider) {
+        $routeProvider
 
         .when('/cntower', {
           templateUrl : 'readmore.php?q=cntower'})
           .when('/theshard', {
             templateUrl : 'readmore.php?q=theshard'})
+            .when('/casaloma', {
+              templateUrl : 'readmore.php?q=casaloma'})
+              .when('/cart', {
+                templateUrl : 'shoppingcart.php'})
+                .when('/paid', {
+                  templateUrl : 'paid.php'})
 
-
-          });
-
-              </script>
-
-              <script>
-                $(document).ready(function(){
-                  $('[data-toggle="popover"]').popover();
                 });
-              </script>
 
-              <script>
-              function show_compare(str) {
-                $("#compare").load("travel_planner/get_compare.php?q="+str);
+                /*
+                myApp.filter('filterText', function() {
+                return function(x) {
+                var arr = x.split('');
+                var i, c, txt = "";
+                for (i = 0; i < arr.length; i++) {
+                if (x[i] == "#") {
 
+                for (j = i; j < i+20; j++) {
+                txt+=x[j];
               }
-              </script>
+              break;
+            }
+
+          }
+          return txt;
+        };
+      });
+      */
+      </script>
+
+      <script>
+      $('#reviewForm').submit(function() {
+        var post_data = $('#mail_subscribe').serialize();
+        $.post('process.php', post_data, function(data) {
+          $('#notification').show();
+        });
+      });
+      </script>
+
+      <script>
+      $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+      });
+      </script>
+
+      <script>
+      function show_compare(str, orig) {
+        document.getElementById("compare").style.display = "block";
+        $("#compare").load("travel_planner/get_compare.php?q="+str+"&original="+orig);
+      }
+      function hide_compare() {
+        document.getElementById("compare").style.display = "none";
+        window.location.href = '#/cart';
+      }
+      </script>
 
 
-            </body>
+    </body>
 
-            </html>
+    </html>
