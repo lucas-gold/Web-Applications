@@ -87,6 +87,46 @@ if(isset($_GET['del_country'])){
     header('location: db_country.php');
 }
 
+//City
+if(isset($_POST['add_city'])){
+    $stmt = $conn->prepare("INSERT INTO city (name, country_id) VALUES (?,?)");
+    $stmt->bind_param("sd", $city_name, $country_id);
+    
+    $city_name = $_POST['name'];
+    $country_id = $_POST['country_id'];
+
+    $stmt->execute();
+
+    $_SESSION['message'] = "City added";
+    header('location: db_city.php');
+}
+
+if(isset($_POST['update_city'])){
+    $stmt = $conn->prepare("UPDATE city SET name=?, country_id=? WHERE city_id=?");
+    $stmt->bind_param("sdd", $city_name, $country_id, $city_id);
+    
+    $country_id = $_POST['country_id'];
+    $city_name = $_POST['name'];
+    $city_id = $_POST['city_id'];
+
+    $stmt->execute();
+
+    $_SESSION['message'] = "City updated";
+    header('location: db_city.php');
+}
+
+if(isset($_GET['del_city'])){
+    $stmt = $conn->prepare("DELETE FROM city WHERE city_id=?");
+    $stmt->bind_param("d", $id);
+
+    $id = $_GET['del_city'];
+
+    $stmt->execute();
+
+    $SESSION['message'] = "City deleted";
+    header('location: db_city.php');
+}
+
 //Continent
 $continentName = "";
 if(isset($_POST['add_cont'])){
@@ -128,21 +168,21 @@ if(isset($_GET['del_cont'])){
 //Attractions
 if(isset($_POST['add_att'])){
 
-    $stmt = $conn->prepare("INSERT INTO Attraction (name, type, founder, size, year_created, location, country_id, cont_id, picture1, picture2, picture3, close_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param("ssssdsddsssd", $name, $type, $founder, $size, $year_created, $location, $country_id, $cont_id, $picture1, $picture2, $picture3, $close_id);
+    $stmt = $conn->prepare("INSERT INTO Attraction (name, type, city_id, country_id, cont_id, lat, lon, picture1, picture2, picture3, description, price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("ssdddssssd", $name, $type, $city_id, $country_id, $cont_id, $lat, $lon, $picture1, $picture2, $picture3, $description, $price);
 
     $name= $_POST['name'];
     $type= $_POST['type'];
-    $founder= $_POST['founder'];
-    $size= $_POST['size'];
-    $year_created= $_POST['year_created'];
-    $location= $_POST['location'];
+    $city_id= $_POST['city_id'];
     $country_id = $_POST['country_id'];
     $cont_id = $_POST['cont_id'];
+    $lat = $_POST['lat'];
+    $lon = $_POST['lon'];
     $picture1 = $_FILES['picture1']['name'];
     $picture2 = $_FILES['picture2']['name'];
     $picture3 = $_FILES['picture3']['name'];
-    $close_id= $_POST['close_id'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
 
     $stmt->execute();
     echo $picture1;
@@ -151,17 +191,16 @@ if(isset($_POST['add_att'])){
 }
 
 if(isset($_POST['update_att'])){
-    $stmt = $conn->prepare("UPDATE Attraction SET name=?, type=?, founder=?, size=?, year_created=?, location=?, country_id=?, cont_id=?, picture1=?, picture2=?, picture3=?, close_id=? WHERE id=?");
-    $stmt->bind_param("ssssdsddsssdd", $name, $type, $founder, $size, $year_created, $location, $country_id, $cont_id, $picture1, $picture2, $picture3, $close_id, $id);
+    $stmt = $conn->prepare("UPDATE Attraction SET name=?, type=?, city_id=?, country_id=?, cont_id=?, lat=?, lon=?, picture1=?, picture2=?, picture3=?, description=?, price=? WHERE id=?");
+    $stmt->bind_param("ssdddssssdd", $name, $type, $city_id, $country_id, $cont_id, $lat, $lon, $picture1, $picture2, $picture3, $description, $price, $id);
 
     $name= $_POST['name'];
     $type= $_POST['type'];
-    $founder= $_POST['founder'];
-    $size= $_POST['size'];
-    $year_created= $_POST['year_created'];
-    $location= $_POST['location'];
+    $city_id= $_POST['city_id'];
     $country_id = $_POST['country_id'];
     $cont_id = $_POST['cont_id'];
+    $lat = $_POST['lat'];
+    $lon = $_POST['lon'];
 
     if($_FILES['picture1']['name'] != NULL){
         $picture1 = $_FILES['picture1']['name'];
@@ -181,7 +220,8 @@ if(isset($_POST['update_att'])){
         $picture3 = $_POST['picture3'];
     }
 
-    $close_id= $_POST['close_id'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
     $id=$_POST['id'];
 
     $stmt->execute();
@@ -253,10 +293,10 @@ if(isset($_GET['del_plan'])){
 
 //Reviews
 if(isset($_POST['add_review'])){
-    $stmt = $conn->prepare("INSERT INTO Reviews (reviewer_name, attr_id, review, rating, date_posted) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("sdsds", $reviewer_name, $attr_id, $review, $rating, $date_posted);
+    $stmt = $conn->prepare("INSERT INTO Reviews (reviewer_id, attr_id, review, rating, date_posted) VALUES (?,?,?,?,?)");
+    $stmt->bind_param("ddsds", $reviewer_id, $attr_id, $review, $rating, $date_posted);
     
-    $reviewer_name = $_POST['reviewer_name'];
+    $reviewer_id = $_POST['reviewer_id'];
     $attr_id = $_POST['attr_id'];
     $review = $_POST['review'];
     $rating = $_POST['rating'];
@@ -269,11 +309,11 @@ if(isset($_POST['add_review'])){
 }
 
 if(isset($_POST['update_review'])){
-    $stmt = $conn->prepare("UPDATE Reviews SET reviewer_name=?, attr_id=?, review=?, rating=?, date_posted=? WHERE id=?");
-    $stmt->bind_param("sdsdsd", $reviewer_name, $attr_id, $review, $rating, $date_posted, $id);
+    $stmt = $conn->prepare("UPDATE Reviews SET reviewer_id=?, attr_id=?, review=?, rating=?, date_posted=? WHERE id=?");
+    $stmt->bind_param("ddsdsd", $reviewer_id, $attr_id, $review, $rating, $date_posted, $id);
     
     $id = $_POST['id'];
-    $reviewer_name = $_POST['reviewer_name'];
+    $reviewer_id = $_POST['reviewer_id'];
     $attr_id = $_POST['attr_id'];
     $review = $_POST['review'];
     $rating = $_POST['rating'];
@@ -294,5 +334,45 @@ if(isset($_GET['del_review'])){
     $stmt->execute();
     $SESSION['message'] = "Review deleted";
     header('location: db_reviews.php');
+}
+
+//Invoice
+if(isset($_POST['add_invoice'])){
+    $stmt = $conn->prepare("INSERT INTO invoice (user_id, attr_id, price) VALUES (?,?,?)");
+    $stmt->bind_param("ddd", $user_id, $attr_id, $price);
+    
+    $user_id = $_POST['user_id'];
+    $attr_id = $_POST['attr_id'];
+    $price = $_POST['price'];
+
+    $stmt->execute();
+
+    $_SESSION['message'] = "Invoice added";
+    header('location: db_invoice.php');
+}
+
+if(isset($_POST['update_invoice'])){
+    $stmt = $conn->prepare("UPDATE invoice SET user_id=?, attr_id=?, price=? WHERE id=?");
+    $stmt->bind_param("dddd", $user_id, $attr_id, $price, $id);
+    
+    $id = $_POST['id'];
+    $user_id = $_POST['user_id'];
+    $attr_id = $_POST['attr_id'];
+    $price = $_POST['price'];
+    $stmt->execute();
+
+    $_SESSION['message'] = "Invoice updated";
+    header('location: db_invoice.php');
+}
+
+if(isset($_GET['del_invoice'])){
+    $stmt = $conn->prepare("DELETE FROM invoice WHERE id=?");
+    $stmt->bind_param("d", $id);
+
+    $id = $_GET['del_invoice'];
+
+    $stmt->execute();
+    $SESSION['message'] = "Invoice deleted";
+    header('location: db_invoice.php');
 }
 ?>
