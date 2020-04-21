@@ -78,7 +78,7 @@ if(isset($_POST['add_city'])){
     $stmt = $conn->prepare("INSERT INTO city (name) VALUES (?)");
     $stmt->bind_param("s", $city_name);
     
-    $city_name = $_POST['new_name'];
+    $city_name = $_POST['name'];
 
     $stmt->execute();
 
