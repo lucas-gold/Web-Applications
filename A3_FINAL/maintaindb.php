@@ -159,7 +159,7 @@ if(isset($_POST['update_att'])){
     $type= $_POST['type'];
     $city= $_POST['city'];
     $country = $_POST['country'];
-    $cont = $_POST['continent'];
+    $continent = $_POST['continent'];
     $lat = $_POST['lat'];
     $lon = $_POST['lon'];
 
