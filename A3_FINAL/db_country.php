@@ -1,19 +1,7 @@
 <?php 
 include('dbconnect.php');
 
-$update = false;
 $name="";
-
-if(isset($_GET['edit'])){
-    $name = $_GET['edit'];
-    $update = true;
-    $record = mysqli_query($conn, "SELECT * from Country WHERE name='$name'");
-
-    if($record->num_rows == 1){
-        $n = mysqli_fetch_array($record);
-        $name=$n['name'];
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +48,7 @@ if(isset($_GET['edit'])){
             <label for="name">Country</label>
             <input class="form-control input-sm" type="text" id="name" name="name" value="<?php echo $name;?>" required>
         </div>
-        <?php if ($update == true): ?>
-            <button class="btn btn-warning btn-sm" type="submit" name="update_country">Update</button> 
-        <?php else: ?>
             <button class="btn btn-success btn-sm" type="submit" name="add_country">Add</button>
-        <?php endif ?>
     </form>
 
     <?php $results = mysqli_query($conn, "SELECT * FROM country"); ?>
@@ -79,9 +63,6 @@ if(isset($_GET['edit'])){
         <?php while($row = mysqli_fetch_array($results)) { ?>
             <tr>
                 <td><?php echo $row['name'];?></td>
-                <td>
-                    <a href="db_country.php?edit=<?php echo $row['name'];?>" class="btn btn-warning btn-sm">Edit</a>
-                </td>
                 <td>
                     <a href="maintaindb.php?del_country=<?php echo $row['name'];?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>

@@ -1,19 +1,6 @@
 <?php 
 include('dbconnect.php');
-
-$update = false;
 $name="";
-
-if(isset($_GET['edit'])){
-    $name = $_GET['edit'];
-    $update = true;
-    $record = mysqli_query($conn, "SELECT * from Continent WHERE name='$name'");
-
-    if($record->num_rows == 1){
-        $n = mysqli_fetch_array($record);
-        $name=$n['name'];
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +47,7 @@ if(isset($_GET['edit'])){
             <label for="name">Continent</label>
             <input class="form-control input-sm" type="text" id="name" name="name" value="<?php echo $name;?>" required>
         </div>
-        <?php if ($update == true): ?>
-            <button class="btn btn-warning btn-sm" type="submit" name="update_cont">Update</button> 
-        <?php else: ?>
             <button class="btn btn-success btn-sm" type="submit" name="add_cont">Add</button>
-        <?php endif ?>
     </form>
 
     <?php $results = mysqli_query($conn, "SELECT * FROM Continent"); ?>
@@ -79,9 +62,6 @@ if(isset($_GET['edit'])){
         <?php while($row = mysqli_fetch_array($results)) { ?>
             <tr>
                 <td><?php echo $row['name']; ?></td>
-                <td>
-                    <a class="btn btn-warning btn-sm" href="db_continent.php?edit=<?php echo $row['name'];?>">Edit</a>
-                </td>
                 <td>
                     <a class="btn btn-danger btn-sm" href="maintaindb.php?del_cont=<?php echo $row['name'];?>">Delete</a>
                 </td>

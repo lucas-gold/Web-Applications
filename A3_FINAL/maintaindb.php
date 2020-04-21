@@ -61,19 +61,6 @@ if(isset($_POST['add_country'])){
     header('location: db_country.php');
 }
 
-if(isset($_POST['update_country'])){
-    $stmt = $conn->prepare("UPDATE Country SET name=? WHERE name=?");
-    $stmt->bind_param("ss", $countryName,$name);
-
-    $countryName = $_POST['name'];
-    $name = $_POST['name'];
-
-    $stmt->execute();
-
-    $_SESSION['message'] = "Contry updated";
-    header('location: db_country.php');
-}
-
 if(isset($_GET['del_country'])){
     $stmt = $conn->prepare("DELETE FROM Country WHERE name=?");
     $stmt->bind_param("s", $name);
@@ -96,18 +83,6 @@ if(isset($_POST['add_city'])){
     $stmt->execute();
 
     $_SESSION['message'] = "City added";
-    header('location: db_city.php');
-}
-
-if(isset($_POST['update_city'])){
-    $stmt = $conn->prepare("UPDATE city SET name=?");
-    $stmt->bind_param("s", $new_name);
-    
-    $new_name = $_POST['name'];
-
-    $stmt->execute();
-
-    $_SESSION['message'] = "City updated";
     header('location: db_city.php');
 }
 
@@ -136,18 +111,6 @@ if(isset($_POST['add_cont'])){
     header('location: db_continent.php');
 }
 
-if(isset($_POST['update_cont'])){
-    $stmt = $conn->prepare("UPDATE Continent SET name=? WHERE name=?");
-    $stmt->bind_param("ss", $continentName, $oldName);
-    
-    $oldName = $_POST['name'];
-    $continentName = $_POST['name'];
-
-    $stmt->execute();
-
-    $_SESSION['message'] = "Continent updated";
-    header('location: db_continent.php');
-}
 
 if(isset($_GET['del_cont'])){
     $stmt = $conn->prepare("DELETE FROM Continent WHERE name=?");
