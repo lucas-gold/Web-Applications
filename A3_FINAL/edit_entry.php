@@ -4,7 +4,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-
+<br><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;
 <?php
 $id = strval($_GET['edit']);
 //$type = intval($_GET['type']);
@@ -39,6 +40,8 @@ mysqli_select_db($conn,"travel_planner");
     $lon=$row['lon'];
   }
 ?>
+
+<div class="container">
 
 <form method="post" action="edit_entry_form.php">
         <input type="hidden" name="id" value="<?php echo $id;?>">
@@ -108,13 +111,7 @@ mysqli_select_db($conn,"travel_planner");
     </div>
             <button class="btn btn-warning btn-sm" type="submit" name="submit">Update</button>
 </form>
-
-
-
-
-
-
-
+</div>
 
 <?php
 
