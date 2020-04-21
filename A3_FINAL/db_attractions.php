@@ -20,7 +20,7 @@ $lon="";
 if(isset($_GET['edit'])){
     $id = $_GET['edit'];
     $update = true;
-    $record = mysqli_query($conn, "SELECT * from Attraction WHERE id=$id");
+    $record = mysqli_query($conn, "SELECT * from Attraction WHERE id='$id'");
 
     if($record->num_rows == 1){
         $n = mysqli_fetch_array($record);
@@ -52,6 +52,24 @@ if(isset($_GET['edit'])){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">MaintainDB</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="db_attractions.php">Attractions</a></li>
+      <li><a href="db_users.php">Users</a></li>
+      <li><a href="db_city.php">City</a></li>
+      <li><a href="db_country.php">Country</a></li>
+      <li><a href="db_continent.php">Continent</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.php">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container">
 
     <?php if(isset($_SESSION['message'])):?>
@@ -64,7 +82,6 @@ if(isset($_GET['edit'])){
     <?php endif ?>
 
     <form method="post" action="maintaindb.php" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $id;?>">
         <div class="form-group">
             <label for="name">Name</label>
             <input class="form-control input-sm" type="text" id="name" name="name" value="<?php echo $name;?>">
@@ -78,8 +95,8 @@ if(isset($_GET['edit'])){
             <input class="form-control input-sm" type="text" id="type" name="type" value="<?php echo $type;?>">
         </div>
         <div class="form-group">
-            <label for="city_id">City</label>
-            <select class="form-control input-sm" id="city_id" name="city_id" required>
+            <label for="city">City</label>
+            <select class="form-control input-sm" id="city" name="city" required>
                 <option disabled selected>Select one...</option>
                 <?php $results = mysqli_query($conn, "SELECT * FROM City");
                 while($row = mysqli_fetch_array($results)) { ?>
@@ -88,8 +105,8 @@ if(isset($_GET['edit'])){
             </select>
         </div>
         <div class="form-group">
-            <label for="country_id">Country</label>
-            <select class="form-control input-sm" id="country_id" name="country_id" required>
+            <label for="country">Country</label>
+            <select class="form-control input-sm" id="country" name="country" required>
                 <option disabled selected>Select one...</option>
                 <?php $results = mysqli_query($conn, "SELECT * FROM Country");
                 while($row = mysqli_fetch_array($results)) { ?>
@@ -98,8 +115,8 @@ if(isset($_GET['edit'])){
             </select>
         </div>
         <div class="form-group">
-            <label for="cont_id">Continent</label>
-            <select class="form-control input-sm" id="cont_id" name="cont_id" required>
+            <label for="continent">Continent</label>
+            <select class="form-control input-sm" id="continent" name="continent" required>
                 <option disabled selected>Select one...</option>
                 <?php $results = mysqli_query($conn, "SELECT * FROM Continent");
                 while($row = mysqli_fetch_array($results)) { ?>
@@ -194,10 +211,10 @@ if(isset($_GET['edit'])){
                 <td><?php echo $row['review']; ?></td>
 
                 <td>
-                    <a class="btn btn-warning btn-sm" href="edit_entry.php?edit=<?php echo $row['id'];?>">Edit</a>
+                    <a class="btn btn-warning btn-sm" href="db_attractions.php?edit=<?php echo $row['id'];?>">Edit</a>
                 </td>
                 <td>
-                    <a class="btn btn-danger btn-sm" href="delete_entry.php?del=<?php echo $row['id'];?>&type=1">Delete</a>
+                    <a class="btn btn-danger btn-sm" href="maintaindb.php?del_att=<?php echo $row['id'];?>">Delete</a>
                 </td>
             </tr>
         <?php } ?>
