@@ -194,7 +194,7 @@ if(isset($_GET['edit'])){
                 <td><?php echo $row['review']; ?></td>
 
                 <td>
-                    <a class="btn btn-warning btn-sm" href="db_attractions.php?edit=<?php echo $row['id'];?>">Edit</a>
+                    <a class="btn btn-warning btn-sm" href="edit_entry.php?edit=<?php echo $row['id'];?>">Edit</a>
                 </td>
                 <td>
                     <a class="btn btn-danger btn-sm" href="delete_entry.php?del=<?php echo $row['id'];?>&type=1">Delete</a>
